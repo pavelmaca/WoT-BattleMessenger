@@ -1,0 +1,11 @@
+--- orig\BattleMessenger.xml	2013-04-07 11:17:16.208800000 +0200
++++ BattleMessenger.xml	2013-04-07 11:17:02.883800000 +0200
+@@ -34273,7 +34273,7 @@
+         <actions>
+           <PushData>
+             <items>
+-              <StackString value="net.wargaming.messenger.BattleMessenger"/>
++              <StackString value="wot.BattleMessenger.BattleMessenger"/>
+             </items>
+           </PushData>
+           <GetVariable/>
