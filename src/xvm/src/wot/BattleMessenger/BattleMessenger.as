@@ -42,7 +42,13 @@ class wot.BattleMessenger.BattleMessenger extends net.wargaming.messenger.Battle
 		
 		/** ignore own msg (not in debug mode)*/
 		if ((!himself || MessengerConfig.debugMode) && MessengerConfig.enabled) {
-			var player:Player = this.getPlayerFromMessage(message);
+			var player:Player;
+			
+			var msgParts:Array = message.split(":&nbsp;</font><font", 2);
+			if (msgParts.length == 2) {
+				player = this.getPlayerFromMessage(msgParts[0]);
+			}
+			
 			//Logger.addObject(player);
 			
 			if(player){
@@ -68,12 +74,12 @@ class wot.BattleMessenger.BattleMessenger extends net.wargaming.messenger.Battle
 					
 					/** antispam */
 					if (sendMsg && MessengerConfig.antispamEnabled) {
-						sendMsg = !this.antispam.isSpam(message, player.uid);
+						sendMsg = !this.antispam.isSpam(msgParts[2], player.uid);
 						//Logger.add("spam: " + !sendMsg);
 						
 						/** filters */
 						if (sendMsg) {
-							sendMsg = !this.antispam.isFilter(message);
+							sendMsg = !this.antispam.isFilter(msgParts[2]);
 							//Logger.add("filter: " + !sendMsg);
 						}
 					}
@@ -83,7 +89,7 @@ class wot.BattleMessenger.BattleMessenger extends net.wargaming.messenger.Battle
 				
 		if (sendMsg || MessengerConfig.debugMode) {
 			if (!sendMsg && MessengerConfig.debugMode) {
-				message = "<font color='#FF0000'>deleted: </font>" + message;
+				message = "<font color='#CC0099'>deleted: </font>" + message;
 			}
 			super._onRecieveChannelMessage(cid, message, himself, targetIsCurrentPlayer);
 		}
