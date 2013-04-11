@@ -8,7 +8,7 @@ class wot.BattleMessenger.MessengerConfig
 	//#TODO: use DefaultConfgig file
 	private static var defaultConfig:Object = {
 		enabled: true,
-		chatLenght: 2,
+		chatLength: 10,
 		ignoreClan: false,
 		ignoreSquad: false,
 		blockAlly: {
@@ -21,50 +21,50 @@ class wot.BattleMessenger.MessengerConfig
 		},
 		antispam: {
 			enabled: true,
-			duplicateCount: 1,
-			duplicateInterval: 3, //secs
-			playerCount: 2,
+			duplicateCount: 2,
+			duplicateInterval: 5, //secs
+			playerCount: 3,
 			playerInterval: 5,
-			filters: ["noob", "siemka"]
+			filters: []
 		},
 		debugMode: true
 	};
 	
 	
 	public static function get enabled():Boolean    {
-        return battleMessenger.enabled;        
+        return battleMessenger.enabled;
 	}
 	
-	public static function get chatLenght():Number   {
-        return battleMessenger.chatLenght;        
+	public static function get chatLength():Number   {
+        return battleMessenger.chatLength;
 	}
 	
 	public static function get ignoreClan():Boolean   {
-        return battleMessenger.ignoreClan;        
+        return battleMessenger.ignoreClan;
 	}
 	
 	public static function get ignoreSquad():Boolean   {
-        return battleMessenger.ignoreSquad;        
+        return battleMessenger.ignoreSquad;
 	}
 	
 	public static function get blockAllyDead():Boolean   {
-        return battleMessenger.blockAlly.dead;        
+        return battleMessenger.blockAlly.dead;
 	}
 	
 	public static function get blockAllyAlive():Boolean   {
-        return battleMessenger.blockAlly.alive;        
+        return battleMessenger.blockAlly.alive;
 	}
 	
 	public static function get blockEnemyDead():Boolean   {
-        return battleMessenger.blockEnemy.dead;        
+        return battleMessenger.blockEnemy.dead;
 	}
 	
 	public static function get blockEnemyAlive():Boolean   {
-        return battleMessenger.blockEnemy.alive;        
+        return battleMessenger.blockEnemy.alive;
 	}
 	
 	public static function get antispamEnabled():Boolean   {
-        return battleMessenger.antispam.enabled;        
+        return battleMessenger.antispam.enabled;
 	}
 	
 	public static function get antispamDuplcateCount():Number   {
@@ -72,7 +72,7 @@ class wot.BattleMessenger.MessengerConfig
 	}
 	
 	public static function get antispamDuplicateInterval():Number   {
-        return battleMessenger.antispam.duplicateInterval;        
+        return battleMessenger.antispam.duplicateInterval;
 	}
 	
 	public static function get antispamPlayerCount():Number   {
@@ -80,7 +80,7 @@ class wot.BattleMessenger.MessengerConfig
 	}
 	
 	public static function get antispamPlayerInterval():Number   {
-        return battleMessenger.antispam.playerInterval;        
+        return battleMessenger.antispam.playerInterval;
 	}
 	
 	public static function get antispamFilters():Array   {
@@ -89,7 +89,7 @@ class wot.BattleMessenger.MessengerConfig
 	
 	
 	public static function get debugMode():Boolean   {
-        return battleMessenger.debugMode;        
+        return battleMessenger.debugMode;
 	}
 	
 	

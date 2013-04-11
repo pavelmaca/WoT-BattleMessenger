@@ -1,3 +1,4 @@
+import gfx.core.UIComponent;
 import wot.BattleMessenger.Antispam;
 import wot.BattleMessenger.Player;
 import wot.BattleMessenger.PlayersPanelProxy;
@@ -19,37 +20,47 @@ class wot.BattleMessenger.BattleMessenger extends net.wargaming.messenger.Battle
 		
 		if (MessengerConfig.enabled) {
 			/** max chat lenght*/ //#TODO: not working
-			//this.messageList.stackLength(MessengerConfig.chatLenght);
+			//Logger.addObject(this.messageList, "BattleMessageList");
+			this.messageList.stackLength = MessengerConfig.chatLenght;
 
 			this.antispam = new Antispam();
+		}
+	}
+	
+	/** overvrire */
+	function _onPopulateUI()
+    {
+		super._onPopulateUI.apply(this, arguments);
+		
+		if(MessengerConfig.enabled){
+			/**
+			 * this.messageList = child of net.wargaming.notification.FadingMessageList
+			 * this.messageList.stackLength not working, need _stackLength
+			 */
+			this.messageList._stackLength = MessengerConfig.chatLength;
 		}
 	}
 	
 	/** overwrite*/
 	function _onRecieveChannelMessage(cid, message, himself, targetIsCurrentPlayer)
     {
-		Logger.add("msg: " + message);
+		//Logger.add("msg: " + message);
 		if (!this.self) {
 			this.self = PlayersPanelProxy.getSelf();
 		}
-		//Logger.addObject(this.self);
 		
 		var sendMsg:Boolean = true;
-		
-		
-		//Logger.add("me: "+himself +"; debug: "+ MessengerConfig.debugMode + "; enabled: " +MessengerConfig.enabled);
-		//Logger.add("result: "+ ((!himself || MessengerConfig.debugMode) && MessengerConfig.enabled));
 		
 		/** ignore own msg (not in debug mode)*/
 		if ((!himself || MessengerConfig.debugMode) && MessengerConfig.enabled) {
 			var player:Player;
 			
-			var msgParts:Array = message.split(":&nbsp;</font><font", 2);
+			var msgParts:Array = message.split(":&nbsp;</font><font ", 2);
 			if (msgParts.length == 2) {
 				player = this.getPlayerFromMessage(msgParts[0]);
 			}
 			
-			//Logger.addObject(player);
+			Logger.addObject(msgParts);
 			
 			if(player){
 				var isClan:Boolean = false;
@@ -63,7 +74,6 @@ class wot.BattleMessenger.BattleMessenger extends net.wargaming.messenger.Battle
 				/** ignore clan/squad */
 				if (!isClan || !isSquad) {
 					var isDead:Boolean = PlayersPanelProxy.isDead(player.uid);
-					//Logger.add("dead: " + isDead);
 					
 					/** block dead/alive */
 					if (player.team == self.team) {
@@ -72,14 +82,14 @@ class wot.BattleMessenger.BattleMessenger extends net.wargaming.messenger.Battle
 						sendMsg = !(isDead ? MessengerConfig.blockEnemyDead : MessengerConfig.blockEnemyAlive);
 					}
 					
-					/** antispam */
+					/** antispam #TODO: remove HTML from message*/
 					if (sendMsg && MessengerConfig.antispamEnabled) {
-						sendMsg = !this.antispam.isSpam(msgParts[2], player.uid);
+						sendMsg = !this.antispam.isSpam(msgParts[1], player.uid);
 						//Logger.add("spam: " + !sendMsg);
 						
 						/** filters */
 						if (sendMsg) {
-							sendMsg = !this.antispam.isFilter(msgParts[2]);
+							sendMsg = !this.antispam.isFilter(msgParts[1]);
 							//Logger.add("filter: " + !sendMsg);
 						}
 					}
@@ -87,7 +97,7 @@ class wot.BattleMessenger.BattleMessenger extends net.wargaming.messenger.Battle
 			}else Logger.add("[BattleMessenger] player not found");
 		}
 				
-		if (sendMsg || MessengerConfig.debugMode) {
+		if (sendMsg || MessengerConfig.debugMode) {	
 			if (!sendMsg && MessengerConfig.debugMode) {
 				message = "<font color='#CC0099'>deleted: </font>" + message;
 			}
