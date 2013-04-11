@@ -33,6 +33,7 @@ import wot.BattleMessenger.Player;
  * @author ilitvinov87@gmail.com
  */
 
+//#TODO: use wot.Minimap.model.externalProxy.PlayersPanelProxy
 class wot.BattleMessenger.PlayersPanelProxy
 {
     public static function getPlayerInfo(uid:Number):Player

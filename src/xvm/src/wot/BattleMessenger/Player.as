@@ -26,6 +26,8 @@
   "label": "Zohan11981",
   "vehAction": 0
  */
+  
+//#TODO: use wot.Minimap.dataTypes.Player
 class wot.BattleMessenger.Player
 {
     public var uid:Number;

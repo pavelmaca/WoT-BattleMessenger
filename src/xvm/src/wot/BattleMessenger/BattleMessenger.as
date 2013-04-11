@@ -1,14 +1,10 @@
-import gfx.core.UIComponent;
 import wot.BattleMessenger.Antispam;
 import wot.BattleMessenger.Player;
 import wot.BattleMessenger.PlayersPanelProxy;
 import wot.BattleMessenger.MessengerConfig;
+import wot.utils.Utils;
 import wot.utils.Logger;
 
-/**
- * ...
- * @author 
- */
 class wot.BattleMessenger.BattleMessenger extends net.wargaming.messenger.BattleMessenger
 {
 	var self:Player;
@@ -18,16 +14,10 @@ class wot.BattleMessenger.BattleMessenger extends net.wargaming.messenger.Battle
 	{
 		super();
 		
-		if (MessengerConfig.enabled) {
-			/** max chat lenght*/ //#TODO: not working
-			//Logger.addObject(this.messageList, "BattleMessageList");
-			this.messageList.stackLength = MessengerConfig.chatLenght;
-
-			this.antispam = new Antispam();
-		}
+		this.antispam = new Antispam();
 	}
 	
-	/** overvrire */
+	/** overwrire */
 	function _onPopulateUI()
     {
 		super._onPopulateUI.apply(this, arguments);
@@ -41,28 +31,27 @@ class wot.BattleMessenger.BattleMessenger extends net.wargaming.messenger.Battle
 		}
 	}
 	
-	/** overwrite*/
-	function _onRecieveChannelMessage(cid, message, himself, targetIsCurrentPlayer)
-    {
-		//Logger.add("msg: " + message);
-		if (!this.self) {
-			this.self = PlayersPanelProxy.getSelf();
-		}
-		
+	/** overwrite */
+	function _onRecieveChannelMessage(cid, message:String, himself:Boolean, targetIsCurrentPlayer)
+    {		
 		var sendMsg:Boolean = true;
 		
 		/** ignore own msg (not in debug mode)*/
-		if ((!himself || MessengerConfig.debugMode) && MessengerConfig.enabled) {
+		if (MessengerConfig.enabled && (!himself || MessengerConfig.debugMode)) {
+			if(!this.self) this.self = PlayersPanelProxy.getSelf();
 			var player:Player;
 			
+			/** 
+			 * split message in two parts 
+			 * [0]: player name, clan, vehicle 
+			 * [1]: content
+			 */
 			var msgParts:Array = message.split(":&nbsp;</font><font ", 2);
 			if (msgParts.length == 2) {
 				player = this.getPlayerFromMessage(msgParts[0]);
 			}
-			
-			Logger.addObject(msgParts);
-			
-			if(player){
+		
+			if(player && this.self){
 				var isClan:Boolean = false;
 				if (MessengerConfig.ignoreClan && this.self.clanAbbrev.length > 0) 
 					isClan = (player.clanAbbrev == this.self.clanAbbrev);
@@ -72,7 +61,7 @@ class wot.BattleMessenger.BattleMessenger extends net.wargaming.messenger.Battle
 					isSquad = (player.squad == this.self.squad);
 					
 				/** ignore clan/squad */
-				if (!isClan || !isSquad) {
+				if (!isClan && !isSquad) {
 					var isDead:Boolean = PlayersPanelProxy.isDead(player.uid);
 					
 					/** block dead/alive */
@@ -85,16 +74,14 @@ class wot.BattleMessenger.BattleMessenger extends net.wargaming.messenger.Battle
 					/** antispam #TODO: remove HTML from message*/
 					if (sendMsg && MessengerConfig.antispamEnabled) {
 						sendMsg = !this.antispam.isSpam(msgParts[1], player.uid);
-						//Logger.add("spam: " + !sendMsg);
 						
 						/** filters */
 						if (sendMsg) {
 							sendMsg = !this.antispam.isFilter(msgParts[1]);
-							//Logger.add("filter: " + !sendMsg);
 						}
 					}
 				}
-			}else Logger.add("[BattleMessenger] player not found");
+			}else Logger.add("[BattleMessenger] player not found: " + message);
 		}
 				
 		if (sendMsg || MessengerConfig.debugMode) {	
@@ -113,10 +100,9 @@ class wot.BattleMessenger.BattleMessenger extends net.wargaming.messenger.Battle
         var endOfUsername:Number = messageWitOutFirstTag.indexOf(" ");
        		
 		var userName:String = messageWitOutFirstTag.substr(0, endOfUsername);
-		var clanIndex:Number = userName.indexOf("[");
-		if (clanIndex >= 0) {
-			userName = userName.substr(0, clanIndex);
-		}
+		
+		/** remove clan tag */
+		userName = Utils.GetPlayerName(userName);
 		
 		return PlayersPanelProxy.getPlayerInfoByName(userName);
 	}

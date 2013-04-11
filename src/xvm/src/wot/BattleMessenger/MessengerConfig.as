@@ -22,7 +22,7 @@ class wot.BattleMessenger.MessengerConfig
 		antispam: {
 			enabled: true,
 			duplicateCount: 2,
-			duplicateInterval: 5, //secs
+			duplicateInterval: 5,
 			playerCount: 3,
 			playerInterval: 5,
 			filters: []
