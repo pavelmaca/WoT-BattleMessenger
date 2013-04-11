@@ -8,7 +8,6 @@ import wot.BattleMessenger.MessengerConfig;
  */
 class wot.BattleMessenger.Antispam
 {
-	
 	/**
 	 * {
 	 * 	playerUid:
@@ -24,33 +23,37 @@ class wot.BattleMessenger.Antispam
 	
 	
 	public function isSpam(message:String, playerUid:Number):Boolean {
-		if (MessengerConfig.antispamDuplcateCount <= 0 && MessengerConfig.antispamDuplicateInterval <= 0) {
-			return false;
-		}
-		
-		/** timestamp in milisecunds */
-		var currentTime:Number = this.getCurrentTime();
-		
-		//Logger.add("time: "+currentTime);
-
-		if (!this.cache[playerUid]) {
-			this.cache[playerUid] = new Object();
-			//Logger.add("creating cache: " + playerUid);
-		}
-				
 		var duplicateCount:Number = 0;
 		var playerCount:Number = 0;
+		
+		/** turn off duplicateCount */
+		if (MessengerConfig.antispamDuplcateCount <= 0 || MessengerConfig.antispamDuplicateInterval <= 0) {
+			 duplicateCount = -1;
+		}
+		
+		/** turn off playerCount */
+		if (MessengerConfig.antispamPlayerCount <= 0 || MessengerConfig.antispamPlayerInterval <= 0) {
+			 playerCount = -1;
+		}
+		
+		var currentTime:Number = this.getCurrentTime();
+		
+		if (!this.cache[playerUid]) {
+			this.cache[playerUid] = new Object();
+		}
+				
+		
+		
 		for ( var i:String in this.cache[playerUid]) {
 			var time:Number = Utils.toInt(i);
-			//Logger.add("msg-time: " + time);
 
 			/** is messenge in time interval && msg match */
-			if (time > currentTime - MessengerConfig.antispamDuplicateInterval) {
+			if (duplicateCount >= 0 && time > currentTime - MessengerConfig.antispamDuplicateInterval) {
 				if(this.cache[playerUid][i] == message) {
 					duplicateCount++;
 				}
 			}
-			if (time > currentTime - MessengerConfig.antispamPlayerInterval) {
+			if (playerCount >= 0 && time > currentTime - MessengerConfig.antispamPlayerInterval) {
 				playerCount++;
 			}
 			
@@ -59,11 +62,8 @@ class wot.BattleMessenger.Antispam
 		/** add message to cache */
 		this.cache[playerUid][currentTime] = message;
 		
-		//Logger.add("duplicateCount: " + duplicateCount );
-		//Logger.add("playerCount: " + playerCount);
-		
-		var isSpam:Boolean = (duplicateCount >= MessengerConfig.antispamDuplcateCount);
-		return (isSpam || (playerCount >= MessengerConfig.antispamPlayerCount));
+		var isDuplicate:Boolean = (duplicateCount >= MessengerConfig.antispamDuplcateCount);
+		return (isDuplicate || (playerCount >= MessengerConfig.antispamPlayerCount));
 	}
 	
 	public function isFilter(message:String):Boolean {
@@ -77,7 +77,7 @@ class wot.BattleMessenger.Antispam
 
 	/**
 	 * 
-	 * @return timestamp
+	 * @return timestamp in secunds
 	 */
 	private function getCurrentTime():Number {
 		var date:Date = new Date();
