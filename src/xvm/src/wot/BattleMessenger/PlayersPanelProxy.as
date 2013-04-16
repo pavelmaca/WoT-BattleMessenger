@@ -31,9 +31,9 @@ import wot.BattleMessenger.Player;
   "vehAction": 0
  *   
  * @author ilitvinov87@gmail.com
+ * @author Assassik
  */
 
-//#TODO: use wot.Minimap.model.externalProxy.PlayersPanelProxy
 class wot.BattleMessenger.PlayersPanelProxy
 {
     public static function getPlayerInfo(uid:Number):Player

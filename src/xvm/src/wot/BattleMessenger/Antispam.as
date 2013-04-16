@@ -1,4 +1,4 @@
-import wot.utils.Utils;
+import wot.BattleMessenger.Utils;
 import wot.BattleMessenger.MessengerConfig;
 
 class wot.BattleMessenger.Antispam

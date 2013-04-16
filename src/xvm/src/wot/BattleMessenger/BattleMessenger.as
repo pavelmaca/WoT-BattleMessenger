@@ -2,8 +2,7 @@ import wot.BattleMessenger.Antispam;
 import wot.BattleMessenger.Player;
 import wot.BattleMessenger.PlayersPanelProxy;
 import wot.BattleMessenger.MessengerConfig;
-import wot.utils.Utils;
-import wot.utils.Logger;
+import wot.BattleMessenger.Utils;
 
 class wot.BattleMessenger.BattleMessenger extends net.wargaming.messenger.BattleMessenger
 {
@@ -14,6 +13,7 @@ class wot.BattleMessenger.BattleMessenger extends net.wargaming.messenger.Battle
 	{
 		super();
 		
+		MessengerConfig.loadConfig();
 		this.antispam = new Antispam();
 	}
 	
@@ -81,7 +81,7 @@ class wot.BattleMessenger.BattleMessenger extends net.wargaming.messenger.Battle
 						}
 					}
 				}
-			}else Logger.add("[BattleMessenger] player not found: " + message);
+			}
 		}
 				
 		if (sendMsg || MessengerConfig.debugMode) {	

@@ -1,35 +1,34 @@
-import wot.utils.Config;
-/**
- * ...
- * @author 
- */
+import wot.BattleMessenger.Utils;
+
 class wot.BattleMessenger.MessengerConfig
 {
-	//#TODO: use DefaultConfgig file
-	private static var defaultConfig:Object = {
+	private static var CONFIG_FILE:String = "BattleMessenger.conf";
+	
+	private static var _config:Object;
+	
+	private static var _defaultConfig:Object = {
 		enabled: true,
 		chatLength: 10,
-		ignoreClan: false,
-		ignoreSquad: false,
+		ignoreClan: true,
+		ignoreSquad: true,
 		blockAlly: {
 			dead: false,
 			alive: false
 		},
 		blockEnemy: {
-			dead: true,
+			dead: false,
 			alive: false
 		},
 		antispam: {
-			enabled: true,
+		enabled: false,
 			duplicateCount: 2,
-			duplicateInterval: 5,
+			duplicateInterval: 7,
 			playerCount: 3,
-			playerInterval: 5,
+			playerInterval: 7,
 			filters: []
 		},
-		debugMode: true
+		debugMode: false
 	};
-	
 	
 	public static function get enabled():Boolean    {
         return battleMessenger.enabled;
@@ -96,8 +95,7 @@ class wot.BattleMessenger.MessengerConfig
 	/** private */
 	private static function get battleMessenger():Object
     {
-		//#TODO: use DefaultConfgig file
-        return Config.s_config.battleMessenger || defaultConfig;
+        return _config;
     }
 	
 	private static function get blockAlly():Object
@@ -114,5 +112,26 @@ class wot.BattleMessenger.MessengerConfig
     {
         return battleMessenger.antispam;
     }
+	
+	/** Load config from file */
+	public static function loadConfig()	{
+		if (_config) return;
+		
+		var lv:LoadVars = new LoadVars();
+		lv.onData = onLoadConfig;
+        lv.load(CONFIG_FILE);
+	}
+	
+	private static function onLoadConfig(str:String) {
+		if (str) {
+			var config = com.xvm.JSON.parse(str);
+			
+			if (config) {
+				_config = Utils.MergeConfigs(config, _defaultConfig);
+			}
+		}
+		/** set default config */
+		if (!_config) _config = _defaultConfig;
+	}
 	
 }

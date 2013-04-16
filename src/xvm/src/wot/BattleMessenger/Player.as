@@ -27,7 +27,6 @@
   "vehAction": 0
  */
   
-//#TODO: use wot.Minimap.dataTypes.Player
 class wot.BattleMessenger.Player
 {
     public var uid:Number;
@@ -38,7 +37,6 @@ class wot.BattleMessenger.Player
     public var userName:String;
     public var icon:String;
     public var vehicleState:Number;
-	
 	public var clanAbbrev:String;
 	public var squad:Number;
 }
