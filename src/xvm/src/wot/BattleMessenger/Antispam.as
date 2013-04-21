@@ -58,7 +58,7 @@ class wot.BattleMessenger.Antispam
 	
 	public function isFilter(message:String):Boolean {
 		for (var i in MessengerConfig.antispamFilters) {
-			if (message.indexOf(MessengerConfig.antispamFilters[i]) != -1) {
+			if (message.toLowerCase().indexOf(MessengerConfig.antispamFilters[i].toLowerCase()) != -1) {
 				return true;
 			}
 		}
