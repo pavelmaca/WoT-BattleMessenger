@@ -30,6 +30,8 @@ class wot.BattleMessenger.MessengerConfig
 		debugMode: false
 	};
 	
+	private static var _filters:Array;
+
 	public static function get enabled():Boolean    {
         return battleMessenger.enabled;
 	}
@@ -63,27 +65,32 @@ class wot.BattleMessenger.MessengerConfig
 	}
 	
 	public static function get antispamEnabled():Boolean   {
-        return battleMessenger.antispam.enabled;
+        return antispam.enabled;
 	}
 	
 	public static function get antispamDuplcateCount():Number   {
-        return battleMessenger.antispam.duplicateCount;
+        return antispam.duplicateCount;
 	}
 	
 	public static function get antispamDuplicateInterval():Number   {
-        return battleMessenger.antispam.duplicateInterval;
+        return antispam.duplicateInterval;
 	}
 	
 	public static function get antispamPlayerCount():Number   {
-        return battleMessenger.antispam.playerCount;
+        return antispam.playerCount;
 	}
 	
 	public static function get antispamPlayerInterval():Number   {
-        return battleMessenger.antispam.playerInterval;
+        return antispam.playerInterval;
 	}
 	
 	public static function get antispamFilters():Array   {
-        return battleMessenger.antispam.filters;
+		if (!_filters) {
+			for (var i in antispam.filters) {
+				_filters.push(antispam.filters[i].toLowerCase());
+			}
+		}
+        return _filters;
 	}
 	
 	
@@ -133,5 +140,4 @@ class wot.BattleMessenger.MessengerConfig
 		/** set default config */
 		if (!_config) _config = _defaultConfig;
 	}
-	
 }
