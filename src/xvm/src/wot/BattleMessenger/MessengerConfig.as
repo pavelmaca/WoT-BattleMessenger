@@ -30,7 +30,7 @@ class wot.BattleMessenger.MessengerConfig
 		debugMode: false
 	};
 	
-	private static var _filters:Array;
+	private static var _filters:Array = new Array();
 
 	public static function get enabled():Boolean    {
         return battleMessenger.enabled;
@@ -85,7 +85,7 @@ class wot.BattleMessenger.MessengerConfig
 	}
 	
 	public static function get antispamFilters():Array   {
-		if (!_filters) {
+		if (!_filters.length == 0) {
 			for (var i in antispam.filters) {
 				_filters.push(antispam.filters[i].toLowerCase());
 			}
