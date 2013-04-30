@@ -1,5 +1,5 @@
-import wot.BattleMessenger.Utils;
-import wot.BattleMessenger.GlobalEventDispatcher;
+import wot.BattleMessenger.utils.Utils;
+import wot.BattleMessenger.utils.GlobalEventDispatcher;
 //import com.xvm.Logger;
 
 class wot.BattleMessenger.MessengerConfig

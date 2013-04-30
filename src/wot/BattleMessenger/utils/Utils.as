@@ -1,8 +1,8 @@
 /**
- * Part of XML project https://code.google.com/p/wot-xvm/
+ * Part of XVM project https://code.google.com/p/wot-xvm/
  * @author sirmax2
  */
-class wot.BattleMessenger.Utils
+class wot.BattleMessenger.utils.Utils
 {
 	
 	// TODO: check performance, charAt is slow in ScaleForm

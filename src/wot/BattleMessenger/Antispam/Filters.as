@@ -1,4 +1,4 @@
-import wot.BattleMessenger.Utils;
+import wot.BattleMessenger.utils.Utils;
 //import wot.utils.Logger;
 
 /**
@@ -148,7 +148,7 @@ class wot.BattleMessenger.Antispam.Filters
 	
 	private function normalize(message:String, isFilter:Boolean):String {
 		if (!isFilter) {
-			message = this.removeHtml(message);
+			message = this.removeHTML(message);
 		}
 		message = message.toLowerCase();
 		for (var i in this.charReplacements) {
@@ -171,10 +171,38 @@ class wot.BattleMessenger.Antispam.Filters
 		}
 		return text;
 	}
-	
+	/*
 	private function removeHtml(text:String):String {
 		var firstTag:Number = text.indexOf(">");
 		var lastTag:Number = text.lastIndexOf("<");
 		return text.slice( firstTag + 1, (lastTag != -1 ? lastTag : text.length));
+	}*/
+	
+	/**
+	 * @param	"<font color='#80D63A'>this is minimap <font color=''>username(vehicle)</font> action</font>"
+	 * @return	"this is minimap action"
+	 */
+	public function removeHTML(message:String):String {
+		// Remove first and last tag
+		var firstTag:Number = message.indexOf(">");
+		var lastTag:Number = message.lastIndexOf("<");
+		var content:String = message.slice( firstTag + 1, (lastTag != -1 ? lastTag : message.length));
+		//trace("dirty: " + content);
+		
+		//return content;
+		
+		// Remove all <font>text</font> WITH content
+		var tagStart:Number;
+		var tagEnd:Number;
+		while ((tagStart = content.indexOf("<font ")) > -1 && (tagEnd = content.indexOf("</font>", tagStart)) > -1) {
+			content = content.slice(0, tagStart) + content.slice(tagEnd + 7, content.length);
+		}
+		//trace("clean: " + content);
+		
+		/**
+		 * TODO: remove img tags?
+		 */
+		
+		return content;
 	}
 }

@@ -1,3 +1,4 @@
+import wot.BattleMessenger.BattleMessenger
 import tests.TestAntispam;
 /**
  * ...
@@ -13,7 +14,6 @@ class tests.Test extends MovieClip
 
     private function init():Void
     {
-		
 		var antispam:TestAntispam = new TestAntispam();
 		try{
 			antispam.test();

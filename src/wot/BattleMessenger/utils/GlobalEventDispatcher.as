@@ -1,9 +1,9 @@
 /**
- * ...
+ * Part of XVM project https://code.google.com/p/wot-xvm/
  * @author sirmax2
  */
 
-class wot.BattleMessenger.GlobalEventDispatcher
+class wot.BattleMessenger.utils.GlobalEventDispatcher
 {
   private static var _listeners = {};
 

@@ -2,9 +2,9 @@ import wot.BattleMessenger.Antispam.Antispam;
 import wot.BattleMessenger.models.Player;
 import wot.BattleMessenger.models.PlayersPanelProxy;
 import wot.BattleMessenger.MessengerConfig;
-import wot.BattleMessenger.Utils;
-import wot.BattleMessenger.GlobalEventDispatcher;
-//import com.xvm.Logger;
+import wot.BattleMessenger.utils.Utils;
+import wot.BattleMessenger.utils.GlobalEventDispatcher;
+import com.xvm.Logger;
 
 class wot.BattleMessenger.BattleMessenger extends net.wargaming.messenger.BattleMessenger
 {
@@ -15,18 +15,13 @@ class wot.BattleMessenger.BattleMessenger extends net.wargaming.messenger.Battle
 	{
 		super();
 		
-		GlobalEventDispatcher.addEventListener("BM_config_loaded", this, onConfigLoaded);
+		GlobalEventDispatcher.addEventListener("config_loaded", this, onConfigLoaded);
 		MessengerConfig.loadConfig();
 	}
 	
 	private function onConfigLoaded() {
-		
-		//Logger.add('BM config loaded');
-		
-		GlobalEventDispatcher.removeEventListener("BM_config_loaded", this, onConfigLoaded);
+		GlobalEventDispatcher.removeEventListener("config_loaded", this, onConfigLoaded);
 		this.antispam = new Antispam();
-		
-		
 	}
 	
 	/** overwrire */
@@ -63,7 +58,7 @@ class wot.BattleMessenger.BattleMessenger extends net.wargaming.messenger.Battle
 			 * [0]: player name, clan, vehicle 
 			 * [1]: content
 			 */
-			var msgParts:Array = message.split(":&nbsp;</font><font ", 2);
+			var msgParts:Array = message.split("&nbsp;:&nbsp;</font>", 2);
 			if (msgParts.length == 2) {
 				player = this.getPlayerFromMessage(msgParts[0]);
 			}
@@ -97,10 +92,10 @@ class wot.BattleMessenger.BattleMessenger extends net.wargaming.messenger.Battle
 					/** antispam #TODO: remove HTML from message*/
 					if (sendMsg && MessengerConfig.antispamEnabled) {
 						sendMsg = !this.antispam.isSpam(msgParts[1], player.uid);
+						log.d_spam = !sendMsg;
 						
 						/** filters */
 						if (sendMsg) {
-							
 							var start:Date = new Date();
 							sendMsg = !this.antispam.isFilter(msgParts[1]);
 							var end:Date = new Date();
@@ -116,8 +111,9 @@ class wot.BattleMessenger.BattleMessenger extends net.wargaming.messenger.Battle
 				}
 			}
 		}
-		
-		//Logger.addObject(log, "[BattleMessanger]");
+		log.d_hidden = !sendMsg;
+		Logger.addObject(log, "[BattleMessanger]");
+		Logger.addObject(MessengerConfig, "[config]");
 		
 				
 		if (sendMsg || MessengerConfig.debugMode) {	
@@ -128,7 +124,7 @@ class wot.BattleMessenger.BattleMessenger extends net.wargaming.messenger.Battle
 		}
     }
 	
-	/** <font color='#FFC697'>UserName[clan] (vehicle)&nbsp;:&nbsp;</font><font color='#80D63A'>message</font> */
+	/** <font color='#FFC697'>UserName[clan] (vehicle) */
 	private function getPlayerFromMessage(message:String):Player {
 		
 		var endOfFirtsTag:Number = message.indexOf(">");

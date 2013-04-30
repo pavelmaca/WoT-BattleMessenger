@@ -1,4 +1,4 @@
-import wot.BattleMessenger.Utils;
+import wot.BattleMessenger.utils.Utils;
 import wot.BattleMessenger.MessengerConfig;
 import wot.BattleMessenger.Antispam.Filters;
 import wot.BattleMessenger.Antispam.WGFilter;
@@ -74,6 +74,11 @@ class wot.BattleMessenger.Antispam.Antispam
 		return (isDuplicate || (playerCount >= MessengerConfig.antispamPlayerCount));
 	}
 	
+	/**
+	 * <font color='#80D63A'>message</font>
+	 * @param	message
+	 * @return	true when filter match
+	 */
 	public function isFilter(message:String):Boolean {
 		if (this.filters.test(message)) {
 			this.lastMatch = this.filters.lastMatch;

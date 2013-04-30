@@ -1,6 +1,6 @@
 import wot.BattleMessenger.Antispam.Antispam;
 import wot.BattleMessenger.MessengerConfig;
-import wot.BattleMessenger.Antispam.WGFilters;
+import wot.BattleMessenger.Antispam.WGFilter;
 import wot.BattleMessenger.Antispam.Filters;
 /**
  * ...
@@ -25,13 +25,17 @@ class tests.TestAntispam extends Antispam
 	/**Test this:
 
 		 */
-		msg = "color='#80D63A'>siema</font>";
+
+		msg = "<color='#80D63A'>Útočím na <font color=''>zkouška</font> zde</font>";
+		expect(msg, this.filters.removeHTML(msg), "Útočím na  zde");
+
+		msg = "<font color='#80D63A'>siema</font>";
 		expect(msg, this.filters.test(msg), true);
 		
 		
-		msg = "color='#80D63A'>Reloafing <img src='img.jpg'>siema</font>";
+		msg = "<font color='#80D63A'>Reloafing <img src='img.jpg'>siema</font>";
 		expect(msg, this.filters.test(msg), true);
-		return;
+
 		// ".*bad1"
 		msg = "split words bad1 nothing here";
 		expect(msg, this.filters.test(msg), true);
