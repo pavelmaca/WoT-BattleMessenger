@@ -1,6 +1,6 @@
 import wot.BattleMessenger.Antispam;
-import wot.BattleMessenger.Player;
-import wot.BattleMessenger.PlayersPanelProxy;
+import wot.BattleMessenger.models.Player;
+import wot.BattleMessenger.models.PlayersPanelProxy;
 import wot.BattleMessenger.MessengerConfig;
 import wot.BattleMessenger.Utils;
 

@@ -1,4 +1,4 @@
-import wot.BattleMessenger.Player;
+import wot.BattleMessenger.models.Player;
 /**
  * PlayersPanelProxy class
  * provides simple wrapper to PlayersPanel.m_list._dataProvider Array
@@ -34,7 +34,7 @@ import wot.BattleMessenger.Player;
  * @author Assassik
  */
 
-class wot.BattleMessenger.PlayersPanelProxy
+class wot.BattleMessenger.models.PlayersPanelProxy
 {
     public static function getPlayerInfo(uid:Number):Player
     {

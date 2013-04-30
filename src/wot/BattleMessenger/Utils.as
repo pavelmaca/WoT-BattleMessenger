@@ -18,7 +18,7 @@ class wot.BattleMessenger.Utils
 	public static function GetPlayerName(fullplayername: String): String
     {
         var pos = fullplayername.indexOf("[");
-        return (pos < 0) ? fullplayername : Utils.trim(fullplayername.slice(0, pos));
+        return (pos < 0) ? fullplayername : trim(fullplayername.slice(0, pos));
     }
 	
 	public static function toInt(value: Object, defaultValue: Number): Number

@@ -25,9 +25,12 @@
   "frags": 0,
   "label": "Zohan11981",
   "vehAction": 0
+  
+ * @author ilitvinov87@gmail.com
+ * @author Assassik
  */
   
-class wot.BattleMessenger.Player
+class wot.BattleMessenger.models.Player
 {
     public var uid:Number;
     public var vehicle:String;
