@@ -1,7 +1,9 @@
 import wot.BattleMessenger.Utils;
 import wot.BattleMessenger.MessengerConfig;
+import wot.BattleMessenger.Antispam.Filters;
+import wot.BattleMessenger.Antispam.WGFilters;
 
-class wot.BattleMessenger.Antispam
+class wot.BattleMessenger.Antispam.Antispam
 {
 	/**
 	 * {
@@ -11,8 +13,17 @@ class wot.BattleMessenger.Antispam
 	 * }
 	 */
 	private var cache:Object = {};
-		
+	
+	private var filters:Filters;
+	
+	public var lastMatch:String;
+			
 	public function Antispam() 	{
+		this.filters = new Filters();
+		filters.addFiltersFromArray(MessengerConfig.antispamCustomFilters);
+		if (MessengerConfig.antispamWGFiltersEnabled) {
+			filters.addFiltersFromArray(WGFilters.badWords);
+		}
 	}
 	
 	public function isSpam(message:String, playerUid:Number):Boolean {
@@ -53,14 +64,19 @@ class wot.BattleMessenger.Antispam
 		this.cache[playerUid][currentTime] = message;
 		
 		var isDuplicate:Boolean = (duplicateCount >= MessengerConfig.antispamDuplcateCount);
+		if (isDuplicate) {
+			Logger.add("duplicity (" + duplicateCount + "): " + message);
+		}
+		if (playerCount >= MessengerConfig.antispamPlayerCount) {
+			Logger.add("spam: ("+playerCount + "): " + message);
+		}
 		return (isDuplicate || (playerCount >= MessengerConfig.antispamPlayerCount));
 	}
 	
 	public function isFilter(message:String):Boolean {
-		for (var i in MessengerConfig.antispamFilters) {
-			if (message.toLowerCase().indexOf(MessengerConfig.antispamFilters[i]) != -1) {
-				return true;
-			}
+		if (this.filters.test(message)) {
+			this.lastMatch = this.filters.lastMatch;
+			return true;
 		}
 		return false;
 	}

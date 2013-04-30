@@ -1,20 +1,32 @@
-import wot.BattleMessenger.Antispam;
+import wot.BattleMessenger.Antispam.Antispam;
 import wot.BattleMessenger.models.Player;
 import wot.BattleMessenger.models.PlayersPanelProxy;
 import wot.BattleMessenger.MessengerConfig;
 import wot.BattleMessenger.Utils;
+import wot.BattleMessenger.GlobalEventDispatcher;
+import com.xvm.Logger;
 
 class wot.BattleMessenger.BattleMessenger extends net.wargaming.messenger.BattleMessenger
 {
 	var self:Player;
 	var antispam:Antispam;
-	
+		
 	public function BattleMessenger() 
 	{
 		super();
 		
+		GlobalEventDispatcher.addEventListener("BM_config_loaded", this, onConfigLoaded);
 		MessengerConfig.loadConfig();
+	}
+	
+	private function onConfigLoaded() {
+		
+		Logger.add('BM config loaded');
+		
+		GlobalEventDispatcher.removeEventListener("BM_config_loaded", this, onConfigLoaded);
 		this.antispam = new Antispam();
+		
+		
 	}
 	
 	/** overwrire */
@@ -35,6 +47,11 @@ class wot.BattleMessenger.BattleMessenger extends net.wargaming.messenger.Battle
 	function _onRecieveChannelMessage(cid, message:String, himself:Boolean, targetIsCurrentPlayer)
     {		
 		var sendMsg:Boolean = true;
+		
+		var log:Object = {
+			d_msg: message
+		};
+		
 		
 		/** ignore own msg (not in debug mode)*/
 		if (MessengerConfig.enabled && (!himself || MessengerConfig.debugMode)) {
@@ -60,9 +77,13 @@ class wot.BattleMessenger.BattleMessenger extends net.wargaming.messenger.Battle
 				if (MessengerConfig.ignoreSquad && self.squad != 0)
 					isSquad = (player.squad == this.self.squad);
 					
+				log.d_isSquad = isSquad;
+				log.d_isClan = isClan;
+					
 				/** ignore clan/squad */
 				if (!isClan && !isSquad) {
 					var isDead:Boolean = PlayersPanelProxy.isDead(player.uid);
+					log.d_isDead = isDead;
 					
 					/** block dead/alive */
 					if (player.team == self.team) {
@@ -71,18 +92,33 @@ class wot.BattleMessenger.BattleMessenger extends net.wargaming.messenger.Battle
 						sendMsg = !(isDead ? MessengerConfig.blockEnemyDead : MessengerConfig.blockEnemyAlive);
 					}
 					
+					log.d_ally = (player.team == self.team);
+					
 					/** antispam #TODO: remove HTML from message*/
 					if (sendMsg && MessengerConfig.antispamEnabled) {
 						sendMsg = !this.antispam.isSpam(msgParts[1], player.uid);
 						
 						/** filters */
 						if (sendMsg) {
+							
+							var start:Date = new Date();
 							sendMsg = !this.antispam.isFilter(msgParts[1]);
+							var end:Date = new Date();
+							if(!sendMsg) {
+								message += "\n" + this.antispam.lastMatch;
+								log.d_filter = this.antispam.lastMatch;
+								this.antispam.lastMatch = null;
+							}
+							log.d_took = (end.getTime() - start.getTime());
+							
 						}
 					}
 				}
 			}
 		}
+		
+		Logger.addObject(log, "[BattleMessanger]");
+		
 				
 		if (sendMsg || MessengerConfig.debugMode) {	
 			if (!sendMsg && MessengerConfig.debugMode) {
@@ -106,7 +142,4 @@ class wot.BattleMessenger.BattleMessenger extends net.wargaming.messenger.Battle
 		
 		return PlayersPanelProxy.getPlayerInfoByName(userName);
 	}
-	
-	
-
 }

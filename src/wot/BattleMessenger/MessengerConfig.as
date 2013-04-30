@@ -1,4 +1,6 @@
 import wot.BattleMessenger.Utils;
+import wot.BattleMessenger.GlobalEventDispatcher;
+import com.xvm.Logger;
 
 class wot.BattleMessenger.MessengerConfig
 {
@@ -20,18 +22,19 @@ class wot.BattleMessenger.MessengerConfig
 			alive: false
 		},
 		antispam: {
-		enabled: false,
+			enabled: false,
 			duplicateCount: 2,
 			duplicateInterval: 7,
 			playerCount: 3,
 			playerInterval: 7,
-			filters: []
+			WG_Filters: false,
+			customFilters: []
 		},
 		debugMode: false
 	};
 	
-	private static var _filters:Array = new Array();
-
+	private static var _customFilters:Array = new Array();
+		
 	public static function get enabled():Boolean    {
         return battleMessenger.enabled;
 	}
@@ -84,13 +87,17 @@ class wot.BattleMessenger.MessengerConfig
         return antispam.playerInterval;
 	}
 	
-	public static function get antispamFilters():Array   {
-		if (!_filters.length == 0) {
-			for (var i in antispam.filters) {
-				_filters.push(antispam.filters[i].toLowerCase());
+	public static function get antispamWGFiltersEnabled():Boolean	{
+		return antispam.WG_Filters;
+	}
+	
+	public static function get antispamCustomFilters():Array   {
+		if (_customFilters.length == 0) {
+			for (var i in antispam.customFilters) {
+				_customFilters.push(antispam.customFilters[i].toLowerCase());
 			}
 		}
-        return _filters;
+        return _customFilters;
 	}
 	
 	
@@ -139,5 +146,8 @@ class wot.BattleMessenger.MessengerConfig
 		}
 		/** set default config */
 		if (!_config) _config = _defaultConfig;
-	}
+		
+		Logger.add('BM config calling event');
+		GlobalEventDispatcher.dispatchEvent({type: "BM_config_loaded"});
+	}	
 }
