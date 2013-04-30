@@ -13,7 +13,9 @@ When someone spaming chat, for example, with minimap ping.. this mod only hide m
 ---
 
 ## Download
-> [[0.8.5] BattleMessenger - filters & antispam 1.1.rar](http://www.mediafire.com/?shzrtyp48s93umk)
+> [[0.8.5] BattleMessenger - chat filter & antispam 1.1.rar](http://www.mediafire.com/?shzrtyp48s93umk)
+>
+> MD5 check sum: `no check sum for this version`
 
 ---
 
@@ -31,7 +33,7 @@ When someone spaming chat, for example, with minimap ping.. this mod only hide m
 
 ## Tips for configuration
 ### Disable chat completely
->Simply dont show eny message on chat *(can bee use for recording videos from replays)*
+>Simply don't display any message on chat *(can be used for recording videos)*
 
     chatLength: 0,
 
@@ -39,10 +41,10 @@ When someone spaming chat, for example, with minimap ping.. this mod only hide m
 
 ### Display chat messages little longer
 >Open file `res_mods/0.8.5/gui/messenger.xml`.
->You can get original here - [[0.8.5] messenger.xml - original.rar](http://www.mediafire.com/?epncveoaa04a6lc),
+>You can get original here: [[0.8.5] messenger.xml - original.rar](http://www.mediafire.com/?epncveoaa04a6lc),
 >or use existing one if you have some mod using it (YasenKrasen etc.)
 >
->Change `battle/lifeTime` value to set display time for ingame messages in seconds.
+>Change `battle/lifeTime` value to set display time for ingame messages **in seconds**.
 
     <battle>
         <lifeTime> 10 </lifeTime>
@@ -51,9 +53,9 @@ When someone spaming chat, for example, with minimap ping.. this mod only hide m
 ---
 
 ### Debug mode
->allow you test new configuration, while all messages will be displayed
->affected messages will get "deleted:" prefix
->this also works on own messages
+>Allows you test new configuration, while all messages will be displayed
+>Affected messages will get "deleted:" prefix
+>Works also on own messages
 
     debugMode: true
 >![debugModePreview](http://imageshack.us/a/img577/3143/shot047d.jpg)
