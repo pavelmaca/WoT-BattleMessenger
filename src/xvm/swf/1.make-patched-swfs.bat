@@ -1,10 +1,7 @@
 @echo off
 
 set copy_files=
-set patch_swfs=battleloading.swf PlayersPanel.swf StatisticForm.swf FinalStatistic.swf
-set patch_swfs=%patch_swfs% battle.swf TeamBasesPanel.swf Minimap.swf VehicleMarkersManager.swf
-set patch_swfs=%patch_swfs% TeamMemberRenderer.swf TeamRenderer.swf
-set patch_swfs=%patch_swfs% UserInfo.swf lobby_messenger.swf crew.swf SquadMemberRenderer.swf BattleMessenger.swf
+set patch_swfs=BattleMessenger.swf
 set patch_xmls=
 
 rem Patch XMLs
