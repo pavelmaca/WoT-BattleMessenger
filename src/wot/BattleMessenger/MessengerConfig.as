@@ -1,6 +1,6 @@
 import wot.BattleMessenger.Utils;
 import wot.BattleMessenger.GlobalEventDispatcher;
-import com.xvm.Logger;
+//import com.xvm.Logger;
 
 class wot.BattleMessenger.MessengerConfig
 {
@@ -147,7 +147,7 @@ class wot.BattleMessenger.MessengerConfig
 		/** set default config */
 		if (!_config) _config = _defaultConfig;
 		
-		Logger.add('BM config calling event');
+		//Logger.add('BM config calling event');
 		GlobalEventDispatcher.dispatchEvent({type: "BM_config_loaded"});
 	}	
 }

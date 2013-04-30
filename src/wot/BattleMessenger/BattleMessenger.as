@@ -4,7 +4,7 @@ import wot.BattleMessenger.models.PlayersPanelProxy;
 import wot.BattleMessenger.MessengerConfig;
 import wot.BattleMessenger.Utils;
 import wot.BattleMessenger.GlobalEventDispatcher;
-import com.xvm.Logger;
+//import com.xvm.Logger;
 
 class wot.BattleMessenger.BattleMessenger extends net.wargaming.messenger.BattleMessenger
 {
@@ -21,7 +21,7 @@ class wot.BattleMessenger.BattleMessenger extends net.wargaming.messenger.Battle
 	
 	private function onConfigLoaded() {
 		
-		Logger.add('BM config loaded');
+		//Logger.add('BM config loaded');
 		
 		GlobalEventDispatcher.removeEventListener("BM_config_loaded", this, onConfigLoaded);
 		this.antispam = new Antispam();
@@ -117,7 +117,7 @@ class wot.BattleMessenger.BattleMessenger extends net.wargaming.messenger.Battle
 			}
 		}
 		
-		Logger.addObject(log, "[BattleMessanger]");
+		//Logger.addObject(log, "[BattleMessanger]");
 		
 				
 		if (sendMsg || MessengerConfig.debugMode) {	

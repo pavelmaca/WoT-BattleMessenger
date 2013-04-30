@@ -84,4 +84,17 @@ class wot.BattleMessenger.Utils
         }
     }
 	
+	/**
+	 * Helper that replaces all "find" with "replace" in the given input string
+	 * http://danikgames.com/blog/?p=550
+	 * @param	input
+	 * @param	find
+	 * @param	replace
+	 * @return
+	 */
+	public static function strReplace(input:String, find:String, replace:String):String {
+		while (input.indexOf("find") != -1)
+			input = input.split(find).join(replace);
+		return input.split(find).join(replace);
+	}
 }

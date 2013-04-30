@@ -4,7 +4,7 @@
   <output>
     <movie outputType="Application" />
     <movie input="" />
-    <movie path="..\..\bin\Test.swf" />
+    <movie path="tests\bin\Test.swf" />
     <movie fps="30" />
     <movie width="800" />
     <movie height="600" />
@@ -17,6 +17,7 @@
   <classpaths>
     <class path="src" />
     <class path="classes" />
+    <class path="tests\src" />
   </classpaths>
   <!-- Build options -->
   <build>
