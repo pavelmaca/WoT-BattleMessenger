@@ -1,18 +1,18 @@
-@echo off
+@ECHO OFF
 
-set patch_swfs=BattleMessenger.swf
+SET patch_swfs=BattleMessenger.swf
 
-for %%i in (%patch_swfs%) do call :do_file %%~ni
+FOR %%i IN (%patch_swfs%) DO CALL :do_file %%~ni
 
-goto :EOF
+GOTO :EOF
 
 :do_file
-set n=%1
-if not exist %n%.xml (
-  echo %n%.swf
-  swfmill swf2xml orig\%n%.swf orig\%n%.xml
-  swfmill swf2xml %n%.swf %n%.xml
-  diff -u -I "<StackDouble value=" orig\%n%.xml %n%.xml > %n%.xml.patch
-  del orig\%n%.xml %n%.xml
+SET n=%1
+IF NOT EXIST %n%.xml (
+  ECHO %n%.swf
+  SWFMILL swf2xml orig\%n%.swf orig\%n%.xml
+  SWFMILL swf2xml %n%.swf %n%.xml
+  DIFF -u -I "<StackDouble value=" orig\%n%.xml %n%.xml > %n%.xml.patch
+  DEL orig\%n%.xml %n%.xml
 )
-goto :EOF
+GOTO :EOF

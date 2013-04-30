@@ -38,6 +38,9 @@
   <!-- Class files to compile (other referenced classes will automatically be included) -->
   <compileTargets>
     <compile path="src\wot\BattleMessenger\BattleMessenger.as" />
+    <compile path="classes\net\wargaming\messenger\controls\BattleMessageList.as" />
+    <compile path="classes\net\wargaming\messenger\controls\BattleMessageRenderer.as" />
+    <compile path="classes\net\wargaming\messenger\controls\BattleMessengerInput.as" />
   </compileTargets>
   <!-- Assets to embed into the output SWF -->
   <library>
@@ -48,9 +51,9 @@
     <!-- example: <hidden path="..." /> -->
   </hiddenPaths>
   <!-- Executed before build -->
-  <preBuildCommand />
+  <preBuildCommand>swf/make-patched-swfs.bat</preBuildCommand>
   <!-- Executed after build -->
-  <postBuildCommand alwaysRun="False" />
+  <postBuildCommand alwaysRun="False">release/make-archive.bat</postBuildCommand>
   <!-- Other project options -->
   <options>
     <option showHiddenPaths="False" />
