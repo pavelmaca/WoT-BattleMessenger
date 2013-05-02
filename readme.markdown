@@ -21,8 +21,8 @@ When someone spaming chat, for example, with minimap ping.. this mod only hide m
 ---
 
 ## Forum Links
-- [EU forum topic](http://forum.worldoftanks.eu/index.php?/topic/235204-085-battlemessenger-chat-filter-antispam-v11-244/)
-- [RU forum topic](http://forum.worldoftanks.ru/index.php?/topic/802335-%D1%84%D0%B8%D0%BB%D1%8C%D1%82%D1%80-%D1%87%D0%B0%D1%82%D0%B0-%D0%BD%D0%B0%D1%81%D1%82%D1%80%D0%B0%D0%B8%D0%B2%D0%B0%D0%B5%D0%BC%D1%8B%D0%B9/) *- unofficial by Demon_Ok*
+- [EU forum topic](http://forum.worldoftanks.eu/index.php?/topic/235204-)
+- [RU forum topic](http://forum.worldoftanks.ru/index.php?/topic/802335-) *- unofficial by Demon_Ok*
 
 ---
 
@@ -93,6 +93,8 @@ Simple filter like `"badword"` will match message: `In this message is badword a
 >    - testing each word separatly
 >    - included set of WG filters from lobby chat (EU)
 >    - special chars replacing and removing
+>- default custom filters in config
+>- debug mode: using XVM 4.0 & xvm-stats for loging
 >
 >no version (24.4.)
 >

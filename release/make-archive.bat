@@ -19,6 +19,6 @@ ECHO Creating new archive
 "C:\Program Files\WinRAR\App\WinRAR-x64\rar.exe" a -ap"res_mods/%game_varsion%/gui/flash" %output_file% %input_files%
 
 IF EXIST %output_file% (
-	ECHO Creating MD5 check sum
+	ECHO Creating MD5 checksum
 	MD5SUM %output_file% > md5sum.txt
 )
