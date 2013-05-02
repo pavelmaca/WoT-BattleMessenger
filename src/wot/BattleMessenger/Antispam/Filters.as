@@ -7,9 +7,14 @@ import wot.BattleMessenger.utils.Utils;
  */
 class wot.BattleMessenger.Antispam.Filters
 {
-	/** TODO: debug only*/
+	/**
+	 * Contain last matched filter
+	 */
 	public var lastMatch:String;
-	/**/
+
+	/**
+	 * List of all active filters
+	 */
 	private var filters:Array = [];
 	
 	/*[["@", "a"], ["0", "o"], ["1", "i"], 
@@ -51,6 +56,9 @@ class wot.BattleMessenger.Antispam.Filters
 		["ö", "o"], ["ô", "o"], ["õ", "o"], ["ó", "o"], ["ò", "o"]
 	];
 	
+	/**
+	 * Lost of removed chars
+	 */
 	private var nonStandardChars = ["*", "|", ".", ",", "&", "[", "]", 
 		":", ";", "?", "<", ">", "~", "`", "(", ")", "^", "%", "#", "{", "}", 
 		"=", "-"
@@ -61,23 +69,30 @@ class wot.BattleMessenger.Antispam.Filters
 		
 	}
 	
+	/**
+	 * Prepare filters on startup
+	 * @param	ar List of filters
+	 */
 	public function addFiltersFromArray(ar:Array) {
 		for (var i in ar) {
 			this.filters.push( this.normalize(ar[i], true) );
 		}
 	}
 	
+	/**
+	 * Sice message to words and test each filter on each word longer then 1 char
+	 * @param	message
+	 * @return	true if one of filters match
+	 */
 	public function test(message:String):Boolean {
 		var words:Array  = this.splitWords( this.normalize(message, false) );
 		for (var i in words) {
 			if (words[i].length < 2) {
-				//trace("skip: " + words[i]);
 				continue;
 			}
 			for (var z in this.filters) {
 				if (this.matchWord(words[i], this.filters[z]) > -1) {
-					//trace("found: " + words[i]+" - "+this.filters[z]);
-					this.lastMatch = "[BattleMessagner] match: " + words[i] + " - " + this.filters[z];
+					this.lastMatch = "word: '" + words[i] + "' filter: '" + this.filters[z] + "'";
 					return true;
 				}
 			}
@@ -85,6 +100,12 @@ class wot.BattleMessenger.Antispam.Filters
 		return false;
 	}
 	
+	/**
+	 * test single filter on given word
+	 * @param	word
+	 * @param	filter
+	 * @return	-1 = no match; > -1 match (number indicate filter position on word)
+	 */
 	private function matchWord(word:String, filter:String):Number {
 		//trace(word + " - " + filter);
 		var expandStart:Boolean = (filter.charAt(0) == "." && filter.charAt(1) == "*");
@@ -92,33 +113,24 @@ class wot.BattleMessenger.Antispam.Filters
 		
 		//detect .* inside "fil.*ter" (skip first and last 2 chars)
 		var expandMiddle:Boolean = (filter.lastIndexOf(".*", (expandEnd ? filter.length - 3 : filter.length)) > 0);
-		//trace("start: " + expandStart +" end: " + expandEnd);
 		if (expandMiddle) {
 			var index:Number = filter.indexOf(".*", (expandStart ? 2 : 0));
-			//trace("is middle: " + index);
 			var tmpFilter:String ;
 			do {
 				if (index == filter.length - 2 || index == -1) {
-					trace("dont reach this");
 					break;
 				}
 				tmpFilter = filter.slice(0, index+2);
-				//trace("temp: " + tmpFilter);
-				//return -1;
 
 				var matchIndex:Number = this.matchWord(word, tmpFilter);
-
 				if (matchIndex > -1) {
 					word = word.slice(matchIndex + tmpFilter.length - 2 - (expandStart ? 2 : 0));
-				//	trace(word);
 				}else {
 					return -1; //not match
 				}
 				filter = filter.slice(index);
 				index = filter.indexOf(".*", 2);
-			//	trace(filter);
 			}while (index > 0 && index < (filter.length - 2));
-			//trace(word +" - "+filter);
 			return this.matchWord(word, filter);
 		}
 		
@@ -157,7 +169,6 @@ class wot.BattleMessenger.Antispam.Filters
 		if(!isFilter){
 			message = this.removeNonStandardCharacters(message);
 		}
-		//trace("normalize: " + message);
 		return message;
 	}
 	
@@ -171,12 +182,6 @@ class wot.BattleMessenger.Antispam.Filters
 		}
 		return text;
 	}
-	/*
-	private function removeHtml(text:String):String {
-		var firstTag:Number = text.indexOf(">");
-		var lastTag:Number = text.lastIndexOf("<");
-		return text.slice( firstTag + 1, (lastTag != -1 ? lastTag : text.length));
-	}*/
 	
 	/**
 	 * @param	"<font color='#80D63A'>this is minimap <font color=''>username(vehicle)</font> action</font>"
@@ -187,9 +192,6 @@ class wot.BattleMessenger.Antispam.Filters
 		var firstTag:Number = message.indexOf(">");
 		var lastTag:Number = message.lastIndexOf("<");
 		var content:String = message.slice( firstTag + 1, (lastTag != -1 ? lastTag : message.length));
-		//trace("dirty: " + content);
-		
-		//return content;
 		
 		// Remove all <font>text</font> WITH content
 		var tagStart:Number;
@@ -197,7 +199,6 @@ class wot.BattleMessenger.Antispam.Filters
 		while ((tagStart = content.indexOf("<font ")) > -1 && (tagEnd = content.indexOf("</font>", tagStart)) > -1) {
 			content = content.slice(0, tagStart) + content.slice(tagEnd + 7, content.length);
 		}
-		//trace("clean: " + content);
 		
 		/**
 		 * TODO: remove img tags?

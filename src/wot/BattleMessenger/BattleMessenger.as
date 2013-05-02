@@ -43,15 +43,14 @@ class wot.BattleMessenger.BattleMessenger extends net.wargaming.messenger.Battle
     {		
 		var sendMsg:Boolean = true;
 		
-		var log:Object = {
-			d_msg: message
-		};
-		
+		var log:Object; 
 		
 		/** ignore own msg (not in debug mode)*/
 		if (MessengerConfig.enabled && (!himself || MessengerConfig.debugMode)) {
 			if(!this.self) this.self = PlayersPanelProxy.getSelf();
 			var player:Player;
+			
+			log = {	d_message: message };
 			
 			/** 
 			 * split message in two parts 
@@ -67,13 +66,12 @@ class wot.BattleMessenger.BattleMessenger extends net.wargaming.messenger.Battle
 				var isClan:Boolean = false;
 				if (MessengerConfig.ignoreClan && this.self.clanAbbrev.length > 0) 
 					isClan = (player.clanAbbrev == this.self.clanAbbrev);
+				log.d_isClan = isClan;
 					
 				var isSquad:Boolean = false;
 				if (MessengerConfig.ignoreSquad && self.squad != 0)
 					isSquad = (player.squad == this.self.squad);
-					
 				log.d_isSquad = isSquad;
-				log.d_isClan = isClan;
 					
 				/** ignore clan/squad */
 				if (!isClan && !isSquad) {
@@ -86,7 +84,6 @@ class wot.BattleMessenger.BattleMessenger extends net.wargaming.messenger.Battle
 					}else {
 						sendMsg = !(isDead ? MessengerConfig.blockEnemyDead : MessengerConfig.blockEnemyAlive);
 					}
-					
 					log.d_ally = (player.team == self.team);
 					
 					/** antispam #TODO: remove HTML from message*/
@@ -96,26 +93,23 @@ class wot.BattleMessenger.BattleMessenger extends net.wargaming.messenger.Battle
 						
 						/** filters */
 						if (sendMsg) {
-							var start:Date = new Date();
 							sendMsg = !this.antispam.isFilter(msgParts[1]);
-							var end:Date = new Date();
-							if(!sendMsg) {
-								message += "\n" + this.antispam.lastMatch;
-								log.d_filter = this.antispam.lastMatch;
-								this.antispam.lastMatch = null;
+							if (!sendMsg && MessengerConfig.debugMode) {
+								var lastFilter = this.antispam.popLastFilter();
+								message += "\n<font color='#CC0099'>filter: <b>" + lastFilter + "</b></font>\n";
+								log.d_filter = lastFilter;
 							}
-							log.d_took = (end.getTime() - start.getTime());
-							
 						}
 					}
 				}
 			}
 		}
-		log.d_hidden = !sendMsg;
-		Logger.addObject(log, "[BattleMessanger]");
-		Logger.addObject(MessengerConfig, "[config]");
 		
-				
+		if (MessengerConfig.debugMode) {
+			log.d_result = !sendMsg;
+			Logger.addObject(log, "[BattleMessanger]");
+		}		
+		
 		if (sendMsg || MessengerConfig.debugMode) {	
 			if (!sendMsg && MessengerConfig.debugMode) {
 				message = "<font color='#CC0099'>deleted: </font>" + message;

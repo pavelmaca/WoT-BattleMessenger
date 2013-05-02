@@ -2,7 +2,6 @@ import wot.BattleMessenger.utils.Utils;
 import wot.BattleMessenger.MessengerConfig;
 import wot.BattleMessenger.Antispam.Filters;
 import wot.BattleMessenger.Antispam.WGFilter;
-//import com.xvm.Logger;
 
 class wot.BattleMessenger.Antispam.Antispam
 {
@@ -65,12 +64,7 @@ class wot.BattleMessenger.Antispam.Antispam
 		this.cache[playerUid][currentTime] = message;
 		
 		var isDuplicate:Boolean = (duplicateCount >= MessengerConfig.antispamDuplcateCount);
-		if (isDuplicate) {
-			//Logger.add("duplicity (" + duplicateCount + "): " + message);
-		}
-		if (playerCount >= MessengerConfig.antispamPlayerCount) {
-			//Logger.add("spam: ("+playerCount + "): " + message);
-		}
+		
 		return (isDuplicate || (playerCount >= MessengerConfig.antispamPlayerCount));
 	}
 	
@@ -81,10 +75,15 @@ class wot.BattleMessenger.Antispam.Antispam
 	 */
 	public function isFilter(message:String):Boolean {
 		if (this.filters.test(message)) {
-			this.lastMatch = this.filters.lastMatch;
 			return true;
 		}
 		return false;
+	}
+	
+	public function popLastFilter():String {
+		var res = this.filters.lastMatch;
+		this.filters.lastMatch = null;
+		return res;
 	}
 
 	/**
