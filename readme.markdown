@@ -1,9 +1,10 @@
 ﻿# BattleMessenger - Chat filter & antispam
 - Limit number of messages displayed in chat
-- Hide messages by dead/alive & ally/enemy player status
+- **Hide messages by dead**/alive & ally/enemy **player status**
 - Hide duplicate messages from players
 - Prevent spam, by setting max. number of messages per x sec from one player
-- Custom chat filters for block messages containing "bad words"
+- **Custom words filter** for block messages containing "bad words"
+- Set of Wargaming **word filters from lobby chat** (EU only)
 - Ignore own messages and clan, squad players (optional)
 
 When someone spaming chat, for example, with minimap ping.. this mod only hide messages, not remove ping sound or minimap action icon.
@@ -28,6 +29,28 @@ When someone spaming chat, for example, with minimap ping.. this mod only hide m
 ## Config file
 - config is stored in `BattleMessenger.conf` using [JSON](http://en.wikipedia.org/wiki/JavaScript_Object_Notation) with extra comments allowed *(same as XVM mod)*
 - default config is also used when config file is corrupt or missing
+
+---
+
+## Custom filters
+Simple filter like `"badword"` will match message: `In this message is badword and will not be displayed.`
+
+>To avoid unwanted filtering with custom filters you need to know some details.
+>
+>- HTML code inside message is deleted, with it's content *(avoid filtering user, clan and vehicle names from RadialMenu actions)*
+>- every message is splited to simple words, using space as delimeter
+>- tested are only **words with 2 or more characters**
+>- some characters become replaced, like `0` => `o`, `ä` => `a`, `c` => `k`, full list is here: [gist - charReplacements.as](https://gist.github.com/PavelMaca/3c9268e553ece98051f0#file-charreplacements-as)
+>- special characters are removed, like `.`, `#`, `:`, full list is here: [gist - nonStandardChars.as](https://gist.github.com/PavelMaca/3c9268e553ece98051f0#file-nonstandardchars-as)
+
+### Using .* statement
+>For creating dynamic filters, you can use `.*` inside filter definition.
+>It mean "any characters".
+>
+> - `.*bar` match `bar`, `foobar`
+> - `fu.*` match `fu`, `fun`, `fuck`
+> - `re.*d` match `red`, `reeeed`, `read`
+> - `re.*d.*` match same as above + `reading`
 
 ---
 
@@ -64,6 +87,13 @@ When someone spaming chat, for example, with minimap ping.. this mod only hide m
 
 ## Changelog
 **[0.8.5]**
+>2.0 ()
+>
+>- new implementation of filter
+>    - testing each word separatly
+>    - included set of WG filters from lobby chat (EU)
+>    - special chars replacing and removing
+>
 >no version (24.4.)
 >
 >- file structure for 0.8.5
