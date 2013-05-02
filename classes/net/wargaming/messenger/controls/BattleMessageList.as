@@ -1,7 +1,4 @@
-/**
- * @author Assassik
- */
-intrinsic class net.wargaming.messenger.controls.BattleMessageList
+intrinsic class net.wargaming.messenger.controls.BattleMessageList extends net.wargaming.notification.FadingMessageList
 {
-	// TODO: make doc
+	function handleInput(details, pathToFocus);
 }
