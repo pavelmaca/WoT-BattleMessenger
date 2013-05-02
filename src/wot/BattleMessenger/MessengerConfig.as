@@ -30,6 +30,10 @@ class wot.BattleMessenger.MessengerConfig
 			WG_Filters: false,
 			customFilters: []
 		},
+		xvm: {
+			enabled: true,
+			minRating: 1300
+		},
 		debugMode: false
 	};
 	
@@ -51,6 +55,7 @@ class wot.BattleMessenger.MessengerConfig
         return battleMessenger.ignoreSquad;
 	}
 	
+	/** Blokers */
 	public static function get blockAllyDead():Boolean   {
         return battleMessenger.blockAlly.dead;
 	}
@@ -67,6 +72,7 @@ class wot.BattleMessenger.MessengerConfig
         return battleMessenger.blockEnemy.alive;
 	}
 	
+	/** Antispam */
 	public static function get antispamEnabled():Boolean   {
         return antispam.enabled;
 	}
@@ -100,6 +106,14 @@ class wot.BattleMessenger.MessengerConfig
         return _customFilters;
 	}
 	
+	/** XVM */
+	public static function get xvmEnabled():Boolean	{
+		return battleMessenger.xvm.enabled;
+	}
+	
+	public static function get xvmMinRating():Number {
+		return battleMessenger.xvm.minRating;
+	}
 	
 	public static function get debugMode():Boolean   {
         return battleMessenger.debugMode;

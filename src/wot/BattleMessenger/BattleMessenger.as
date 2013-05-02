@@ -4,6 +4,9 @@ import wot.BattleMessenger.models.PlayersPanelProxy;
 import wot.BattleMessenger.MessengerConfig;
 import wot.BattleMessenger.utils.Utils;
 import wot.BattleMessenger.utils.GlobalEventDispatcher;
+import com.xvm.StatData;
+//import com.xvm.Utils; used for accesing StatData
+//import com.xvm.Defines; for testing xvm data state
 import com.xvm.Logger;
 
 class wot.BattleMessenger.BattleMessenger extends net.wargaming.messenger.BattleMessenger
@@ -62,7 +65,7 @@ class wot.BattleMessenger.BattleMessenger extends net.wargaming.messenger.Battle
 				player = this.getPlayerFromMessage(msgParts[0]);
 			}
 		
-			if(player && this.self){
+			if (player && this.self) {
 				var isClan:Boolean = false;
 				if (MessengerConfig.ignoreClan && this.self.clanAbbrev.length > 0) 
 					isClan = (player.clanAbbrev == this.self.clanAbbrev);
@@ -75,18 +78,30 @@ class wot.BattleMessenger.BattleMessenger extends net.wargaming.messenger.Battle
 					
 				/** ignore clan/squad */
 				if (!isClan && !isSquad) {
-					var isDead:Boolean = PlayersPanelProxy.isDead(player.uid);
-					log.d_isDead = isDead;
-					
-					/** block dead/alive */
-					if (player.team == self.team) {
-						sendMsg = !(isDead ? MessengerConfig.blockAllyDead : MessengerConfig.blockAllyAlive);
-					}else {
-						sendMsg = !(isDead ? MessengerConfig.blockEnemyDead : MessengerConfig.blockEnemyAlive);
+					var xvmKey:String = com.xvm.Utils.GetNormalizedPlayerName(player.userName);
+					/** check if data are presend */
+					if (MessengerConfig.xvmEnabled && StatData.s_data[xvmKey]) {
+						/** stats must be loaded */
+						if (StatData.s_data[xvmKey].loadstate == com.xvm.Defines.LOADSTATE_DONE) {
+							sendMsg = (MessengerConfig.xvmMinRating >= StatData.s_data[xvmKey].stat.wn);
+							log.d_xvm = StatData.s_data[xvmKey].stat.wn;
+						}
 					}
-					log.d_ally = (player.team == self.team);
 					
-					/** antispam #TODO: remove HTML from message*/
+					if(sendMsg){
+						var isDead:Boolean = PlayersPanelProxy.isDead(player.uid);
+						log.d_isDead = isDead;
+						
+						/** block dead/alive */
+						if (player.team == self.team) {
+							sendMsg = !(isDead ? MessengerConfig.blockAllyDead : MessengerConfig.blockAllyAlive);
+						}else {
+							sendMsg = !(isDead ? MessengerConfig.blockEnemyDead : MessengerConfig.blockEnemyAlive);
+						}
+						log.d_ally = (player.team == self.team);
+					}
+					
+					/** antispam */
 					if (sendMsg && MessengerConfig.antispamEnabled) {
 						sendMsg = !this.antispam.isSpam(msgParts[1], player.uid);
 						log.d_spam = !sendMsg;

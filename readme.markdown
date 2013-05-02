@@ -6,6 +6,7 @@
 - **Custom words filter** for block messages containing "bad words"
 - Set of Wargaming **word filters from lobby chat** (EU only)
 - Ignore own messages and clan, squad players (optional)
+- Blocking messages based on min. WN rating (xvm-stats required)
 
 When someone spaming chat, for example, with minimap ping.. this mod only hide messages, not remove ping sound or minimap action icon.
 
@@ -95,6 +96,9 @@ Simple filter like `"badword"` will match message: `In this message is badword a
 >    - special chars replacing and removing
 >- default custom filters in config
 >- debug mode: using XVM 4.0 & xvm-stats for loging
+>- add XVM section
+>    - depend on XVM > 4.0 & xvm-stats
+>    - messages blocking based on minimum {{WN}} rating
 >
 >no version (24.4.)
 >
