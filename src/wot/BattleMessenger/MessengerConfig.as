@@ -6,7 +6,11 @@ class wot.BattleMessenger.MessengerConfig
 {
 	private static var CONFIG_FILE:String = "BattleMessenger.conf";
 	
+	public static var EVENT_CONFIG_LOADED = "config_loaded";
+	
 	private static var _config:Object;
+	
+	private static var _error:String = null;
 	
 	private static var _defaultConfig:Object = {
 		enabled: true,
@@ -151,17 +155,40 @@ class wot.BattleMessenger.MessengerConfig
 	}
 	
 	private static function onLoadConfig(str:String) {
+		
 		if (str) {
-			var config = com.xvm.JSON.parse(str);
-			
-			if (config) {
-				_config = Utils.MergeConfigs(config, _defaultConfig);
+			try {
+				var userConfig = com.xvm.JSON.parse(str);
+				if (userConfig) {
+					_config = Utils.MergeConfigs(userConfig, _defaultConfig);
+				}
+			}catch (ex) {
+				var head = ex.at > 0 ? str.substring(0, ex.at) : "";
+				head = head.split("\r").join("").split("\n").join("");
+				while (head.indexOf("  ") != -1)
+					head = head.split("  ").join(" ");
+				head = head.substr(head.length - 75, 75);
+
+				var tail = (ex.at + 1 < str.length) ? str.substring(ex.at + 1, str.length) : "";
+				tail = tail.split("\r").join("").split("\n").join("");
+				while (tail.indexOf("  ") != -1)
+					tail = tail.split("  ").join(" ");
+
+				var text:String = "[BattleMessenger]: Error loading config file \n" +
+					"[" + ex.at + "] " + Utils.trim(ex.name) + ": " + Utils.trim(ex.message) + "\n  " +
+					head + ">>>" + str.charAt(ex.at) + "<<<" + tail;
+				_error = text;
 			}
+			
+			
 		}
 		/** set default config */
 		if (!_config) _config = _defaultConfig;
 		
-		//Logger.add('BM config calling event');
-		GlobalEventDispatcher.dispatchEvent({type: "BM_config_loaded"});
-	}	
+		GlobalEventDispatcher.dispatchEvent({type: EVENT_CONFIG_LOADED});
+	}
+	
+	public static function get error():String {
+		return _error;
+	}
 }

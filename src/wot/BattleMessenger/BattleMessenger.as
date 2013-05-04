@@ -18,12 +18,12 @@ class wot.BattleMessenger.BattleMessenger extends net.wargaming.messenger.Battle
 	{
 		super();
 		
-		GlobalEventDispatcher.addEventListener("config_loaded", this, onConfigLoaded);
+		GlobalEventDispatcher.addEventListener(MessengerConfig.EVENT_CONFIG_LOADED, this, onConfigLoaded);
 		MessengerConfig.loadConfig();
 	}
 	
 	private function onConfigLoaded() {
-		GlobalEventDispatcher.removeEventListener("config_loaded", this, onConfigLoaded);
+		GlobalEventDispatcher.removeEventListener(MessengerConfig.EVENT_CONFIG_LOADED, this, onConfigLoaded);
 		this.antispam = new Antispam();
 	}
 	
@@ -38,12 +38,22 @@ class wot.BattleMessenger.BattleMessenger extends net.wargaming.messenger.Battle
 			 * this.messageList.stackLength not working, need _stackLength
 			 */
 			this.messageList._stackLength = MessengerConfig.chatLength;
+			
+			/** Warn on missing or corrupt config file */
+			if (MessengerConfig.error != null) {
+				super._onRecieveChannelMessage("", "<font color='#CC0099'>" + MessengerConfig.error + "<font>", true, false);
+			}
+			
+			/** Debug mode info */
+			if (MessengerConfig.debugMode) {
+					super._onRecieveChannelMessage("", "<font color='#CC0099'>Debug mode is active<font>", true, false);
+			}
 		}
 	}
 	
 	/** overwrite */
 	function _onRecieveChannelMessage(cid, message:String, himself:Boolean, targetIsCurrentPlayer)
-    {		
+    {
 		var sendMsg:Boolean = true;
 		
 		var log:Object; 
