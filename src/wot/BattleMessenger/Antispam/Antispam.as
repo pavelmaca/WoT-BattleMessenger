@@ -1,7 +1,7 @@
 import wot.BattleMessenger.utils.Utils;
-import wot.BattleMessenger.MessengerConfig;
+import wot.BattleMessenger.Config;
 import wot.BattleMessenger.Antispam.Filters;
-import wot.BattleMessenger.Antispam.WGFilter;
+import wot.BattleMessenger.Antispam.WGFilterEU;
 
 class wot.BattleMessenger.Antispam.Antispam
 {
@@ -16,13 +16,13 @@ class wot.BattleMessenger.Antispam.Antispam
 	
 	private var filters:Filters;
 	
-	public var lastMatch:String;
+	public var lastSpam:Array = [];
 			
 	public function Antispam() 	{
 		this.filters = new Filters();
-		filters.addFiltersFromArray(MessengerConfig.antispamCustomFilters);
-		if (MessengerConfig.antispamWGFiltersEnabled) {
-			filters.addFiltersFromArray(WGFilter.badWords);
+		filters.addFiltersFromArray(Config.antispamCustomFilters);
+		if (Config.antispamWGFiltersEnabled) {
+			filters.addFiltersFromArray(WGFilterEU.badWords);
 		}
 	}
 	
@@ -32,12 +32,12 @@ class wot.BattleMessenger.Antispam.Antispam
 		var currentTime:Number = this.getCurrentTime();
 		
 		/** turn off duplicateCounter */
-		if (MessengerConfig.antispamDuplcateCount <= 0 || MessengerConfig.antispamDuplicateInterval <= 0){
+		if (Config.antispamDuplcateCount <= 0 || Config.antispamDuplicateInterval <= 0){
 			duplicateCount = -1;
 		}
 		
 		/** turn off playerCounter */
-		if (MessengerConfig.antispamPlayerCount <= 0 || MessengerConfig.antispamPlayerInterval <= 0) {
+		if (Config.antispamPlayerCount <= 0 || Config.antispamPlayerInterval <= 0) {
 			playerCount = -1;
 		}
 		
@@ -50,12 +50,12 @@ class wot.BattleMessenger.Antispam.Antispam
 			var msgTime:Number = Utils.toInt(i);
 
 			/** is messenge in time interval && msg match */
-			if (duplicateCount >= 0 && msgTime > currentTime - MessengerConfig.antispamDuplicateInterval) {
+			if (duplicateCount >= 0 && msgTime > currentTime - Config.antispamDuplicateInterval) {
 				if(this.cache[playerUid][i] == message) {
 					duplicateCount++;
 				}
 			}
-			if (playerCount >= 0 && msgTime > currentTime - MessengerConfig.antispamPlayerInterval) {
+			if (playerCount >= 0 && msgTime > currentTime - Config.antispamPlayerInterval) {
 				playerCount++;
 			}
 		}
@@ -63,9 +63,16 @@ class wot.BattleMessenger.Antispam.Antispam
 		/** add message to cache */
 		this.cache[playerUid][currentTime] = message;
 		
-		var isDuplicate:Boolean = (duplicateCount >= MessengerConfig.antispamDuplcateCount);
+		var isDuplicate:Boolean = (duplicateCount >= Config.antispamDuplcateCount);
+		if (isDuplicate) {
+			this.lastSpam.push("Duplicate count: " + duplicateCount);
+		}
+		var isSpam = (playerCount >= Config.antispamPlayerCount);
+		if (isSpam) {
+			this.lastSpam.push("Spam count: " + playerCount);
+		}
 		
-		return (isDuplicate || (playerCount >= MessengerConfig.antispamPlayerCount));
+		return (isDuplicate || isSpam);
 	}
 	
 	/**
@@ -81,9 +88,13 @@ class wot.BattleMessenger.Antispam.Antispam
 	}
 	
 	public function popLastFilter():String {
-		var res = this.filters.lastMatch;
-		this.filters.lastMatch = null;
-		return res;
+		return this.filters.popLastFilter();
+	}
+	
+	public function popLastSpam():String {
+		var ret = this.lastSpam.join("\n");
+		this.lastSpam = [];
+		return ret;
 	}
 
 	/**

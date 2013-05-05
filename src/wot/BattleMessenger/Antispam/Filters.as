@@ -1,4 +1,5 @@
 import wot.BattleMessenger.utils.Utils;
+import wot.BattleMessenger.Antispam.FilterData;
 //import wot.utils.Logger;
 
 /**
@@ -7,67 +8,14 @@ import wot.BattleMessenger.utils.Utils;
  */
 class wot.BattleMessenger.Antispam.Filters
 {
-	/**
-	 * Contain last matched filter
-	 */
-	public var lastMatch:String;
 
-	/**
-	 * List of all active filters
-	 */
+	/** Contain last matched filter */
+	public var lastFilter:String;
+
+	/** List of all active filters */
 	private var filters:Array = [];
 	
-	/*[["@", "a"], ["0", "o"], ["1", "i"], 
-  ["2", "r"], ["3", "e"], ["4", "a"], ["5", "s"], ["7", "t"], ["8", "b"], 
-  ["9", "g"], ["|<", "k"], ["|\\/|", "m"], ["|\\|", "n"], ["ä", "a"], ["ã", "a"], 
-  ["â", "a"], ["ä", "a"], ["á", "a"], ["à", "a"], ["å", "a"], ["é", "e"], 
-  ["è", "e"], ["ë", "e"], ["ê", "e"], ["§", "s"], ["$", "s"], ["£", "l"], 
-  ["€", "e"], ["ü", "u"], ["û", "u"], ["ú", "u"], ["ù", "u"], ["î", "i"], 
-  ["ï", "i"], ["í", "i"], ["ì", "i"], ["ÿ", "y"], ["ý", "y"], ["ö", "o"], 
-  ["ô", "o"], ["õ", "o"], ["ó", "o"], ["ò", "o"]];*/
-	private var charReplacements:Array = [
-		// WG
-		["@", "a"],
-		["3", "e"],
-		["ph", "f"],
-		["6", "g"],
-		["c", "k"],
-	//	["\\(", "k"], collision with nonStandardChars
-		["1", "l"],
-		["!", "l"],
-		["i", "l"],
-		["0", "o"],
-		["9", "q"],
-		["$", "s"],
-		["5", "s"],
-		["z", "s"],
-		["2", "s"],
-		["7", "t"],
-		["+", "t"],
-		["u", "v"],
-		["w", "v"],
-		//added
-		["4", "a"], ["8", "b"], 
-	//	["|<", "k"], ["|\\/|", "m"], ["|\\|", "n"], collision with nonStandardChars
-		["ä", "a"], ["ã", "a"], ["â", "a"], ["ä", "a"], ["á", "a"], ["à", "a"], 
-		["å", "a"], ["é", "e"], ["è", "e"], ["ë", "e"], ["ê", "e"], ["§", "s"], 
-		["£", "l"], ["€", "e"], ["ü", "u"], ["û", "u"], ["ú", "u"], ["ù", "u"], 
-		["î", "i"], ["ï", "i"], ["í", "i"], ["ì", "i"], ["ÿ", "y"], ["ý", "y"], 
-		["ö", "o"], ["ô", "o"], ["õ", "o"], ["ó", "o"], ["ò", "o"]
-	];
-	
-	/**
-	 * Lost of removed chars
-	 */
-	private var nonStandardChars = ["*", "|", ".", ",", "&", "[", "]", 
-		":", ";", "?", "<", ">", "~", "`", "(", ")", "^", "%", "#", "{", "}", 
-		"=", "-"
-	];
-	
-	public function Filters() 
-	{
-		
-	}
+	//public function Filters() {}
 	
 	/**
 	 * Prepare filters on startup
@@ -92,12 +40,19 @@ class wot.BattleMessenger.Antispam.Filters
 			}
 			for (var z in this.filters) {
 				if (this.matchWord(words[i], this.filters[z]) > -1) {
-					this.lastMatch = "word: '" + words[i] + "' filter: '" + this.filters[z] + "'";
+					this.lastFilter = "<b>" + this.filters[z] + "</b> on word: " + words[i];
+					//this.lastMatch = "word: '" + words[i] + "' filter: '" + this.filters[z] + "'";
 					return true;
 				}
 			}
 		}
 		return false;
+	}
+	
+	public function popLastFilter():String {
+		var res = this.lastFilter;
+		this.lastFilter = null;
+		return res;
 	}
 	
 	/**
@@ -163,8 +118,8 @@ class wot.BattleMessenger.Antispam.Filters
 			message = this.removeHTML(message);
 		}
 		message = message.toLowerCase();
-		for (var i in this.charReplacements) {
-			message = Utils.strReplace(message, this.charReplacements[i][0], this.charReplacements[i][1]);
+		for (var i in FilterData.charReplacements) {
+			message = Utils.strReplace(message, FilterData.charReplacements[i][FilterData.FIND], FilterData.charReplacements[i][FilterData.REPLACEMENT]);
 		}
 		if(!isFilter){
 			message = this.removeNonStandardCharacters(message);
@@ -177,8 +132,8 @@ class wot.BattleMessenger.Antispam.Filters
 	}
 	
 	private function removeNonStandardCharacters(text:String):String {
-		for (var i in this.nonStandardChars) {
-			text = Utils.strReplace(text, this.nonStandardChars[i], "");
+		for (var i in FilterData.nonStandardChars) {
+			text = Utils.strReplace(text, FilterData.nonStandardChars[i], "");
 		}
 		return text;
 	}

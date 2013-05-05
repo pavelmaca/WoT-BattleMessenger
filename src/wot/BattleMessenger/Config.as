@@ -2,7 +2,7 @@ import wot.BattleMessenger.utils.Utils;
 import wot.BattleMessenger.utils.GlobalEventDispatcher;
 //import com.xvm.Logger;
 
-class wot.BattleMessenger.MessengerConfig
+class wot.BattleMessenger.Config
 {
 	private static var CONFIG_FILE:String = "BattleMessenger.conf";
 	
@@ -174,13 +174,11 @@ class wot.BattleMessenger.MessengerConfig
 				while (tail.indexOf("  ") != -1)
 					tail = tail.split("  ").join(" ");
 
-				var text:String = "[BattleMessenger]: Error loading config file \n" +
+				var text:String = "Error loading config file \n" +
 					"[" + ex.at + "] " + Utils.trim(ex.name) + ": " + Utils.trim(ex.message) + "\n  " +
 					head + ">>>" + str.charAt(ex.at) + "<<<" + tail;
 				_error = text;
 			}
-			
-			
 		}
 		/** set default config */
 		if (!_config) _config = _defaultConfig;

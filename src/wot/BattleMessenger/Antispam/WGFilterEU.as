@@ -1,5 +1,5 @@
 
-class wot.BattleMessenger.Antispam.WGFilter
+class wot.BattleMessenger.Antispam.WGFilterEU
 {
 
 	public static var badWords =  [
