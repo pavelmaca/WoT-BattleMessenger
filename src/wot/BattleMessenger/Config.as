@@ -15,8 +15,14 @@ class wot.BattleMessenger.Config
 	private static var _defaultConfig:Object = {
 		enabled: true,
 		chatLength: 10,
-		ignoreClan: true,
-		ignoreSquad: true,
+		ignore: {
+			clan: true,
+			squad: true,
+			companyBattle: true,
+			specialBattle: true,
+			trainingBattle: true,
+			randomBattle: false
+		},
 		blockAlly: {
 			dead: false,
 			alive: false
@@ -47,16 +53,34 @@ class wot.BattleMessenger.Config
         return battleMessenger.enabled;
 	}
 	
+	/** Chat length */
 	public static function get chatLength():Number   {
         return battleMessenger.chatLength;
 	}
 	
+	/** Ignore */
 	public static function get ignoreClan():Boolean   {
-        return battleMessenger.ignoreClan;
+        return battleMessenger.ignore.clan;
 	}
 	
 	public static function get ignoreSquad():Boolean   {
-        return battleMessenger.ignoreSquad;
+        return battleMessenger.ignore.squad;
+	}	
+	
+	public static function get ignoreCompanyBattle():Boolean   {
+        return battleMessenger.ignore.companyBattle;
+	}
+	
+	public static function get ignoreSpecialBattle():Boolean   {
+        return battleMessenger.ignore.specialBattle;
+	}
+	
+	public static function get ignoreTrainingBattle():Boolean   {
+        return battleMessenger.ignore.trainingBattle;
+	}
+	
+	public static function get ignoreRandomBattle():Boolean   {
+        return battleMessenger.ignore.randomBattle;
 	}
 	
 	/** Blokers */

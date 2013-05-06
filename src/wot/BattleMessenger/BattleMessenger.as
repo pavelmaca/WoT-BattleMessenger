@@ -27,13 +27,21 @@ class wot.BattleMessenger.BattleMessenger extends net.wargaming.messenger.Battle
 		
 		/** Edit message for debug mode */
 		if (Config.debugMode) {
+			var log:Object = { 
+				msg: message,
+				display: displayMsg
+			};
+			
 			if(!displayMsg){
 				message = "<font color='" + Worker.DEBUG_COLOR + "'>Hidden: </font>" + message;
 			}
 			/** add reason, can be also "ignored for xx" */
 			var reason:String = _bm_worker.popReason();
-			if(reason != null){
+			if (reason != null) {
 				message += "\n<font color='" + Worker.DEBUG_COLOR + "'>" + reason + "</font>";
+				
+				log.reason = reason;
+				Logger.addObject(log, "[BattleMessenger]");
 			}
 		}
 		

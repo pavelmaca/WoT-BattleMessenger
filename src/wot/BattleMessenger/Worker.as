@@ -1,5 +1,6 @@
 import wot.BattleMessenger.Antispam.Antispam;
 import wot.BattleMessenger.BattleMessenger;
+import wot.BattleMessenger.models.BattleType;
 import wot.BattleMessenger.models.Player;
 import wot.BattleMessenger.models.PlayersPanelProxy;
 import wot.BattleMessenger.Config;
@@ -18,8 +19,8 @@ class wot.BattleMessenger.Worker
 {
 	// Color of debug messages
 	public static var DEBUG_COLOR = "#FF3362";
-	public static var MSG_DEBUG_FLAG = "bm_debug_message";
-	public static var MSG_ERROR_FLAG = "bm_error_message";
+	
+	private var battleType:String;
 	
 	private var battleMessenger:BattleMessenger;
 	
@@ -59,8 +60,12 @@ class wot.BattleMessenger.Worker
 				this.sendDebugMessage("Config loaded");
 			}
 			
+			/** Get battle type */
+			battleType = BattleType.getType(_root.statsData.arenaData.battleIcon.toString());
+			//Logger.addObject(_root.statsData.arenaData, "_root.statsData.arenaData");
+			
 			/** Debug mode info */
-			this.sendDebugMessage("Debug mode active");
+			this.sendDebugMessage("Debug mode active, " + battleType + " battle");
 		}
 	}
 	
@@ -103,10 +108,33 @@ class wot.BattleMessenger.Worker
 			this.lastReason = "Ignore: squad - " + sender.squad;
 			return true;
 		}
-		//if ( ignoreForCompanny(sender) ) return true;
-		//if ( ignoreForSpecial(sender) ) return true;
-		//if ( ignoreForTraining(sender) ) return true;
 		
+		/** Ignore by battle type, skip self */
+		if (isSameTeam(sender) && sender.uid != this.self.uid) {
+			switch(battleType) {
+				case BattleType.RANDOM: 
+					if (Config.ignoreRandomBattle) {
+						this.lastReason = "Ignore: ally in Random battle";
+						return true;
+					} break;
+				case BattleType.COMPANY: 
+					if (Config.ignoreCompanyBattle) {
+						this.lastReason = "Ignore: ally in Company battle";
+						return true;
+					} break;
+				case BattleType.SPECIAL: 
+					if (Config.ignoreSpecialBattle) {
+						this.lastReason = "Ignore: ally in Special battle";
+						return true;
+					} break;
+				case BattleType.TRAINING: 
+					if (Config.ignoreTrainingBattle) {
+						this.lastReason = "Ignore: ally in Training battle";
+						return true;
+					} break;
+			}
+		}
+
 		/** XVM */
 		if (Config.xvmEnabled && !isXvmRatingHigher(sender) ) return false;
 		
@@ -219,16 +247,20 @@ class wot.BattleMessenger.Worker
 		var isDead:Boolean = PlayersPanelProxy.isDead(player.uid);
 		
 		var hide:Boolean;
-		if (player.team == self.team) {
+		if (isSameTeam(player)) {
 			hide = (isDead ? Config.blockAllyDead : Config.blockAllyAlive);
 		}else {
 			hide = (isDead ? Config.blockEnemyDead : Config.blockEnemyAlive);
 		}
 		
 		if (hide) {
-			lastReason = (player.team == self.team ? "Ally" : "Enemy") + " - " + (isDead ? "dead" : "alive");
+			lastReason = (isSameTeam(player) ? "Ally" : "Enemy") + " - " + (isDead ? "dead" : "alive");
 		}
 		return hide;
+	}
+	
+	private function isSameTeam(player:Player):Boolean {
+		return (self.team == player.team);
 	}
 	
 }
