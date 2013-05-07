@@ -1,11 +1,11 @@
 ﻿# BattleMessenger - Chat filter & antispam
 - Limit number of messages displayed in chat
-- **Hide messages by dead**/alive & ally/enemy **player status**
+- **Hide messages by** dead/alive & ally/enemy **player status**
 - Hide duplicate messages from players
 - Prevent spam, by setting max. number of messages per x sec from one player
 - **Custom words filter** for block messages containing "bad words"
 - Set of Wargaming **word filters from lobby chat** (EU only)
-- Ignore own messages and clan, squad players (optional)
+- Ignore own messages, clan / squad mate, ally in company / clan wars / training / random battles (optional)
 - Blocking messages based on min. WN rating (xvm-stats required)
 
 When someone spaming chat, for example, with minimap ping.. this mod only hide messages, not remove ping sound or minimap action icon.
@@ -77,39 +77,41 @@ Simple filter like `"badword"` will match message: `In this message is badword a
 ---
 
 ### Debug mode
->Allows you test new configuration, while all messages will be displayed
->Affected messages will get "deleted:" prefix
->Works also on own messages
+>Allows you test new configuration, while all messages will be displayed.
+>Works also on own messages.
 
     debugMode: true
->![debugModePreview](http://imageshack.us/a/img577/3143/shot047d.jpg)
+>![debugModePreview](http://imageshack.us/a/img837/9910/comp1t.png)
 
 ---
 
 ## Changelog
 **[0.8.5]**
->2.0 ()
+>2.0 (7.5.2013)
 >
->- new implementation of filter
+>- ignore section reworked, add battle types
+>- new implementation of filters
 >    - testing each word separatly
 >    - included set of WG filters from lobby chat (EU)
 >    - special chars replacing and removing
->- default custom filters in config
->- debug mode: using XVM 4.0 & xvm-stats for loging
+>    - default custom filters in config
 >- add XVM section
 >    - depend on XVM > 4.0 & xvm-stats
 >    - messages blocking based on minimum {{WN}} rating
+>- debug mode
+>    - using XVM 4.0 & xvm-stats for loging
+>    - hide/ignore reason under messages
 >
 >no version (24.4.)
 >
 >- file structure for 0.8.5
 
 **[0.8.4]**
->1.1 (21.4.)
+>1.1 (21.4.2013)
 >
 >- filters are now case insensitive
 >- config use UTF-8
 >
->1.0 (16.4.)
+>1.0 (16.4.2013)
 >
 >- public release
