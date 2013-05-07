@@ -1,10 +1,12 @@
 ﻿# BattleMessenger - Chat filter & antispam
 - Limit number of messages displayed in chat
-- Hide messages by dead/alive & ally/enemy player status
+- **Hide messages by** dead/alive & ally/enemy **player status**
 - Hide duplicate messages from players
 - Prevent spam, by setting max. number of messages per x sec from one player
-- Custom chat filters for block messages containing "bad words"
-- Ignore own messages and clan, squad players (optional)
+- **Custom words filter** for block messages containing "bad words"
+- Set of Wargaming **word filters from lobby chat** (EU only)
+- Ignore own messages, clan / squad mate, ally in company / clan wars / training / random battles (optional)
+- Blocking messages based on min. WN rating (xvm-stats required)
 
 When someone spaming chat, for example, with minimap ping.. this mod only hide messages, not remove ping sound or minimap action icon.
 
@@ -20,14 +22,36 @@ When someone spaming chat, for example, with minimap ping.. this mod only hide m
 ---
 
 ## Forum Links
-- [EU forum topic](http://forum.worldoftanks.eu/index.php?/topic/235204-085-battlemessenger-chat-filter-antispam-v11-244/)
-- [RU forum topic](http://forum.worldoftanks.ru/index.php?/topic/802335-%D1%84%D0%B8%D0%BB%D1%8C%D1%82%D1%80-%D1%87%D0%B0%D1%82%D0%B0-%D0%BD%D0%B0%D1%81%D1%82%D1%80%D0%B0%D0%B8%D0%B2%D0%B0%D0%B5%D0%BC%D1%8B%D0%B9/) *- unofficial by Demon_Ok*
+- [EU forum topic](http://forum.worldoftanks.eu/index.php?/topic/235204-)
+- [RU forum topic](http://forum.worldoftanks.ru/index.php?/topic/802335-) *- unofficial by Demon_Ok*
 
 ---
 
 ## Config file
 - config is stored in `BattleMessenger.conf` using [JSON](http://en.wikipedia.org/wiki/JavaScript_Object_Notation) with extra comments allowed *(same as XVM mod)*
 - default config is also used when config file is corrupt or missing
+
+---
+
+## Custom filters
+Simple filter like `"badword"` will match message: `In this message is badword and will not be displayed.`
+
+>To avoid unwanted filtering with custom filters you need to know some details.
+>
+>- HTML code inside message is deleted, with it's content *(avoid filtering user, clan and vehicle names from RadialMenu actions)*
+>- every message is splited to simple words, using space as delimeter
+>- tested are only **words with 2 or more characters**
+>- some characters become replaced, like `0` => `o`, `ä` => `a`, `c` => `k`, full list is here: [gist - charReplacements.as](https://gist.github.com/PavelMaca/3c9268e553ece98051f0#file-charreplacements-as)
+>- special characters are removed, like `.`, `#`, `:`, full list is here: [gist - nonStandardChars.as](https://gist.github.com/PavelMaca/3c9268e553ece98051f0#file-nonstandardchars-as)
+
+### Using .* statement
+>For creating dynamic filters, you can use `.*` inside filter definition.
+>It mean "any characters".
+>
+> - `.*bar` match `bar`, `foobar`
+> - `fu.*` match `fu`, `fun`, `fuck`
+> - `re.*d` match `red`, `reeeed`, `read`
+> - `re.*d.*` match same as above + `reading`
 
 ---
 
@@ -53,27 +77,41 @@ When someone spaming chat, for example, with minimap ping.. this mod only hide m
 ---
 
 ### Debug mode
->Allows you test new configuration, while all messages will be displayed
->Affected messages will get "deleted:" prefix
->Works also on own messages
+>Allows you test new configuration, while all messages will be displayed.
+>Works also on own messages.
 
     debugMode: true
->![debugModePreview](http://imageshack.us/a/img577/3143/shot047d.jpg)
+>![debugModePreview](http://imageshack.us/a/img837/9910/comp1t.png)
 
 ---
 
 ## Changelog
 **[0.8.5]**
+>2.0 (7.5.2013)
+>
+>- ignore section reworked, add battle types
+>- new implementation of filters
+>    - testing each word separatly
+>    - included set of WG filters from lobby chat (EU)
+>    - special chars replacing and removing
+>    - default custom filters in config
+>- add XVM section
+>    - depend on XVM > 4.0 & xvm-stats
+>    - messages blocking based on minimum {{WN}} rating
+>- debug mode
+>    - using XVM 4.0 & xvm-stats for loging
+>    - hide/ignore reason under messages
+>
 >no version (24.4.)
 >
 >- file structure for 0.8.5
 
 **[0.8.4]**
->1.1 (21.4.)
+>1.1 (21.4.2013)
 >
 >- filters are now case insensitive
 >- config use UTF-8
 >
->1.0 (16.4.)
+>1.0 (16.4.2013)
 >
 >- public release

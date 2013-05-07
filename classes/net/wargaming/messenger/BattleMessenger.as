@@ -1,8 +1,4 @@
-/**
- * ...
- * @author 
- */
-intrinsic class net.wargaming.messenger.BattleMessenger
+intrinsic class net.wargaming.messenger.BattleMessenger extends gfx.core.UIComponent
 {
 	var m_editable: Boolean = false;
     var m_channelsInit: Boolean = false;
@@ -12,7 +8,7 @@ intrinsic class net.wargaming.messenger.BattleMessenger
     var __width;
     var m_constraints;
     var messageInput;
-    var messageList;
+    var messageList; //:net.wargaming.messenger.controls.BattleMessageLis
     var onEnterFrame;
     var onMouseDown;
     var skipFirstInput;

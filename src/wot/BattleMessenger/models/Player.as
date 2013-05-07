@@ -1,32 +1,29 @@
 /**
- * PlayersPanel.swf
- * _level0.leftPanel.m_list._dataProvider[*]
- * 
-  "uid": 1170763,
-  "vehicle": "BDR G1B",
-  "position": 7,
-  "denunciations": 4,
-  "team": "team1",
-  "squad": 0,
-  "level": 5,
-  "himself": false,
-  "vehId": 24036255,
-  "userName": "Zohan11981",
-  "teamKiller": false,
-  "VIP": false,
-  "icon": "../maps/icons/vehicle/contour/france-BDR_G1B.png",
-  "vipKilled": 0,
-  "muted": false,
-  "vehicleState": 3,
-  "speaking": false,
-  "roster": 0,
-  "isPostmortemView": false,
-  "clanAbbrev": "",
-  "frags": 0,
-  "label": "Zohan11981",
-  "vehAction": 0
-  
- * @author ilitvinov87@gmail.com
+ * 	{
+ * 		"uid": 502182284,
+ *     	"vehicle": "IS-3",
+ *      "position": 1,
+ *     	"denunciations": 3,
+ *     	"team": "team2",
+ *      "squad": 0,
+ *      "level": 0,
+ *      "himself": false,
+ *     	"vehId": 23024114,
+ * 		"userName": "philhill",
+ * 		"teamKiller": false,
+ * 		"VIP": false,
+ * 		"icon": "../maps/icons/vehicle/contour/ussr-IS-3.png",
+ * 		"vipKilled": 0,
+ * 		"muted": false,
+ * 		"vehicleState": 1,
+ * 		"speaking": false,
+ * 		"roster": 0,
+ * 		"isPostmortemView": false,
+ * 		"clanAbbrev": "M-R",
+ * 		"frags": 0,
+ * 		"label": "philhill",
+ * 		"vehAction": 0
+ * 	}
  * @author Assassik
  */
   

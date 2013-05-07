@@ -3,8 +3,8 @@
   <!-- Output SWF options -->
   <output>
     <movie outputType="Application" />
-    <movie input="swf\BattleMessenger.swf" />
-    <movie path="release\BattleMessenger.swf" />
+    <movie input="" />
+    <movie path="release\Test.swf" />
     <movie fps="30" />
     <movie width="800" />
     <movie height="600" />
@@ -12,22 +12,22 @@
     <movie minorVersion="0" />
     <movie platform="Flash Player" />
     <movie background="#FFFFFF" />
-    <movie preferredSDK="Mtasc 1.14;1.14;" />
   </output>
   <!-- Other classes to be compiled into your SWF -->
   <classpaths>
     <class path="src" />
     <class path="classes" />
+    <class path="tests\src" />
   </classpaths>
   <!-- Build options -->
   <build>
     <option verbose="False" />
     <option strict="False" />
-    <option infer="True" />
-    <option useMain="False" />
-    <option useMX="False" />
-    <option warnUnusedImports="True" />
-    <option traceMode="Disable" />
+    <option infer="False" />
+    <option useMain="True" />
+    <option useMX="True" />
+    <option warnUnusedImports="False" />
+    <option traceMode="FlashConnectExtended" />
     <option traceFunction="" />
     <option libraryPrefix="" />
     <option excludeFile="" />
@@ -37,10 +37,9 @@
   </build>
   <!-- Class files to compile (other referenced classes will automatically be included) -->
   <compileTargets>
-    <compile path="src\wot\BattleMessenger\BattleMessenger.as" />
-    <compile path="classes\net\wargaming\messenger\controls\BattleMessageList.as" />
-    <compile path="classes\net\wargaming\messenger\controls\BattleMessageRenderer.as" />
-    <compile path="classes\net\wargaming\messenger\controls\BattleMessengerInput.as" />
+    <compile path="src\Main.as" />
+    <compile path="tests\Test.as" />
+    <compile path="src\tests\Test.as" />
   </compileTargets>
   <!-- Assets to embed into the output SWF -->
   <library>
@@ -48,17 +47,16 @@
   </library>
   <!-- Paths to exclude from the Project Explorer tree -->
   <hiddenPaths>
-    <hidden path="tests" />
+    <!-- example: <hidden path="..." /> -->
   </hiddenPaths>
   <!-- Executed before build -->
-  <preBuildCommand>swf/make-patched-swfs.bat</preBuildCommand>
+  <preBuildCommand />
   <!-- Executed after build -->
-  <postBuildCommand alwaysRun="False">release/make-archive.bat</postBuildCommand>
+  <postBuildCommand alwaysRun="False" />
   <!-- Other project options -->
   <options>
-    <option showHiddenPaths="True" />
-    <option testMovie="Custom" />
-    <option testMovieCommand="" />
+    <option showHiddenPaths="False" />
+    <option testMovie="Default" />
   </options>
   <!-- Plugin storage -->
   <storage />

@@ -1,8 +1,8 @@
 /**
- * Part of XML project https://code.google.com/p/wot-xvm/
+ * Part of XVM project https://code.google.com/p/wot-xvm/
  * @author sirmax2
  */
-class wot.BattleMessenger.Utils
+class wot.BattleMessenger.utils.Utils
 {
 	
 	// TODO: check performance, charAt is slow in ScaleForm
@@ -84,4 +84,17 @@ class wot.BattleMessenger.Utils
         }
     }
 	
+	/**
+	 * Helper that replaces all "find" with "replace" in the given input string
+	 * http://danikgames.com/blog/?p=550
+	 * @param	input
+	 * @param	find
+	 * @param	replace
+	 * @return
+	 */
+	public static function strReplace(input:String, find:String, replace:String):String {
+		while (input.indexOf("find") != -1)
+			input = input.split(find).join(replace);
+		return input.split(find).join(replace);
+	}
 }

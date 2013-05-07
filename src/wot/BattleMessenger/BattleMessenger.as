@@ -1,20 +1,16 @@
-import wot.BattleMessenger.Antispam;
-import wot.BattleMessenger.models.Player;
-import wot.BattleMessenger.models.PlayersPanelProxy;
-import wot.BattleMessenger.MessengerConfig;
-import wot.BattleMessenger.Utils;
+import wot.BattleMessenger.Worker;
+import wot.BattleMessenger.Config;
+import com.xvm.Logger;
 
 class wot.BattleMessenger.BattleMessenger extends net.wargaming.messenger.BattleMessenger
-{
-	var self:Player;
-	var antispam:Antispam;
+{	
+	private var _bm_worker:Worker;
 	
 	public function BattleMessenger() 
 	{
 		super();
-		
-		MessengerConfig.loadConfig();
-		this.antispam = new Antispam();
+		_bm_worker = new Worker(this);
+
 	}
 	
 	/** overwrire */
@@ -22,91 +18,50 @@ class wot.BattleMessenger.BattleMessenger extends net.wargaming.messenger.Battle
     {
 		super._onPopulateUI.apply(this, arguments);
 		
-		if(MessengerConfig.enabled){
-			/**
-			 * this.messageList = child of net.wargaming.notification.FadingMessageList
-			 * this.messageList.stackLength not working, need _stackLength
-			 */
-			this.messageList._stackLength = MessengerConfig.chatLength;
-		}
+		_bm_worker.onGuiInit();
 	}
 	
 	/** overwrite */
-	function _onRecieveChannelMessage(cid, message:String, himself:Boolean, targetIsCurrentPlayer)
-    {		
-		var sendMsg:Boolean = true;
+	function _onRecieveChannelMessage(cid:Number, message:String, himself:Boolean, targetIsCurrentPlayer:Boolean)
+    {
+		//var timer:Number = getTimer();
+		var displayMsg:Boolean = (Config.enabled ? _bm_worker.getDisplayStatus(message, himself) : true);
+		//Logger.add("timer: " +(getTimer() - timer));
 		
-		/** ignore own msg (not in debug mode)*/
-		if (MessengerConfig.enabled && (!himself || MessengerConfig.debugMode)) {
-			if(!this.self) this.self = PlayersPanelProxy.getSelf();
-			var player:Player;
+		/** Edit message for debug mode */
+		if (Config.enabled && Config.debugMode) {
+			var log:Object = { 
+				msg: message,
+				display: displayMsg
+			};
 			
-			/** 
-			 * split message in two parts 
-			 * [0]: player name, clan, vehicle 
-			 * [1]: content
-			 */
-			var msgParts:Array = message.split(":&nbsp;</font><font ", 2);
-			if (msgParts.length == 2) {
-				player = this.getPlayerFromMessage(msgParts[0]);
+			if(!displayMsg){
+				message = "<font color='" + Worker.DEBUG_COLOR + "'>Hidden: </font>" + message;
 			}
-		
-			if(player && this.self){
-				var isClan:Boolean = false;
-				if (MessengerConfig.ignoreClan && this.self.clanAbbrev.length > 0) 
-					isClan = (player.clanAbbrev == this.self.clanAbbrev);
-					
-				var isSquad:Boolean = false;
-				if (MessengerConfig.ignoreSquad && self.squad != 0)
-					isSquad = (player.squad == this.self.squad);
-					
-				/** ignore clan/squad */
-				if (!isClan && !isSquad) {
-					var isDead:Boolean = PlayersPanelProxy.isDead(player.uid);
-					
-					/** block dead/alive */
-					if (player.team == self.team) {
-						sendMsg = !(isDead ? MessengerConfig.blockAllyDead : MessengerConfig.blockAllyAlive);
-					}else {
-						sendMsg = !(isDead ? MessengerConfig.blockEnemyDead : MessengerConfig.blockEnemyAlive);
-					}
-					
-					/** antispam #TODO: remove HTML from message*/
-					if (sendMsg && MessengerConfig.antispamEnabled) {
-						sendMsg = !this.antispam.isSpam(msgParts[1], player.uid);
-						
-						/** filters */
-						if (sendMsg) {
-							sendMsg = !this.antispam.isFilter(msgParts[1]);
-						}
-					}
-				}
+			/** add reason, can be also "ignored for xx" */
+			var reason:String = _bm_worker.popReason();
+			if (reason != null) {
+				message += "\n<font color='" + Worker.DEBUG_COLOR + "'>" + reason + "</font>";
+				
+				log.reason = reason;
+				Logger.addObject(log, "[BattleMessenger]");
 			}
 		}
-				
-		if (sendMsg || MessengerConfig.debugMode) {	
-			if (!sendMsg && MessengerConfig.debugMode) {
-				message = "<font color='#CC0099'>deleted: </font>" + message;
-			}
+		
+		/** Send message to render */
+		if (displayMsg || (Config.enabled && Config.debugMode)) {	
 			super._onRecieveChannelMessage(cid, message, himself, targetIsCurrentPlayer);
 		}
     }
 	
-	/** <font color='#FFC697'>UserName[clan] (vehicle)&nbsp;:&nbsp;</font><font color='#80D63A'>message</font> */
-	private function getPlayerFromMessage(message:String):Player {
-		
-		var endOfFirtsTag:Number = message.indexOf(">");
-        var messageWitOutFirstTag:String = message.substr(endOfFirtsTag + 1, message.length - endOfFirtsTag);
-        var endOfUsername:Number = messageWitOutFirstTag.indexOf(" ");
-       		
-		var userName:String = messageWitOutFirstTag.substr(0, endOfUsername);
-		
-		/** remove clan tag */
-		userName = Utils.GetPlayerName(userName);
-		
-		return PlayersPanelProxy.getPlayerInfoByName(userName);
+	/** 
+	 * FIXIT: find better sulation how send extra messages without creating loop on "_onRecieveChannelMessage" 
+	 * Send extra info messages, only in debug mude
+	 */
+	public function _bm_sendExtraMessage(text:String, ignoreDebugMode:Boolean):Void {
+		if (Config.enabled && (Config.debugMode || ignoreDebugMode) && text.length > 0) {
+			Logger.add("[BattleMessenger] " + text);
+			super._onRecieveChannelMessage(null, "<font color='" + Worker.DEBUG_COLOR + "'>" + text + "</font>", true, false);
+		}
 	}
-	
-	
-
 }

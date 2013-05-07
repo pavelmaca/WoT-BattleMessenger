@@ -1,0 +1,197 @@
+2013.05.06 21:24:48 [i] [B:011] [BattleMessenger] Config loaded
+2013.05.06 21:24:48 [i] [B:012] [BattleMessenger] Debug mode active, Random battle
+2013.05.06 18:11:45 [i] [B:013] [BattleMessenger]: {
+                          "display": false,
+                          "msg": "<font color='#80D63A'>Delta121[AISAG] (KV-1)&nbsp;:&nbsp;</font><font color='#80D63A'>Nebezpečí v sektoru F2!</font>",
+                          "reason": "Duplicate count: 2"
+                        }
+2013.05.06 18:11:46 [i] [B:014] [BattleMessenger]: {
+                          "display": false,
+                          "msg": "<font color='#80D63A'>Delta121[AISAG] (KV-1)&nbsp;:&nbsp;</font><font color='#80D63A'>Nebezpečí v sektoru F2!</font>",
+                          "reason": "Duplicate count: 2"
+                        }
+2013.05.06 18:11:46 [i] [B:015] [BattleMessenger]: {
+                          "display": false,
+                          "msg": "<font color='#80D63A'>Delta121[AISAG] (KV-1)&nbsp;:&nbsp;</font><font color='#80D63A'>Nebezpečí v sektoru F2!</font>",
+                          "reason": "Duplicate count: 3\nSpam count: 3"
+                        }
+2013.05.06 18:11:47 [i] [B:016] [BattleMessenger]: {
+                          "display": false,
+                          "msg": "<font color='#80D63A'>Delta121[AISAG] (KV-1)&nbsp;:&nbsp;</font><font color='#80D63A'>Nebezpečí v sektoru F2!</font>",
+                          "reason": "Duplicate count: 4\nSpam count: 4"
+                        }
+2013.05.06 18:11:48 [i] [B:017] [BattleMessenger]: {
+                          "display": false,
+                          "msg": "<font color='#80D63A'>Delta121[AISAG] (KV-1)&nbsp;:&nbsp;</font><font color='#80D63A'>Nebezpečí v sektoru F2!</font>",
+                          "reason": "Duplicate count: 5\nSpam count: 5"
+                        }
+2013.05.06 18:11:48 [i] [B:018] [BattleMessenger]: {
+                          "display": false,
+                          "msg": "<font color='#80D63A'>Delta121[AISAG] (KV-1)&nbsp;:&nbsp;</font><font color='#80D63A'>Nebezpečí v sektoru F2!</font>",
+                          "reason": "Duplicate count: 5\nSpam count: 5"
+                        }
+2013.05.06 18:11:51 [i] [B:019] [BattleMessenger]: {
+                          "display": false,
+                          "msg": "<font color='#80D63A'>Delta121[AISAG] (KV-1)&nbsp;:&nbsp;</font><font color='#80D63A'>za mna</font>",
+                          "reason": "Spam count: 4"
+                        }
+2013.05.06 18:11:53 [i] [B:020] [BattleMessenger]: {
+                          "display": false,
+                          "msg": "<font color='#80D63A'>Delta121[AISAG] (KV-1)&nbsp;:&nbsp;</font><font color='#80D63A'>za mna</font>",
+                          "reason": "Spam count: 4"
+                        }
+2013.05.06 18:11:55 [i] [B:021] [BattleMessenger]: {
+                          "display": false,
+                          "msg": "<font color='#80D63A'>Delta121[AISAG] (KV-1)&nbsp;:&nbsp;</font><font color='#80D63A'>za mna</font>",
+                          "reason": "Duplicate count: 2\nSpam count: 3"
+                        }
+2013.05.06 18:11:56 [i] [B:022] [BattleMessenger]: {
+                          "display": false,
+                          "msg": "<font color='#80D63A'>Delta121[AISAG] (KV-1)&nbsp;:&nbsp;</font><font color='#80D63A'>za mna</font>",
+                          "reason": "Duplicate count: 3\nSpam count: 3"
+                        }
+2013.05.06 18:11:59 [i] [B:023] [BattleMessenger]: {
+                          "display": false,
+                          "msg": "<font color='#80D63A'>Delta121[AISAG] (KV-1)&nbsp;:&nbsp;</font><font color='#80D63A'>Nebezpečí v sektoru F2!</font>",
+                          "reason": "Spam count: 3"
+                        }
+2013.05.06 18:21:03 [i] [B:013] [BattleMessenger]: {
+                          "display": false,
+                          "msg": "<font color='#999999'>kapitandominik55 (SU-76)&nbsp;:&nbsp;</font><font color='#FFFFFF'>siema pl</font>",
+                          "reason": "<b>slem.*</b> on word: slema"
+                        }
+2013.05.06 18:29:49 [i] [B:013] [BattleMessenger]: {
+                          "display": false,
+                          "msg": "<font color='#80D63A'>walterp[RBF_2] (Type T-34)&nbsp;:&nbsp;</font><font color='#80D63A'>Nebezpečí v sektoru D0!</font>",
+                          "reason": "Duplicate count: 2"
+                        }
+2013.05.06 19:10:18 [i] [B:013] [BattleMessenger]: {
+                          "display": false,
+                          "msg": "<font color='#80D63A'>B3GeY14 (BT-7)&nbsp;:&nbsp;</font><font color='#80D63A'>noob</font>",
+                          "reason": "<b>noob.*</b> on word: noob"
+                        }
+2013.05.06 19:10:46 [i] [B:014] [BattleMessenger]: {
+                          "display": false,
+                          "msg": "<font color='#80D63A'>JurburNL[FE3] (KV-1)&nbsp;:&nbsp;</font><font color='#80D63A'>and so what if i am a noob</font>",
+                          "reason": "<b>noob.*</b> on word: noob"
+                        }
+2013.05.06 19:40:14 [i] [B:013] [BattleMessenger]: {
+                          "display": false,
+                          "msg": "<font color='#80D63A'>tank_killer24 (T49)&nbsp;:&nbsp;</font><font color='#80D63A'>noob team go left</font>",
+                          "reason": "<b>noob.*</b> on word: noob"
+                        }
+2013.05.06 19:48:05 [i] [B:013] [BattleMessenger]: {
+                          "display": false,
+                          "msg": "<font color='#80D63A'>DJBeatch[CSD1] (Cromwell)&nbsp;:&nbsp;</font><font color='#80D63A'>noobs</font>",
+                          "reason": "<b>noob.*</b> on word: noobs"
+                        }
+2013.05.06 19:48:43 [i] [B:014] [BattleMessenger]: {
+                          "display": false,
+                          "msg": "<font color='#80D63A'>tiger358[_THX_] (KV-1)&nbsp;:&nbsp;</font><font color='#FFFFFF'>noobs</font>",
+                          "reason": "<b>noob.*</b> on word: noobs"
+                        }
+2013.05.06 19:49:50 [i] [B:015] [BattleMessenger]: {
+                          "display": false,
+                          "msg": "<font color='#80D63A'>DJBeatch[CSD1] (Cromwell)&nbsp;:&nbsp;</font><font color='#80D63A'>NOOB TEAM</font>",
+                          "reason": "<b>noob.*</b> on word: noob"
+                        }
+2013.05.06 19:49:53 [i] [B:016] [BattleMessenger]: {
+                          "display": false,
+                          "msg": "<font color='#80D63A'>DJBeatch[CSD1] (Cromwell)&nbsp;:&nbsp;</font><font color='#80D63A'>FUCK</font>",
+                          "reason": "<b>.*fvkk.*</b> on word: fvkk"
+                        }
+2013.05.06 19:50:32 [i] [B:017] [BattleMessenger]: {
+                          "display": false,
+                          "msg": "<font color='#80D63A'>DJBeatch[CSD1] (Cromwell)&nbsp;:&nbsp;</font><font color='#80D63A'>Epic noob team</font>",
+                          "reason": "<b>noob.*</b> on word: noob"
+                        }
+2013.05.06 19:50:54 [i] [B:018] [BattleMessenger]: {
+                          "display": false,
+                          "msg": "<font color='#DA0400'>Eustahije_Brzic[B--A] (SU-85)&nbsp;:&nbsp;</font><font color='#FFFFFF'>omg fuckin cheater</font>",
+                          "reason": "Enemy - dead"
+                        }
+2013.05.06 19:50:59 [i] [B:019] [BattleMessenger]: {
+                          "display": false,
+                          "msg": "<font color='#80D63A'>Sulsi49[_THX_] (Bison)&nbsp;:&nbsp;</font><font color='#80D63A'>noob</font>",
+                          "reason": "<b>noob.*</b> on word: noob"
+                        }
+2013.05.06 19:51:09 [i] [B:020] [BattleMessenger]: {
+                          "display": false,
+                          "msg": "<font color='#80D63A'>tiger358[_THX_] (KV-1)&nbsp;:&nbsp;</font><font color='#FFFFFF'>noob team</font>",
+                          "reason": "<b>noob.*</b> on word: noob"
+                        }
+2013.05.06 20:02:49 [i] [B:013] [BattleMessenger]: {
+                          "display": false,
+                          "msg": "<font color='#80D63A'>BogNL (AMX105AM)&nbsp;:&nbsp;</font><font color='#80D63A'>Nebezpečí v sektoru C5!</font>",
+                          "reason": "Spam count: 3"
+                        }
+2013.05.06 20:07:39 [i] [B:014] [BattleMessenger]: {
+                          "display": false,
+                          "msg": "<font color='#80D63A'>BogNL (AMX105AM)&nbsp;:&nbsp;</font><font color='#80D63A'>damn</font>",
+                          "reason": "<b>.*da.*mn</b> on word: damn"
+                        }
+2013.05.06 20:40:59 [i] [B:013] [BattleMessenger]: {
+                          "display": true,
+                          "msg": "<font color='#FFC364'>makcijopikcijo[APO] (IS-3)&nbsp;:&nbsp;</font><font color='#80D63A'>Nebezpečí v sektoru A6!</font>",
+                          "reason": "Ignore: clan - APO"
+                        }
+2013.05.06 20:41:00 [i] [B:014] [BattleMessenger]: {
+                          "display": true,
+                          "msg": "<font color='#FFC364'>makcijopikcijo[APO] (IS-3)&nbsp;:&nbsp;</font><font color='#80D63A'>Nebezpečí v sektoru A7!</font>",
+                          "reason": "Ignore: clan - APO"
+                        }
+2013.05.06 21:05:38 [i] [B:013] [BattleMessenger]: {
+                          "display": false,
+                          "msg": "<font color='#80D63A'>Kotenockin[PCR] (Pz. IV)&nbsp;:&nbsp;</font><font color='#FFFFFF'>fuck you gay</font>",
+                          "reason": "<b>gay.*</b> on word: gay"
+                        }
+2013.05.06 21:26:15 [i] [B:013] [BattleMessenger]: {
+                          "display": false,
+                          "msg": "<font color='#DA0400'>allanmcmas (T49)&nbsp;:&nbsp;</font><font color='#FFFFFF'>oops</font>",
+                          "reason": "Enemy - dead"
+                        }
+2013.05.06 21:59:03 [i] [B:013] [BattleMessenger]: {
+                          "display": false,
+                          "msg": "<font color='#80D63A'>Aresix[PO] (E-100)&nbsp;:&nbsp;</font><font color='#FFFFFF'>n00b!</font>",
+                          "reason": "<b>noob.*</b> on word: noobl"
+                        }
+2013.05.06 21:59:21 [i] [B:014] [BattleMessenger]: {
+                          "display": false,
+                          "msg": "<font color='#DA0400'>Commander_Exacompta[6PD] (IS-3)&nbsp;:&nbsp;</font><font color='#FFFFFF'>yes</font>",
+                          "reason": "Enemy - dead"
+                        }
+2013.05.06 21:59:25 [i] [B:015] [BattleMessenger]: {
+                          "display": false,
+                          "msg": "<font color='#80D63A'>STAREJKELT (T32)&nbsp;:&nbsp;</font><font color='#80D63A'>Nebezpečí v sektoru J7!</font>",
+                          "reason": "Duplicate count: 2"
+                        }
+2013.05.06 21:59:39 [i] [B:016] [BattleMessenger]: {
+                          "display": false,
+                          "msg": "<font color='#80D63A'>Graf_von_Zichy (T95)&nbsp;:&nbsp;</font><font color='#80D63A'>Nebezpečí v sektoru J6!</font>",
+                          "reason": "Duplicate count: 2"
+                        }
+2013.05.06 22:00:58 [i] [B:017] [BattleMessenger]: {
+                          "display": false,
+                          "msg": "<font color='#80D63A'>leising[NAP] (JgPzE100)&nbsp;:&nbsp;</font><font color='#80D63A'>fucking wot bug</font>",
+                          "reason": "<b>.*fvkk.*</b> on word: fvkklng"
+                        }
+2013.05.06 22:38:35 [i] [B:013] [BattleMessenger]: {
+                          "display": false,
+                          "msg": "<font color='#80D63A'>ProFecT[THF] (S-35CA)&nbsp;:&nbsp;</font><font color='#FFFFFF'>f4ck u g4y .i.</font>",
+                          "reason": "<b>gay.*</b> on word: gay"
+                        }
+2013.05.06 23:14:12 [i] [B:013] [BattleMessenger]: {
+                          "display": false,
+                          "msg": "<font color='#80D63A'>McTorped[P-G-G] (KV-1S)&nbsp;:&nbsp;</font><font color='#80D63A'>left flank free? fuck, that a hole for enemy</font>",
+                          "reason": "<b>.*fvkk.*</b> on word: fvkk"
+                        }
+2013.05.07 00:20:29 [i] [B:013] [BattleMessenger]: {
+                          "display": false,
+                          "msg": "<font color='#80D63A'>Darek_Na (Type T-34)&nbsp;:&nbsp;</font><font color='#FFFFFF'>siemka</font>",
+                          "reason": "<b>slem.*</b> on word: slemka"
+                        }
+2013.05.07 00:53:13 [i] [B:017] [BattleMessenger]: {
+                          "display": false,
+                          "msg": "<font color='#80D63A'>freezy_leon[GER-A] (Wespe)&nbsp;:&nbsp;</font><font color='#80D63A'>idiot</font>",
+                          "reason": "<b>ldlot</b> on word: ldlot"
+                        }
