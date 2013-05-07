@@ -17,7 +17,7 @@ import com.xvm.StatData;
 class wot.BattleMessenger.Worker
 {
 	// Color of debug messages
-	public static var DEBUG_COLOR = "#FF3362";
+	public static var DEBUG_COLOR:String = "#FF3362";
 	
 	private var battleType:String;
 	

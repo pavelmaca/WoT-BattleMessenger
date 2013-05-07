@@ -129,7 +129,7 @@ class wot.BattleMessenger.Config
 	public static function get antispamCustomFilters():Array   {
 		if (_customFilters.length == 0) {
 			for (var i in antispam.customFilters) {
-				_customFilters.push(antispam.customFilters[i].toLowerCase());
+				_customFilters.push(antispam.customFilters[i]);
 			}
 		}
         return _customFilters;
