@@ -15,9 +15,9 @@ When someone spaming chat, for example, with minimap ping.. this mod only hide m
 ---
 
 ## Download
-> [[0.8.5] BattleMessenger - chat filter & antispam 1.1.rar](http://www.mediafire.com/?shzrtyp48s93umk)
+> [[0.8.5] BattleMessenger - chat filter & antispam 2.0.rar](http://www.mediafire.com/?eyljyw19cjjtk61)
 >
-> MD5 checksum: `e3d2cad7229fa4e3009f0669abbc68a6`
+> MD5 checksum: `72611b960143d1f034ea6627b60fc623`
 
 ---
 
