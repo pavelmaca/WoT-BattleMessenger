@@ -21,21 +21,22 @@ import wot.BattleMessenger.models.Player;
  */
 class wot.BattleMessenger.models.StatsDataProxy
 {
-	public static var BATTLE_SPECIAL = "Special";
-	public static var BATTLE_RANDOM = "Random";
-	public static var BATTLE_TRAINING = "Training";
-	public static var BATTLE_COMPANY = "Company";
-	public static var BATTLE_UNKNOWN = "Unknown";
+	public static var BATTLE_SPECIAL:String = "Special";
+	public static var BATTLE_RANDOM:String = "Random";
+	public static var BATTLE_TRAINING:String = "Training";
+	public static var BATTLE_COMPANY:String = "Company";
+	public static var BATTLE_UNKNOWN:String = "Unknown";
 	
-	private static var TEAM_1 = "team1";
-	private static var TEAM_2 = "team2";
+	private static var TEAM_1:String = "team1";
+	private static var TEAM_2:String = "team2";
+	private static var VEHICLE_DEAD_STATE:Number = 2;
 	
 	
 	public static function getAllPlayers():Array {
 		return getAllyPlayers().concat( getEnemyPlayers() );
 	}
 	
-	public static function getSelf() {
+	public static function getSelf():Player {
 		var myTeam:Array = getAllyPlayers();
         for (var i in myTeam)
         {
@@ -53,6 +54,11 @@ class wot.BattleMessenger.models.StatsDataProxy
             return playerInfo;
         
         return getPlayerFromByName(getEnemyPlayers(), username);
+	}
+	
+	public static function isPlayerDead(uid:Number):Boolean {
+		var player:Player = getPlayerByUid(uid);
+        return (player.vehicleState == VEHICLE_DEAD_STATE);
 	}
 	
 	/**
@@ -115,6 +121,7 @@ class wot.BattleMessenger.models.StatsDataProxy
 	}
 	
 	/** private */
+	
 	private static function getAllyPlayers():Array {
 		return _root.statsData[ getOwnTeamName() ];
 	}
@@ -131,6 +138,24 @@ class wot.BattleMessenger.models.StatsDataProxy
     {
         for (var i:Number = 0; i < players.length; i++)
             if (players[i].userName == username)
+                return players[i];
+        
+        return null;
+    }
+	
+	private static function getPlayerByUid(uid:Number):Player
+    {
+        var playerInfo:Player = getPlayerFromByUid(getAllyPlayers(), uid);
+        if (playerInfo)
+            return playerInfo;
+        
+        return getPlayerFromByUid(getEnemyPlayers(), uid);
+    }
+	
+	private static function getPlayerFromByUid(players:Array, uid:Number):Player
+    {
+        for (var i:Number = 0; i < players.length; i++)
+            if (players[i].uid == uid)
                 return players[i];
         
         return null;

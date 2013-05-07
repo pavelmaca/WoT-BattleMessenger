@@ -25,7 +25,7 @@ class wot.BattleMessenger.BattleMessenger extends net.wargaming.messenger.Battle
 	function _onRecieveChannelMessage(cid:Number, message:String, himself:Boolean, targetIsCurrentPlayer:Boolean)
     {
 		//var timer:Number = getTimer();
-		var displayMsg:Boolean = (Config.enabled ? _bm_worker.getDisplayStatus(message) : true);
+		var displayMsg:Boolean = (Config.enabled ? _bm_worker.getDisplayStatus(message, himself) : true);
 		//Logger.add("timer: " +(getTimer() - timer));
 		
 		/** Edit message for debug mode */

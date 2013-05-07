@@ -29,8 +29,6 @@
   
 class wot.BattleMessenger.models.Player
 {
-	private static var VEHICLE_DEAD_STATE = 2;
-	
     public var uid:Number;
     public var vehicle:String;
     public var team:String;
@@ -41,8 +39,4 @@ class wot.BattleMessenger.models.Player
     public var vehicleState:Number;
 	public var clanAbbrev:String;
 	public var squad:Number;
-	
-	public function isDead():Boolean {
-        return this.vehicleState == VEHICLE_DEAD_STATE;
-	}
 }

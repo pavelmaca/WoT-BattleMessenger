@@ -252,7 +252,7 @@ class wot.BattleMessenger.Worker
 	 * @return	true for hide msg, false for display
 	 */
 	private function isTeamStatusBlock(player:Player):Boolean {
-		var isDead:Boolean = player.isDead();
+		var isDead:Boolean = StatsDataProxy.isPlayerDead(player.uid);
 		
 		var hide:Boolean;
 		if (isSameTeam(player)) {
