@@ -58,7 +58,7 @@ class wot.BattleMessenger.BattleMessenger extends net.wargaming.messenger.Battle
 	 * FIXIT: find better sulation how send extra messages without creating loop on "_onRecieveChannelMessage" 
 	 * Send extra info messages, only in debug mude
 	 */
-	public function _bm_sendExtraMessage(text:String, ignoreDebugMode:Boolean) {
+	public function _bm_sendExtraMessage(text:String, ignoreDebugMode:Boolean):Void {
 		if (Config.enabled && (Config.debugMode || ignoreDebugMode) && text.length > 0) {
 			Logger.add("[BattleMessenger] " + text);
 			super._onRecieveChannelMessage(null, "<font color='" + Worker.DEBUG_COLOR + "'>" + text + "</font>", true, false);

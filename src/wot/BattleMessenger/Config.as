@@ -6,10 +6,10 @@ class wot.BattleMessenger.Config
 {
 	private static var CONFIG_FILE:String = "BattleMessenger.conf";
 	
-	public static var EVENT_CONFIG_LOADED = "config_loaded";
+	public static var EVENT_CONFIG_LOADED:String = "config_loaded";
 	
 	private static var _config:Object;
-	private static var _loaded = false;
+	private static var _loaded:Boolean = false;
 	
 	private static var _error:String = null;
 	

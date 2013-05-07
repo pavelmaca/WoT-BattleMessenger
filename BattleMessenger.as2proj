@@ -56,7 +56,7 @@
   <postBuildCommand alwaysRun="False">release/make-archive.bat</postBuildCommand>
   <!-- Other project options -->
   <options>
-    <option showHiddenPaths="False" />
+    <option showHiddenPaths="True" />
     <option testMovie="Custom" />
     <option testMovieCommand="" />
   </options>

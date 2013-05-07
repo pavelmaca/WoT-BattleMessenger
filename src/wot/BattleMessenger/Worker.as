@@ -8,7 +8,7 @@ import wot.BattleMessenger.utils.GlobalEventDispatcher;
 import com.xvm.StatData;
 //import com.xvm.Utils; used for accesing StatData
 //import com.xvm.Defines; for testing xvm data state
-import com.xvm.Logger;
+//import com.xvm.Logger;
 
 /**
  * Main mod class
