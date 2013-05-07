@@ -11,7 +11,7 @@ class tests.TestAntispam extends Antispam
 	public function TestAntispam() {
 		this.filters = new Filters();
 		this.filters.addFiltersFromArray([
-			".*bad1", ".*bad2.*", "bad3.*", "ext.*ra1", ".*ext.*ra2", ".*ext.*ra3.*", "blov.*job", "siem.*", "czesc"
+			".*bad1", ".*bad2.*", "bad3.*", "ext.*ra1", ".*ext.*ra2", ".*ext.*ra3.*", "blov.*job", "siem.*", "czesc", "idiot.*"
 		]);
 	}
 		
@@ -32,7 +32,7 @@ class tests.TestAntispam extends Antispam
 		msg = "<font color='#80D63A'>siema</font>";
 		expect(msg, this.filters.test(msg), true);
 		
-		
+		/** TODO IMG tag <img /> <img > */
 		msg = "<font color='#80D63A'>Reloafing <img src='img.jpg'>siema</font>";
 		expect(msg, this.filters.test(msg), true);
 

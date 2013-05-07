@@ -9,6 +9,7 @@ class wot.BattleMessenger.Config
 	public static var EVENT_CONFIG_LOADED = "config_loaded";
 	
 	private static var _config:Object;
+	private static var _loaded = false;
 	
 	private static var _error:String = null;
 	
@@ -207,10 +208,15 @@ class wot.BattleMessenger.Config
 		/** set default config */
 		if (!_config) _config = _defaultConfig;
 		
+		_loaded = true;
 		GlobalEventDispatcher.dispatchEvent({type: EVENT_CONFIG_LOADED});
 	}
 	
 	public static function get error():String {
 		return _error;
+	}
+	
+	public static function isLoaded():Boolean {
+		return _loaded;
 	}
 }

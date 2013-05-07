@@ -17,16 +17,19 @@ class wot.BattleMessenger.BattleMessenger extends net.wargaming.messenger.Battle
 	function _onPopulateUI()
     {
 		super._onPopulateUI.apply(this, arguments);
+		
 		_bm_worker.onGuiInit();
 	}
 	
 	/** overwrite */
 	function _onRecieveChannelMessage(cid:Number, message:String, himself:Boolean, targetIsCurrentPlayer:Boolean)
     {
-		var displayMsg:Boolean = _bm_worker.getDisplayStatus(message);
+		//var timer:Number = getTimer();
+		var displayMsg:Boolean = (Config.enabled ? _bm_worker.getDisplayStatus(message) : true);
+		//Logger.add("timer: " +(getTimer() - timer));
 		
 		/** Edit message for debug mode */
-		if (Config.debugMode) {
+		if (Config.enabled && Config.debugMode) {
 			var log:Object = { 
 				msg: message,
 				display: displayMsg
@@ -46,7 +49,7 @@ class wot.BattleMessenger.BattleMessenger extends net.wargaming.messenger.Battle
 		}
 		
 		/** Send message to render */
-		if (displayMsg || Config.debugMode) {	
+		if (displayMsg || (Config.enabled && Config.debugMode)) {	
 			super._onRecieveChannelMessage(cid, message, himself, targetIsCurrentPlayer);
 		}
     }
@@ -56,7 +59,7 @@ class wot.BattleMessenger.BattleMessenger extends net.wargaming.messenger.Battle
 	 * Send extra info messages, only in debug mude
 	 */
 	public function _bm_sendExtraMessage(text:String, ignoreDebugMode:Boolean) {
-		if ((Config.debugMode || ignoreDebugMode) && text.length > 0) {
+		if (Config.enabled && (Config.debugMode || ignoreDebugMode) && text.length > 0) {
 			Logger.add("[BattleMessenger] " + text);
 			super._onRecieveChannelMessage(null, "<font color='" + Worker.DEBUG_COLOR + "'>" + text + "</font>", true, false);
 		}

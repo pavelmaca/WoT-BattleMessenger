@@ -1,15 +1,14 @@
 import wot.BattleMessenger.Antispam.Antispam;
 import wot.BattleMessenger.BattleMessenger;
-import wot.BattleMessenger.models.BattleType;
 import wot.BattleMessenger.models.Player;
-import wot.BattleMessenger.models.PlayersPanelProxy;
+import wot.BattleMessenger.models.StatsDataProxy;
 import wot.BattleMessenger.Config;
 import wot.BattleMessenger.utils.Utils;
 import wot.BattleMessenger.utils.GlobalEventDispatcher;
 import com.xvm.StatData;
 //import com.xvm.Utils; used for accesing StatData
 //import com.xvm.Defines; for testing xvm data state
-//import com.xvm.Logger;
+import com.xvm.Logger;
 
 /**
  * Main mod class
@@ -46,6 +45,21 @@ class wot.BattleMessenger.Worker
 	}
 	
 	public function onGuiInit() {
+		/** in case of gui will be faster then config loader */
+		if (!Config.isLoaded()) {
+			GlobalEventDispatcher.addEventListener(Config.EVENT_CONFIG_LOADED, this, onGuiInit);
+			return;
+		}else {
+			GlobalEventDispatcher.removeEventListener(Config.EVENT_CONFIG_LOADED, this, onGuiInit);
+		}
+		
+		/** Warn on missing or corrupt config file */
+		if (Config.error != null) {
+			this.sendDebugMessage(Config.error, true);
+		}else {
+			this.sendDebugMessage("Config loaded");
+		}
+		
 		if(Config.enabled){
 			/**
 			 * this.messageList = child of net.wargaming.notification.FadingMessageList
@@ -53,16 +67,16 @@ class wot.BattleMessenger.Worker
 			 */
 			battleMessenger.messageList._stackLength = Config.chatLength;
 			
-			/** Warn on missing or corrupt config file */
-			if (Config.error != null) {
-				this.sendDebugMessage(Config.error, true);
-			}else {
-				this.sendDebugMessage("Config loaded");
+			this.self = StatsDataProxy.getSelf();
+			if (!this.self) {
+				this.sendDebugMessage("Error: can't found own identity");
 			}
 			
+			/** Ignore player and vehicle names */
+			this.antispam.createIgnoreList();
+			
 			/** Get battle type */
-			battleType = BattleType.getType(_root.statsData.arenaData.battleIcon.toString());
-			//Logger.addObject(_root.statsData.arenaData, "_root.statsData.arenaData");
+			battleType = StatsDataProxy.getBattleType();
 			
 			/** Debug mode info */
 			this.sendDebugMessage("Debug mode active, " + battleType + " battle");
@@ -71,14 +85,8 @@ class wot.BattleMessenger.Worker
 	
 	public function getDisplayStatus(message:String, himself:Boolean):Boolean {
 		/** ignore own msg (not in debug mode)*/
-		if (!Config.enabled && (himself || !Config.debugMode)) {
+		if (!this.self || (himself && !Config.debugMode)) {
 			return true;
-		}
-		
-		/** Load own identity on first message */
-		if (!this.self && !(this.self = PlayersPanelProxy.getSelf())) {
-			this.sendDebugMessage("Error: can't found own identity");
-			return true; //error
 		}
 		
 		/** sender */
@@ -100,34 +108,34 @@ class wot.BattleMessenger.Worker
 		}
 		
 		/** Ignore */
-		if ( ignoreForClan(sender) ) {
+		if ( ignoreForClan(sender) && !himself ) {
 			this.lastReason = "Ignore: own clan";
 			return true;
 		}
-		if ( ignoreForSquad(sender) ) {
+		if ( ignoreForSquad(sender) && !himself) {
 			this.lastReason = "Ignore: own squad";
 			return true;
 		}
 		
 		/** Ignore by battle type, skip self */
-		if (isSameTeam(sender) && sender.uid != this.self.uid) {
+		if (isSameTeam(sender) && !himself) {
 			switch(battleType) {
-				case BattleType.RANDOM: 
+				case StatsDataProxy.BATTLE_RANDOM:
 					if (Config.ignoreRandomBattle) {
 						this.lastReason = "Ignore: ally in Random battle";
 						return true;
 					} break;
-				case BattleType.COMPANY: 
+				case StatsDataProxy.BATTLE_COMPANY: 
 					if (Config.ignoreCompanyBattle) {
 						this.lastReason = "Ignore: ally in Company battle";
 						return true;
 					} break;
-				case BattleType.SPECIAL: 
+				case StatsDataProxy.BATTLE_SPECIAL: 
 					if (Config.ignoreSpecialBattle) {
 						this.lastReason = "Ignore: ally in Special battle";
 						return true;
 					} break;
-				case BattleType.TRAINING: 
+				case StatsDataProxy.BATTLE_TRAINING: 
 					if (Config.ignoreTrainingBattle) {
 						this.lastReason = "Ignore: ally in Training battle";
 						return true;
@@ -184,7 +192,7 @@ class wot.BattleMessenger.Worker
 		/** remove clan tag */
 		userName = Utils.GetPlayerName(userName);
 		
-		return PlayersPanelProxy.getPlayerInfoByName(userName);
+		return StatsDataProxy.getPlayerByName(userName);
 	}
 	
 	/**
@@ -192,7 +200,7 @@ class wot.BattleMessenger.Worker
 	 * @return	true when player is from same clan, always false on own messages
 	 */
 	private function ignoreForClan(player:Player):Boolean {
-		if (Config.ignoreClan && this.self.clanAbbrev.length > 0 && player.uid != this.self.uid) {
+		if (Config.ignoreClan && this.self.clanAbbrev.length > 0) {
 			return (player.clanAbbrev == this.self.clanAbbrev);
 		}
 		return false;
@@ -203,7 +211,7 @@ class wot.BattleMessenger.Worker
 	 * @return	true when player is from same squad, always false on own messages
 	 */
 	private function ignoreForSquad(player:Player):Boolean {
-		if (Config.ignoreSquad && self.squad != 0 && player.uid != this.self.uid) {
+		if (Config.ignoreSquad && self.squad != 0) {
 			return (player.squad == this.self.squad);
 		}
 		return false;
@@ -244,7 +252,7 @@ class wot.BattleMessenger.Worker
 	 * @return	true for hide msg, false for display
 	 */
 	private function isTeamStatusBlock(player:Player):Boolean {
-		var isDead:Boolean = PlayersPanelProxy.isDead(player.uid);
+		var isDead:Boolean = player.isDead();
 		
 		var hide:Boolean;
 		if (isSameTeam(player)) {

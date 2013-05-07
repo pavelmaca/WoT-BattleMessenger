@@ -1,19 +1,23 @@
 import wot.BattleMessenger.utils.Utils;
 import wot.BattleMessenger.Antispam.FilterData;
-//import wot.utils.Logger;
+import com.xvm.Logger;
 
 /**
- * ...
- * @author 
+ * @author Assassik
  */
 class wot.BattleMessenger.Antispam.Filters
 {
+	
+	public static var MIN_WORD_LENGTH = 2;
 
 	/** Contain last matched filter */
 	public var lastFilter:String;
 
 	/** List of all active filters */
-	private var filters:Array = [];
+	private var filters:Object = {};
+	
+	/** List of ignored words (player and tank names) */
+	private var ignoreWords:Object = {};
 	
 	//public function Filters() {}
 	
@@ -23,8 +27,16 @@ class wot.BattleMessenger.Antispam.Filters
 	 */
 	public function addFiltersFromArray(ar:Array) {
 		for (var i in ar) {
-			this.filters.push( this.normalize(ar[i], true) );
+			this.filters[ this.normalize(ar[i], true) ] = ar[i];
 		}
+	}
+	
+	/**
+	 * add player name in format: playerNameClan (don't use [])
+	 * @param	word
+	 */
+	public function addIgnoredWord(word:String) {
+		this.ignoreWords[ this.normalize(word, false) ] = true;
 	}
 	
 	/**
@@ -33,15 +45,15 @@ class wot.BattleMessenger.Antispam.Filters
 	 * @return	true if one of filters match
 	 */
 	public function test(message:String):Boolean {
-		var words:Array  = this.splitWords( this.normalize(message, false) );
+		var words:Array  = splitWords( this.normalize(message, false) );
 		for (var i in words) {
-			if (words[i].length < 2) {
+			if (words[i].length < MIN_WORD_LENGTH || this.ignoreWords[ words[i] ]) {
+				Logger.add("ignoring word: " + words[i]);
 				continue;
 			}
-			for (var z in this.filters) {
-				if (this.matchWord(words[i], this.filters[z]) > -1) {
-					this.lastFilter = "<b>" + this.filters[z] + "</b> on word: " + words[i];
-					//this.lastMatch = "word: '" + words[i] + "' filter: '" + this.filters[z] + "'";
+			for (var filter:String in this.filters) {
+				if (this.matchWord(words[i], filter) > -1) {
+					this.lastFilter = "<b>" + this.filters[filter] + "</b> on word: " + words[i];
 					return true;
 				}
 			}
@@ -104,7 +116,7 @@ class wot.BattleMessenger.Antispam.Filters
 			match = (index == 0);
 		}else if (expandStart) {
 			// .*word == .*filter
-			index = word.lastIndexOf(filter); //fix "abab" with ".*ab" TODO: lepší řešení
+			index = word.lastIndexOf(filter);
 			match = (index != -1 && index == (word.length - filter.length));
 		}else if (!expandStart && !expandMiddle && !expandEnd){
 			// word == filter || fil.*ter
@@ -127,7 +139,7 @@ class wot.BattleMessenger.Antispam.Filters
 		return message;
 	}
 	
-	private function splitWords(text:String):Array {
+	public static function splitWords(text:String):Array {
 		return text.split(" ");
 	}
 	

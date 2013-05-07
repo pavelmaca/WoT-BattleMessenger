@@ -2,6 +2,8 @@ import wot.BattleMessenger.utils.Utils;
 import wot.BattleMessenger.Config;
 import wot.BattleMessenger.Antispam.Filters;
 import wot.BattleMessenger.Antispam.WGFilterEU;
+import wot.BattleMessenger.models.StatsDataProxy;
+//import com.xvm.Logger;
 
 class wot.BattleMessenger.Antispam.Antispam
 {
@@ -105,5 +107,22 @@ class wot.BattleMessenger.Antispam.Antispam
 		var date:Date = new Date();
 		
 		return Math.round(date.getTime()/1000);
+	}
+	
+	public function createIgnoreList() {
+		var players:Array = StatsDataProxy.getAllPlayers();
+
+		for (var i in players) {
+			/** Ignore usernames */
+			this.filters.addIgnoredWord( players[i].userName + players[i].clanAbbrev);
+			
+			/** Ignore vehicle names */
+			var splitedVehicle:Array = Filters.splitWords( players[i].vehicle );
+			for (var z in splitedVehicle) {
+				if(splitedVehicle[z].length > Filters.MIN_WORD_LENGTH){
+					this.filters.addIgnoredWord( splitedVehicle[z] );
+				}
+			}
+		}
 	}
 }
