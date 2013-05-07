@@ -1,6 +1,7 @@
 /**
- * Part of XVM project https://code.google.com/p/wot-xvm/
+ * Based on XVM project https://code.google.com/p/wot-xvm/
  * @author sirmax2
+ * @author Assassik
  */
 class wot.BattleMessenger.utils.Utils
 {

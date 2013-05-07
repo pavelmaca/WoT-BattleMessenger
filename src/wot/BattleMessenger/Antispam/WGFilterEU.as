@@ -1,4 +1,7 @@
-
+/**
+ * List of badWords from /res/text/messenger_oldictionary.xml (EU client)
+ * @author Assassik
+ */
 class wot.BattleMessenger.Antispam.WGFilterEU
 {
 

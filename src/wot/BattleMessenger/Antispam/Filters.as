@@ -1,8 +1,9 @@
 import wot.BattleMessenger.utils.Utils;
 import wot.BattleMessenger.Antispam.FilterData;
-import com.xvm.Logger;
+//import com.xvm.Logger;
 
 /**
+ * Handle word filtering
  * @author Assassik
  */
 class wot.BattleMessenger.Antispam.Filters
@@ -48,7 +49,7 @@ class wot.BattleMessenger.Antispam.Filters
 		var words:Array  = splitWords( this.normalize(message, false) );
 		for (var i in words) {
 			if (words[i].length < MIN_WORD_LENGTH || this.ignoreWords[ words[i] ]) {
-				Logger.add("ignoring word: " + words[i]);
+				//Logger.add("ignoring word: " + words[i]);
 				continue;
 			}
 			for (var filter:String in this.filters) {

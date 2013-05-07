@@ -5,7 +5,7 @@ import wot.BattleMessenger.models.StatsDataProxy;
 import wot.BattleMessenger.Config;
 import wot.BattleMessenger.utils.Utils;
 import wot.BattleMessenger.utils.GlobalEventDispatcher;
-import com.xvm.StatData;
+//import com.xvm.StatData;
 //import com.xvm.Utils; used for accesing StatData
 //import com.xvm.Defines; for testing xvm data state
 //import com.xvm.Logger;
@@ -14,7 +14,7 @@ import com.xvm.StatData;
  * Main mod class
  * @author Assassik
  */
-class wot.BattleMessenger.Worker
+class wot.BattleMessenger.Handler
 {
 	// Color of debug messages
 	public static var DEBUG_COLOR:String = "#FF3362";
@@ -30,7 +30,7 @@ class wot.BattleMessenger.Worker
 	
 	private var lastReason:String = null;
 	
-	public function Worker(bm:BattleMessenger) 
+	public function Handler(bm:BattleMessenger) 
 	{
 		this.battleMessenger = bm;
 		
@@ -230,11 +230,11 @@ class wot.BattleMessenger.Worker
 		
 		var xvmKey:String = com.xvm.Utils.GetNormalizedPlayerName(player.userName);
 		/** check if data are presend */
-		if (Config.xvmEnabled && StatData.s_data[xvmKey]) {
+		if (Config.xvmEnabled && com.xvm.StatData.s_data[xvmKey]) {
 			/** stats must be loaded */
-			if (StatData.s_data[xvmKey].loadstate == com.xvm.Defines.LOADSTATE_DONE) {
-				if (StatData.s_data[xvmKey].stat.wn < Config.xvmMinRating) {
-					this.lastReason = "XVM rating: " + StatData.s_data[xvmKey].stat.wn;
+			if (com.xvm.StatData.s_data[xvmKey].loadstate == com.xvm.Defines.LOADSTATE_DONE) {
+				if (com.xvm.StatData.s_data[xvmKey].stat.wn < Config.xvmMinRating) {
+					this.lastReason = "XVM rating: " + com.xvm.StatData.s_data[xvmKey].stat.wn;
 					return false;
 				}
 			}else {

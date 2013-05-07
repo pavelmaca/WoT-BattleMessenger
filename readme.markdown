@@ -38,7 +38,7 @@ Simple filter like `"badword"` will match message: `In this message is badword a
 
 >To avoid unwanted filtering with custom filters you need to know some details.
 >
->- HTML code inside message is deleted, with it's content *(avoid filtering user, clan and vehicle names from RadialMenu actions)*
+>- HTML code inside message is deleted, with content *(avoid filtering user, clan and vehicle names from RadialMenu actions)*
 >- every message is splited to simple words, using space as delimeter
 >- tested are only **words with 2 or more characters**
 >- some characters become replaced, like `0` => `o`, `ä` => `a`, `c` => `k`, full list is here: [gist - charReplacements.as](https://gist.github.com/PavelMaca/3c9268e553ece98051f0#file-charreplacements-as)

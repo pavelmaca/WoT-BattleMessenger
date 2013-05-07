@@ -1,5 +1,5 @@
 /**
- * 	{
+ * 	_root.statsData.team1.[] = {
  * 		"uid": 502182284,
  *     	"vehicle": "IS-3",
  *      "position": 1,

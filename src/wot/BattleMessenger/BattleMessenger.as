@@ -1,15 +1,19 @@
-import wot.BattleMessenger.Worker;
+import wot.BattleMessenger.Handler;
 import wot.BattleMessenger.Config;
 import com.xvm.Logger;
 
+/**
+ * BattleMessenger.swf extension
+ * @author Assassik
+ */
 class wot.BattleMessenger.BattleMessenger extends net.wargaming.messenger.BattleMessenger
 {	
-	private var _bm_worker:Worker;
+	private var _bm_handler:Handler;
 	
 	public function BattleMessenger() 
 	{
 		super();
-		_bm_worker = new Worker(this);
+		_bm_handler = new Handler(this);
 
 	}
 	
@@ -18,14 +22,14 @@ class wot.BattleMessenger.BattleMessenger extends net.wargaming.messenger.Battle
     {
 		super._onPopulateUI.apply(this, arguments);
 		
-		_bm_worker.onGuiInit();
+		_bm_handler.onGuiInit();
 	}
 	
 	/** overwrite */
 	function _onRecieveChannelMessage(cid:Number, message:String, himself:Boolean, targetIsCurrentPlayer:Boolean)
     {
 		//var timer:Number = getTimer();
-		var displayMsg:Boolean = (Config.enabled ? _bm_worker.getDisplayStatus(message, himself) : true);
+		var displayMsg:Boolean = (Config.enabled ? _bm_handler.getDisplayStatus(message, himself) : true);
 		//Logger.add("timer: " +(getTimer() - timer));
 		
 		/** Edit message for debug mode */
@@ -36,12 +40,12 @@ class wot.BattleMessenger.BattleMessenger extends net.wargaming.messenger.Battle
 			};
 			
 			if(!displayMsg){
-				message = "<font color='" + Worker.DEBUG_COLOR + "'>Hidden: </font>" + message;
+				message = "<font color='" + Handler.DEBUG_COLOR + "'>Hidden: </font>" + message;
 			}
 			/** add reason, can be also "ignored for xx" */
-			var reason:String = _bm_worker.popReason();
+			var reason:String = _bm_handler.popReason();
 			if (reason != null) {
-				message += "\n<font color='" + Worker.DEBUG_COLOR + "'>" + reason + "</font>";
+				message += "\n<font color='" + Handler.DEBUG_COLOR + "'>" + reason + "</font>";
 				
 				log.reason = reason;
 				Logger.addObject(log, "[BattleMessenger]");
@@ -61,7 +65,7 @@ class wot.BattleMessenger.BattleMessenger extends net.wargaming.messenger.Battle
 	public function _bm_sendExtraMessage(text:String, ignoreDebugMode:Boolean):Void {
 		if (Config.enabled && (Config.debugMode || ignoreDebugMode) && text.length > 0) {
 			Logger.add("[BattleMessenger] " + text);
-			super._onRecieveChannelMessage(null, "<font color='" + Worker.DEBUG_COLOR + "'>" + text + "</font>", true, false);
+			super._onRecieveChannelMessage(null, "<font color='" + Handler.DEBUG_COLOR + "'>" + text + "</font>", true, false);
 		}
 	}
 }

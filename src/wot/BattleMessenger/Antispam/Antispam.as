@@ -5,6 +5,10 @@ import wot.BattleMessenger.Antispam.WGFilterEU;
 import wot.BattleMessenger.models.StatsDataProxy;
 //import com.xvm.Logger;
 
+/**
+ * Spam, duplicity and filter
+ * @author Assassik
+ */
 class wot.BattleMessenger.Antispam.Antispam
 {
 	/**
@@ -31,7 +35,7 @@ class wot.BattleMessenger.Antispam.Antispam
 	public function isSpam(message:String, playerUid:Number):Boolean {
 		var duplicateCount:Number = 0;
 		var playerCount:Number = 0;
-		var currentTime:Number = this.getCurrentTime();
+		var currentTime:Number = getTimer() / 1000;
 		
 		/** turn off duplicateCounter */
 		if (Config.antispamDuplcateCount <= 0 || Config.antispamDuplicateInterval <= 0){
@@ -97,16 +101,6 @@ class wot.BattleMessenger.Antispam.Antispam
 		var ret = this.lastSpam.join("\n");
 		this.lastSpam = [];
 		return ret;
-	}
-
-	/**
-	 * Return UNIX time
-	 * @return timestamp in secunds
-	 */
-	private function getCurrentTime():Number {
-		var date:Date = new Date();
-		
-		return Math.round(date.getTime()/1000);
 	}
 	
 	public function createIgnoreList() {

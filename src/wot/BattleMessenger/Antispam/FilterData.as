@@ -1,20 +1,18 @@
-
+/**
+ * @author Assassik
+ */
 class wot.BattleMessenger.Antispam.FilterData
 {
 	public static var FIND:Number = 0;
 	public static var REPLACEMENT:Number = 1;
 	
 	
-	/*[["@", "a"], ["0", "o"], ["1", "i"], 
-	  ["2", "r"], ["3", "e"], ["4", "a"], ["5", "s"], ["7", "t"], ["8", "b"], 
-	  ["9", "g"], ["|<", "k"], ["|\\/|", "m"], ["|\\|", "n"], ["ä", "a"], ["ã", "a"], 
-	  ["â", "a"], ["ä", "a"], ["á", "a"], ["à", "a"], ["å", "a"], ["é", "e"], 
-	  ["è", "e"], ["ë", "e"], ["ê", "e"], ["§", "s"], ["$", "s"], ["£", "l"], 
-	  ["€", "e"], ["ü", "u"], ["û", "u"], ["ú", "u"], ["ù", "u"], ["î", "i"], 
-	  ["ï", "i"], ["í", "i"], ["ì", "i"], ["ÿ", "y"], ["ý", "y"], ["ö", "o"], 
-	  ["ô", "o"], ["õ", "o"], ["ó", "o"], ["ò", "o"]];*/
+	/**
+	 * List of replaced chars
+	 * ["char", "replacement"] 
+	 */
 	public static var charReplacements:Array = [
-		// WG
+		/** Replacments from /res/text/messenger_oldictionary.xml (EU client) */
 		["@", "a"],
 		["3", "e"],
 		["ph", "f"],
@@ -34,9 +32,8 @@ class wot.BattleMessenger.Antispam.FilterData
 		["+", "t"],
 		["u", "v"],
 		["w", "v"],
-		//added
-		["4", "a"], ["8", "b"], 
-	//	["|<", "k"], ["|\\/|", "m"], ["|\\|", "n"], collision with nonStandardChars
+		/** Extension */
+		["4", "a"], ["8", "b"],
 		["ä", "a"], ["ã", "a"], ["â", "a"], ["ä", "a"], ["á", "a"], ["à", "a"], 
 		["å", "a"], ["é", "e"], ["è", "e"], ["ë", "e"], ["ê", "e"], ["§", "s"], 
 		["£", "l"], ["€", "e"], ["ü", "u"], ["û", "u"], ["ú", "u"], ["ù", "u"], 
@@ -45,7 +42,7 @@ class wot.BattleMessenger.Antispam.FilterData
 	];
 	
 	/**
-	 * Lost of removed chars
+	 * List of deleted chars
 	 */
 	public static var nonStandardChars = ["*", "|", ".", ",", "&", "[", "]", 
 		":", ";", "?", "<", ">", "~", "`", "(", ")", "^", "%", "#", "{", "}", 
