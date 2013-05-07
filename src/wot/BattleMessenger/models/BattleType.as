@@ -13,7 +13,7 @@ class wot.BattleMessenger.models.BattleType
 	
 	
 	/**
-	 * @param	battleIcon
+	 * @param	battleIcon	_root.statsData.arenaData.battleIcon.toString()
 	 * @return	Battle type flag
 	 */
 	public static function getType(battleIcon:String):String {

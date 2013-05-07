@@ -41,8 +41,8 @@ class wot.BattleMessenger.Config
 			customFilters: []
 		},
 		xvm: {
-			enabled: true,
-			minRating: 1300
+			enabled: false,
+			minRating: 0
 		},
 		debugMode: false
 	};
