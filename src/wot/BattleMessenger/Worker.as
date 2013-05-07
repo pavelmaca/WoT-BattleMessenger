@@ -101,11 +101,11 @@ class wot.BattleMessenger.Worker
 		
 		/** Ignore */
 		if ( ignoreForClan(sender) ) {
-			this.lastReason = "Ignore: clan - " + sender.clanAbbrev;
+			this.lastReason = "Ignore: own clan";
 			return true;
 		}
 		if ( ignoreForSquad(sender) ) {
-			this.lastReason = "Ignore: squad - " + sender.squad;
+			this.lastReason = "Ignore: own squad";
 			return true;
 		}
 		
@@ -227,7 +227,7 @@ class wot.BattleMessenger.Worker
 			if (StatData.s_data[xvmKey].loadstate == com.xvm.Defines.LOADSTATE_DONE) {
 				if (StatData.s_data[xvmKey].stat.wn < Config.xvmMinRating) {
 					this.lastReason = "XVM rating: " + StatData.s_data[xvmKey].stat.wn;
-					return true;
+					return false;
 				}
 			}else {
 				this.sendDebugMessage("XVM data not loaded");
