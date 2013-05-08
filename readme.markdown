@@ -87,6 +87,9 @@ Simple filter like `"badword"` will match message: `In this message is badword a
 
 ## Changelog
 **[0.8.5]**
+>2.1 ()
+>- option for background transparency
+>
 >2.0 (7.5.2013)
 >
 >- ignore section reworked, add battle types
