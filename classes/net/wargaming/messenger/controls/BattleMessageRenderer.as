@@ -12,13 +12,9 @@ intrinsic class net.wargaming.messenger.controls.BattleMessageRenderer extends n
     var tweenTo;
 
     function BattleMessageRenderer();
-
     function startShow();
-
     function configUI();
-
     function draw();
-
     function populateData(initData);
 
 }

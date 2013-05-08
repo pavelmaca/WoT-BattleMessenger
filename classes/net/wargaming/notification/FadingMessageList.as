@@ -11,7 +11,6 @@ intrinsic class net.wargaming.notification.FadingMessageList extends gfx.core.UI
     var invalidate;
 
     function FadingMessageList();
-
     function get stackLength();
     function set stackLength(value);
     function get direction();
@@ -20,7 +19,6 @@ intrinsic class net.wargaming.notification.FadingMessageList extends gfx.core.UI
     function set messageLifeTime(value);
     function get messageAlphaSpeed();
     function set messageAlphaSpeed(value);
-	
     function pushMessage(messageData);
     function clear();
     function configUI();

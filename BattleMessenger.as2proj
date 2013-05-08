@@ -39,8 +39,8 @@
   <compileTargets>
     <compile path="src\wot\BattleMessenger\BattleMessenger.as" />
     <compile path="src\wot\BattleMessenger\BattleMessageRenderer.as" />
-    <compile path="classes\net\wargaming\messenger\controls\BattleMessageList.as" />
     <compile path="classes\net\wargaming\messenger\controls\BattleMessengerInput.as" />
+    <compile path="classes\net\wargaming\messenger\controls\BattleMessageList.as" />
   </compileTargets>
   <!-- Assets to embed into the output SWF -->
   <library>
