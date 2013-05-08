@@ -16,6 +16,7 @@ class wot.BattleMessenger.Config
 	private static var _defaultConfig:Object = {
 		enabled: true,
 		chatLength: 10,
+		backgroundAlpha: 100,
 		ignore: {
 			clan: true,
 			squad: true,
@@ -54,9 +55,13 @@ class wot.BattleMessenger.Config
         return battleMessenger.enabled;
 	}
 	
-	/** Chat length */
+	/** Chat setting */
 	public static function get chatLength():Number   {
         return battleMessenger.chatLength;
+	}
+	
+	public static function get backgroundAlpha():Number {
+		return battleMessenger.backgroundAlpha;
 	}
 	
 	/** Ignore */
