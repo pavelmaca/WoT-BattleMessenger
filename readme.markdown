@@ -15,9 +15,9 @@ When someone spaming chat, for example, with minimap ping.. this mod only hide m
 ---
 
 ## Download
-> [[0.8.5] BattleMessenger - chat filter & antispam 2.0.rar](http://www.mediafire.com/?eyljyw19cjjtk61)
+> [[0.8.6] BattleMessenger - chat filter & antispam 2.1.rar](http://www.mediafire.com/download/o1xl129amc5ambd)
 >
-> MD5 checksum: `72611b960143d1f034ea6627b60fc623`
+> MD5 checksum: `bb014e4e6b6abea667b630cbe4706437`
 
 ---
 
@@ -49,7 +49,7 @@ Simple filter like `"badword"` will match message: `In this message is badword a
 >It mean "any characters".
 >
 > - `.*bar` match `bar`, `foobar`
-> - `fu.*` match `fu`, `fun`, `fuck`
+> - `sta.*` match `stay`, `stats`, `start`
 > - `re.*d` match `red`, `reeeed`, `read`
 > - `re.*d.*` match same as above + `reading`
 
@@ -86,10 +86,11 @@ Simple filter like `"badword"` will match message: `In this message is badword a
 ---
 
 ## Changelog
-**[0.8.5]**
->2.1 ()
+**[0.8.6]**
+>2.1 (19.6.2013)
 >- option for background transparency
->
+
+**[0.8.5]**
 >2.0 (7.5.2013)
 >
 >- ignore section reworked, add battle types
