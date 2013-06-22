@@ -64,8 +64,8 @@ Simple filter like `"badword"` will match message: `In this message is badword a
 ---
 
 ### Display chat messages little longer
->Open file `res_mods/0.8.5/gui/messenger.xml`.
->You can get original here: [[0.8.5] messenger.xml - original.rar](http://www.mediafire.com/?epncveoaa04a6lc),
+>Open file `res_mods/0.8.6/gui/messenger.xml`.
+>You can get original here: [[0.8.6] messenger.xml - original.rar](http://www.mediafire.com/download/t9dc09a7rg2bjo7),
 >or use existing one if you have some mod using it (YasenKrasen etc.)
 >
 >Change `battle/lifeTime` value to set display time for ingame messages **in seconds**.
