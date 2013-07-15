@@ -26,6 +26,9 @@ class tests.TestAntispam extends Antispam
 
 		 */
 
+        msg = "Ahmedcz";
+		expect(msg, this.filters.removeHTML(msg), "Ahmedcz");
+
 		msg = "<color='#80D63A'>Útočím na <font color=''>zkouška</font> zde</font>";
 		expect(msg, this.filters.removeHTML(msg), "Útočím na  zde");
 

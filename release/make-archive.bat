@@ -5,7 +5,7 @@ CD release/
 
 REM set variables
 SET game_varsion=0.8.6
-SET mod_version=2.2a
+SET mod_version=2.2
 SET output_file="[%game_varsion%] BattleMessenger - chat filter & antispam %mod_version%.rar"
 SET input_files=BattleMessenger.swf BattleMessenger.conf
 

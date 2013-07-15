@@ -15,9 +15,9 @@ When someone spaming chat, for example, with minimap ping.. this mod only hide m
 ---
 
 ## Download
-> [[0.8.6] BattleMessenger - chat filter & antispam 2.1.rar](http://www.mediafire.com/download/o1xl129amc5ambd)
+> [[0.8.6] BattleMessenger - chat filter & antispam 2.2.rar](http://www.mediafire.com/?0nupdvci8q622j9)
 >
-> MD5 checksum: `bb014e4e6b6abea667b630cbe4706437`
+> MD5 checksum: `9c10a0a40a822c3cdc4c46d44e76aeeb`
 
 ---
 
@@ -87,6 +87,9 @@ Simple filter like `"badword"` will match message: `In this message is badword a
 
 ## Changelog
 **[0.8.6]**
+>2.2 (15.7.2013)
+>- fix: game freeze on loading screen
+>
 >2.1 (19.6.2013)
 >- option for background transparency
 
