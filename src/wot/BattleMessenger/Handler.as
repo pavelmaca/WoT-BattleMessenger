@@ -20,14 +20,9 @@ class wot.BattleMessenger.Handler
 	public static var DEBUG_COLOR:String = "#FF3362";
 	
 	private var battleType:String;
-	
 	private var battleMessenger:BattleMessenger;
-	
-	// Store own identity
-	private var self:Player;
-	
+	private var self:Player; // Store own identity
 	private var antispam:Antispam;
-	
 	private var lastReason:String = null;
 	
 	public function Handler(bm:BattleMessenger) 
@@ -41,7 +36,8 @@ class wot.BattleMessenger.Handler
 	/** config loaded callback */
 	private function onConfigLoaded() {
 		GlobalEventDispatcher.removeEventListener(Config.EVENT_CONFIG_LOADED, this, onConfigLoaded);
-		this.antispam = new Antispam();
+        if(Config.antispamEnabled)
+		    this.antispam = new Antispam();
 	}
 	
 	public function onGuiInit() {
@@ -72,8 +68,10 @@ class wot.BattleMessenger.Handler
 				this.sendDebugMessage("Error: can't found own identity");
 			}
 			
-			/** Ignore player and vehicle names */
-			this.antispam.createIgnoreList();
+            if(Config.antispamEnabled) {
+			    /** Ignore player and vehicle names */
+			    this.antispam.createIgnoreList();
+            }
 			
 			/** Get battle type */
 			battleType = StatsDataProxy.getBattleType();
