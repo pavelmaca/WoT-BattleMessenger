@@ -94,7 +94,7 @@ class wot.BattleMessenger.utils.Utils
 	 * @return
 	 */
 	public static function strReplace(input:String, find:String, replace:String):String {
-		while (input.indexOf("find") != -1)
+		while (input.indexOf(find) != -1)
 			input = input.split(find).join(replace);
 		return input.split(find).join(replace);
 	}
