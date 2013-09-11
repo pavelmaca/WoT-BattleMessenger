@@ -68,7 +68,7 @@ Simple filter like `"badword"` will match message: `In this message is badword a
 >You can get original here: [[0.8.8] messenger.xml - original.rar](http://www.mediafire.com/download/bjxba0g89fy7ia5),
 >or use existing one if you have some mod using it (YasenKrasen etc.)
 >
->Change `battle/messageLifeCycle/lifeTime` *<value>* field to set display time for ingame messages **in seconds**.
+>Change `battle/messageLifeCycle/lifeTime` *value* field to set display time for ingame messages **in seconds**.
 
     <settings>
       <name>battle</name>
