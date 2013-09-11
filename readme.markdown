@@ -15,9 +15,9 @@ When someone spaming chat, for example, with minimap ping.. this mod only hide m
 ---
 
 ## Download
-> [[0.8.7] BattleMessenger - chat filter & antispam 2.2.rar](http://www.mediafire.com/download/6ujynbcjyf5bra3)
+> [[0.8.8] BattleMessenger - chat filter & antispam 2.3.rar](http://www.mediafire.com/download/3f7qfu2uwcy9b63)
 >
-> MD5 checksum: `9c10a0a40a822c3cdc4c46d44e76aeeb`
+> MD5 checksum: `52b707d0c19a16136b2b19cc371dc7d8`
 
 ---
 
@@ -65,13 +65,19 @@ Simple filter like `"badword"` will match message: `In this message is badword a
 
 ### Display chat messages little longer
 >Open file `res_mods/0.8.x/gui/messenger.xml`.
->You can get original here: [[0.8.7] messenger.xml - original.rar](http://www.mediafire.com/download/tg593tdvkj6hjt6),
+>You can get original here: [[0.8.8] messenger.xml - original.rar](http://www.mediafire.com/download/bjxba0g89fy7ia5),
 >or use existing one if you have some mod using it (YasenKrasen etc.)
 >
->Change `battle/lifeTime` value to set display time for ingame messages **in seconds**.
+>Change `battle/messageLifeCycle/lifeTime` *<value>* field to set display time for ingame messages **in seconds**.
 
-    <battle>
-        <lifeTime> 10 </lifeTime>
+    <settings>
+      <name>battle</name>
+      <set>
+        <name>	messageLifeCycle	</name>
+        <items>
+          <item>
+            <name>	lifeTime	</name>
+            <value>	10	</value>
 >In combination with `chatLength` option in this mode, you are able to set as big value as you want, without having chat over whole screen.
 
 ---
@@ -86,6 +92,10 @@ Simple filter like `"badword"` will match message: `In this message is badword a
 ---
 
 ## Changelog
+**[0.8.8]**
+>2.3 (11.9.2013)
+>- update for XVM 5.0.0 and higher
+
 **[0.8.6]**
 >2.2 (15.7.2013)
 >- fix: game freeze on loading screen

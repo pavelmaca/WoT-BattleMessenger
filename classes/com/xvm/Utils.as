@@ -1,8 +1,8 @@
 /**
  * Part of XVM project https://code.google.com/p/wot-xvm/
- * need XVM 4.0+ (xvm.swf)
+ * need XVM 5.0+
  */
 intrinsic class com.xvm.Utils
 {
-    public static function GetNormalizedPlayerName(fullplayername:String):String;
+    public static function GetPlayerName(fullplayername:String):String;
 }

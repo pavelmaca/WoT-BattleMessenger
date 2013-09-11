@@ -25,7 +25,7 @@ class wot.BattleMessenger.Handler
 	private var antispam:Antispam;
 	private var lastReason:String = null;
 	
-	public function Handler(bm:BattleMessenger) 
+	public function Handler(bm:BattleMessenger)
 	{
 		this.battleMessenger = bm;
 		
@@ -90,9 +90,9 @@ class wot.BattleMessenger.Handler
 		/** sender */
 		var sender:Player;
 			
-		/** 
-		 * split message in two parts 
-		 * [0]: player name, clan, vehicle 
+		/**
+		 * split message in two parts
+		 * [0]: player name, clan, vehicle
 		 * [1]: content
 		 */
 		var msgParts:Array = message.split("&nbsp;:&nbsp;</font>", 2);
@@ -123,17 +123,17 @@ class wot.BattleMessenger.Handler
 						this.lastReason = "Ignore: ally in Random battle";
 						return true;
 					} break;
-				case StatsDataProxy.BATTLE_COMPANY: 
+				case StatsDataProxy.BATTLE_COMPANY:
 					if (Config.ignoreCompanyBattle) {
 						this.lastReason = "Ignore: ally in Company battle";
 						return true;
 					} break;
-				case StatsDataProxy.BATTLE_SPECIAL: 
+				case StatsDataProxy.BATTLE_SPECIAL:
 					if (Config.ignoreSpecialBattle) {
 						this.lastReason = "Ignore: ally in Special battle";
 						return true;
 					} break;
-				case StatsDataProxy.BATTLE_TRAINING: 
+				case StatsDataProxy.BATTLE_TRAINING:
 					if (Config.ignoreTrainingBattle) {
 						this.lastReason = "Ignore: ally in Training battle";
 						return true;
@@ -184,7 +184,7 @@ class wot.BattleMessenger.Handler
 		var endOfFirtsTag:Number = message.indexOf(">");
         var messageWitOutFirstTag:String = message.substr(endOfFirtsTag + 1, message.length - endOfFirtsTag);
         var endOfUsername:Number = messageWitOutFirstTag.indexOf(" ");
-       		
+
 		var userName:String = messageWitOutFirstTag.substr(0, endOfUsername);
 		
 		/** remove clan tag */
@@ -216,7 +216,7 @@ class wot.BattleMessenger.Handler
 	}
 	
 	/**
-	 * XVM 4.0 or higher, with xvm-stats requered 
+	 * XVM 5.0 or higher, with stats requered
 	 * @param	player
 	 * @return
 	 */
@@ -226,7 +226,7 @@ class wot.BattleMessenger.Handler
 			return true;
 		}
 		
-		var xvmKey:String = com.xvm.Utils.GetNormalizedPlayerName(player.userName);
+		var xvmKey:String = com.xvm.Utils.GetPlayerName(player.userName);
 		/** check if data are presend */
 		if (Config.xvmEnabled && com.xvm.StatData.s_data[xvmKey]) {
 			/** stats must be loaded */

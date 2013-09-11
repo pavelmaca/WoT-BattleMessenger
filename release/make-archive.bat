@@ -4,8 +4,8 @@ REM FIX: Post-Build Command are executed from /project dir
 CD release/
 
 REM set variables
-SET game_varsion=0.8.7
-SET mod_version=2.3a
+SET game_varsion=0.8.8
+SET mod_version=2.3
 SET output_file="[%game_varsion%] BattleMessenger - chat filter & antispam %mod_version%.rar"
 SET input_files=BattleMessenger.swf BattleMessenger.conf
 
@@ -16,7 +16,7 @@ IF EXIST %output_file% (
 )
 
 ECHO Creating new archive
-"C:\Program Files\WinRAR\App\WinRAR-x64\rar.exe" a -ap"res_mods/%game_varsion%/gui/flash" %output_file% %input_files%
+"C:\Program Files\WinRAR\App\WinRAR-x64\rar.exe" a -ap"res_mods/%game_varsion%/gui/scaleform" %output_file% %input_files%
 
 IF EXIST %output_file% (
 	ECHO Creating MD5 checksum
