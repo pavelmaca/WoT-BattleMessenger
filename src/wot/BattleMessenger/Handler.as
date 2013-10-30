@@ -221,18 +221,18 @@ class wot.BattleMessenger.Handler
 	 * @return
 	 */
 	private function isXvmRatingHigher(player:Player):Boolean {
-		if (com.xvm.StatData == undefined) {
+		if (com.xvm.Stat == undefined) {
 			this.sendDebugMessage("XVM is not present");
 			return true;
 		}
 		
 		var xvmKey:String = com.xvm.Utils.GetPlayerName(player.userName);
 		/** check if data are presend */
-		if (Config.xvmEnabled && com.xvm.StatData.s_data[xvmKey]) {
+		if (Config.xvmEnabled && com.xvm.Stat.s_data[xvmKey]) {
 			/** stats must be loaded */
-			if (com.xvm.StatData.s_data[xvmKey].loadstate == com.xvm.Defines.LOADSTATE_DONE) {
-				if (com.xvm.StatData.s_data[xvmKey].stat.wn < Config.xvmMinRating) {
-					this.lastReason = "XVM rating: " + com.xvm.StatData.s_data[xvmKey].stat.wn;
+			if (com.xvm.Stat.s_data[xvmKey].loadstate == com.xvm.Defines.LOADSTATE_DONE) {
+				if (com.xvm.Stat.s_data[xvmKey].stat.wn < Config.xvmMinRating) {
+					this.lastReason = "XVM rating: " + com.xvm.Stat.s_data[xvmKey].stat.wn;
 					return false;
 				}
 			}else {
