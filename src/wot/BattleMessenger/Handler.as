@@ -3,7 +3,6 @@ import wot.BattleMessenger.BattleMessenger;
 import wot.BattleMessenger.models.Player;
 import wot.BattleMessenger.models.StatsDataProxy;
 import wot.BattleMessenger.Config;
-import wot.BattleMessenger.utils.Utils;
 import wot.BattleMessenger.utils.GlobalEventDispatcher;
 //import com.xvm.StatData;
 //import com.xvm.Utils; used for accesing StatData
@@ -187,8 +186,8 @@ class wot.BattleMessenger.Handler
 
 		var userName:String = messageWitOutFirstTag.substr(0, endOfUsername);
 		
-		/** remove clan tag */
-		userName = Utils.GetPlayerName(userName);
+		/** remove clan tag - not needed since 0.8.9 */
+		//userName = Utils.GetPlayerName(userName);
 		
 		return StatsDataProxy.getPlayerByName(userName);
 	}
