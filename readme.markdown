@@ -6,7 +6,7 @@
 - **Custom words filter** for block messages containing "bad words"
 - Set of Wargaming **word filters from lobby chat** (EU only)
 - Ignore own messages, clan / squad mate, ally in company / clan wars / training / random battles (optional)
-- Blocking messages based on min. WN rating (xvm-stats required)
+- Blocking messages based on min. WN rating (xvm statistics required)
 
 When someone spaming chat, for example, with minimap ping.. this mod only hide messages, not remove ping sound or minimap action icon.
 
@@ -15,15 +15,14 @@ When someone spaming chat, for example, with minimap ping.. this mod only hide m
 ---
 
 ## Download
-> [[0.8.8] BattleMessenger - chat filter & antispam 2.3.rar](http://www.mediafire.com/download/3f7qfu2uwcy9b63)
+> [[0.8.9] BattleMessenger - chat filter & antispam 2.4.rar](http://www.mediafire.com/download/1fsupachljuf7hp)
 >
-> MD5 checksum: `52b707d0c19a16136b2b19cc371dc7d8`
+> MD5 checksum: `fcd4db0cfbacd47d63fb96afed5774be`
 
 ---
 
 ## Forum Links
 - [EU forum topic](http://forum.worldoftanks.eu/index.php?/topic/235204-)
-- [RU forum topic](http://forum.worldoftanks.ru/index.php?/topic/802335-) *- unofficial by Demon_Ok*
 
 ---
 
@@ -65,7 +64,7 @@ Simple filter like `"badword"` will match message: `In this message is badword a
 
 ### Display chat messages little longer
 >Open file `res_mods/0.8.x/gui/messenger.xml`.
->You can get original here: [[0.8.8] messenger.xml - original.rar](http://www.mediafire.com/download/bjxba0g89fy7ia5),
+>You can get original here: [[0.8.9] messenger.xml - original.rar](http://www.mediafire.com/download/vb29495odwsnabu),
 >or use existing one if you have some mod using it (YasenKrasen etc.)
 >
 >Change `battle/messageLifeCycle/lifeTime` *value* field to set display time for ingame messages **in seconds**.
@@ -92,6 +91,11 @@ Simple filter like `"badword"` will match message: `In this message is badword a
 ---
 
 ## Changelog
+**[0.8.9]**
+>2.4 (31.10.2013)
+>- adaptation for client version 0.8.9
+>- update for XVM 5.0.1-test2 and higher
+
 **[0.8.8]**
 >2.3 (11.9.2013)
 >- update for XVM 5.0.0 and higher
