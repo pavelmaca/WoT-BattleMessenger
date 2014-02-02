@@ -1,4 +1,6 @@
-intrinsic class net.wargaming.messenger.controls.BattleMessageList extends net.wargaming.notification.FadingMessageList
+intrinsic dynamic class net.wargaming.messenger.controls.BattleMessageList extends net.wargaming.notification.FadingMessageList
 {
-	function handleInput(details, pathToFocus);
+	public function BattleMessageList ();
+
+	public function handleInput (details, pathToFocus);
 }

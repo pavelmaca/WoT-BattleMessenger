@@ -1,40 +1,60 @@
-intrinsic class net.wargaming.messenger.BattleMessenger extends gfx.core.UIComponent
+intrinsic dynamic class net.wargaming.messenger.BattleMessenger extends gfx.core.UIComponent
 {
-	var m_editable: Boolean = false;
-    var m_channelsInit: Boolean = false;
-    var m_tabIsDown: Boolean = false;
-    var m_inactiveStateAlpha: Number = 0;
-    var __height;
-    var __width;
-    var m_constraints;
-    var messageInput;
-    var messageList; //: net.wargaming.messenger.controls.BattleMessageLis;
-    var onEnterFrame;
-    var onMouseDown;
-    var skipFirstInput;
-    var tabChildren;
-	
-	function BattleMessenger();
-    function setStateAlpha(alpha);
-    function getEditable();
-    function setEditable(bool, forced);
-    function changeReceiverByKeyMod();
-    function handleInput(details, pathToFocus);
-    function configUI();
-    function draw();
-    function sendMessage();
-    function doSendMessage(channelID, valid);
-    function _onFocusIn();
-    function _onFocusOut();
-    function _onReceiverChanged(event);
-    function _onChannelsInit();
-    function _onRefreshUI();
-    function _onPopulateUI();
-    function _onRecieveChannelMessage(cid, message, himself, targetIsCurrentPlayer);
-    function _onClearMessages();
-    function _onShowActionFailureMesssage(message);
-    function _onJoinToChannel();
-    function _onUpdateReceivers();
-    function _onUserPreferencesUpdated(storeLastReceiver);
+	public var m_editable : Boolean;
+	public var m_channelsInit : Boolean;
+	public var m_tabIsDown : Boolean;
+	public var m_inactiveStateAlpha : Number;
+	public var __height;
+	public var __width;
+	public var m_constraints;
+	public var messageInput;
+	public var messageList;
+	public var onEnterFrame;
+	public var onMouseDown;
+	public var skipFirstInput;
+	public var tabChildren;
 
+	public function BattleMessenger ();
+
+	public function setStateAlpha (alpha);
+
+	public function getEditable ();
+
+	public function setEditable (bool, forced, generateEvent);
+
+	public function changeReceiverByKeyMod ();
+
+	public function handleInput (details, pathToFocus);
+
+	public function configUI ();
+
+	public function draw ();
+
+	public function sendMessage ();
+
+	public function doSendMessage (channelID, valid);
+
+	public function _onFocusIn ();
+
+	public function _onFocusOut ();
+
+	public function _onReceiverChanged (event);
+
+	public function _onChannelsInit ();
+
+	public function _onRefreshUI ();
+
+	public function _onPopulateUI ();
+
+	public function _onRecieveChannelMessage (cid, message, himself, targetIsCurrentPlayer);
+
+	public function _onClearMessages ();
+
+	public function _onShowActionFailureMesssage (message);
+
+	public function _onJoinToChannel ();
+
+	public function _onUpdateReceivers ();
+
+	public function _onUserPreferencesUpdated (storeLastReceiver);
 }

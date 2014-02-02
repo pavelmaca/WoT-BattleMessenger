@@ -1,29 +1,40 @@
-intrinsic class net.wargaming.notification.FadingMessageList extends gfx.core.UIComponent
+intrinsic dynamic class net.wargaming.notification.FadingMessageList extends gfx.core.UIComponent
 {
-    var _itemRenderer: String;
-    var _stackLength: Number;
-    var _direction: String;
-    var _lifeTime: Number;
-    var _alphaSpeed: Number;
-    var _renderers;
-    var attachMovie;
-    var getNextHighestDepth;
-    var invalidate;
+	public var _itemRenderer : String;
+	public var _stackLength : Number;
+	public var _direction : String;
+	public var _lifeTime : Number;
+	public var _alphaSpeed : Number;
+	public var _renderers;
+	public var attachMovie;
+	public var getNextHighestDepth;
+	public var invalidate;
 
-    function FadingMessageList();
-    function get stackLength();
-    function set stackLength(value);
-    function get direction();
-    function set direction(value);
-    function get messageLifeTime();
-    function set messageLifeTime(value);
-    function get messageAlphaSpeed();
-    function set messageAlphaSpeed(value);
-    function pushMessage(messageData);
-    function clear();
-    function configUI();
-    function draw();
-    function getItemRenderer(messageData);
-    function createItemRenderer(messageData, index);
-    function onDrawRenderer(event);
+	public function get stackLength ();
+	public function set stackLength (value) : Void;
+
+	public function get direction ();
+	public function set direction (value) : Void;
+
+	public function get messageLifeTime ();
+	public function set messageLifeTime (value) : Void;
+
+	public function get messageAlphaSpeed ();
+	public function set messageAlphaSpeed (value) : Void;
+
+	public function FadingMessageList ();
+
+	public function pushMessage (messageData);
+
+	public function clear ();
+
+	public function configUI ();
+
+	public function draw ();
+
+	public function getItemRenderer (messageData);
+
+	public function createItemRenderer (messageData, index);
+
+	public function onDrawRenderer (event);
 }

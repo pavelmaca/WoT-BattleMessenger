@@ -1,20 +1,23 @@
-intrinsic class net.wargaming.messenger.controls.BattleMessageRenderer extends net.wargaming.notification.FadingMessageRenderer
+intrinsic dynamic class net.wargaming.messenger.controls.BattleMessageRenderer extends net.wargaming.notification.FadingMessageRenderer
 {
-    var textBottomPadding: Number;
-    var textRightPadding: Number;
-    var _shown;
-    var _xscale;
-    var _yscale;
-    var background;
-    var dispatchEvent;
-    var startVisibleLife;
-    var textField;
-    var tweenTo;
+	public var textBottomPadding : Number;
+	public var textRightPadding : Number;
+	public var _shown;
+	public var _xscale;
+	public var _yscale;
+	public var background;
+	public var dispatchEvent;
+	public var startVisibleLife;
+	public var textField;
+	public var tweenTo;
 
-    function BattleMessageRenderer();
-    function startShow();
-    function configUI();
-    function draw();
-    function populateData(initData);
+	public function BattleMessageRenderer ();
 
+	public function startShow ();
+
+	public function configUI ();
+
+	public function draw ();
+
+	public function populateData (initData);
 }
