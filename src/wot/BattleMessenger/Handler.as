@@ -216,7 +216,7 @@ class wot.BattleMessenger.Handler
 	}
 	
 	/**
-	 * XVM 5.0 or higher, with stats requered
+	 * XVM 5.0.2 or higher, with stats requered
 	 * @param	player
 	 * @return
 	 */
@@ -231,7 +231,7 @@ class wot.BattleMessenger.Handler
 		if (Config.xvmEnabled && com.xvm.Stat.s_data[xvmKey]) {
 			/** stats must be loaded */
 			if (com.xvm.Stat.s_data[xvmKey].loadstate == com.xvm.Defines.LOADSTATE_DONE) {
-				if (com.xvm.Stat.s_data[xvmKey].stat.wn < Config.xvmMinRating) {
+				if (com.xvm.Stat.s_data[xvmKey].stat.wn8 < Config.xvmMinRating) {
 					this.lastReason = "XVM rating: " + com.xvm.Stat.s_data[xvmKey].stat.wn;
 					return false;
 				}
