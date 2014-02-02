@@ -17,6 +17,8 @@ IF EXIST %output_file% (
 
 ECHO Creating new archive
 "C:\Program Files\WinRAR\App\WinRAR-x64\rar.exe" a -ap"res_mods/%game_varsion%/gui/scaleform" %output_file% %input_files%
+"C:\Program Files\WinRAR\App\WinRAR-x64\rar.exe" u %output_file% "../readme.markdown"
+"C:\Program Files\WinRAR\App\WinRAR-x64\rar.exe" c -z"archive-readme.txt" %output_file%
 
 IF EXIST %output_file% (
 	ECHO Creating MD5 checksum
