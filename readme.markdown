@@ -15,9 +15,9 @@ When someone spaming chat, for example, with minimap ping.. this mod only hide m
 ---
 
 ## Download
-> [[0.8.10] BattleMessenger - chat filter & antispam 2.5.rar](http://www.mediafire.com/download/qfis7z5g0wdcn2d)
+> [[0.8.11] BattleMessenger - chat filter & antispam 2.6.rar](http://www.mediafire.com/download/5x587yy0f9njwub)
 >
-> MD5 checksum: `59fb22bbc9cd8548aa2a2e8ffbe5`
+> MD5 checksum: `0a744579e4106cd8c42698316341ee9c`
 
 ---
 
@@ -64,7 +64,7 @@ Simple filter like `"badword"` will match message: `In this message is badword a
 
 ### Display chat messages little longer
 >Open file `res_mods/0.8.x/gui/messenger.xml`.
->You can get original here: [[0.8.10] messenger.xml - original.rar](http://www.mediafire.com/download/qwh9dbdlh6d5uw9),
+>You can get original here: [[0.8.11] messenger.xml - original.rar](http://www.mediafire.com/download/v9pe1g89y1nl8mj),
 >or use existing one if you have some mod using it (YasenKrasen etc.)
 >
 >Change `battle/messageLifeCycle/lifeTime` *value* field to set display time for ingame messages **in seconds**.
@@ -91,11 +91,11 @@ Simple filter like `"badword"` will match message: `In this message is badword a
 ---
 
 ## Changelog
-**[0.8.10]**
->2.6 (-----)
+**[0.8.11]**
+>2.6 (11.02.2014)
 >- adaptation for client version 0.8.11
 >- rating filter now use WN8
->- update for XVM 5.0.2 and higher
+>- ready for XVM 5.0.2 and higher
 
 **[0.8.10]**
 >2.5 (23.12.2013)
