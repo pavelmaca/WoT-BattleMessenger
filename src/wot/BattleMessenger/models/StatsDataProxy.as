@@ -16,7 +16,7 @@ import wot.BattleMessenger.models.Player;
  *     	"team2": [ {wot.BattleMessenger.models.Player},... ],
  * 		"team1": [ {wot.BattleMessenger.models.Player},... ]
  * 	};
- * 
+ *
  * @author Assassik
  */
 class wot.BattleMessenger.models.StatsDataProxy
@@ -25,6 +25,7 @@ class wot.BattleMessenger.models.StatsDataProxy
 	public static var BATTLE_RANDOM:String = "Random";
 	public static var BATTLE_TRAINING:String = "Training";
 	public static var BATTLE_COMPANY:String = "Company";
+    public static var BATTLE_TEAM_7x7:String = "Team7x7";
 	public static var BATTLE_UNKNOWN:String = "Unknown";
 	
 	private static var TEAM_1:String = "team1";
@@ -44,7 +45,7 @@ class wot.BattleMessenger.models.StatsDataProxy
             if (player.himself == true)
                 return player;
         }
-        
+
         return null;
 	}
 	
@@ -52,7 +53,7 @@ class wot.BattleMessenger.models.StatsDataProxy
 		var playerInfo:Player = getPlayerFromByName(getAllyPlayers(), username);
         if (playerInfo)
             return playerInfo;
-        
+
         return getPlayerFromByName(getEnemyPlayers(), username);
 	}
 	
@@ -66,13 +67,13 @@ class wot.BattleMessenger.models.StatsDataProxy
 	 */
 	public static function getBattleType():String {
 		switch(_root.statsData.arenaData.battleIcon.toString()) {
-			case "1": 
+			case "1":
 				/**
 				 * Tournament CTF
 				 * 	"battleName": "Open League Championship Series, Spring 2013: May 4th [Group 2]"
 				 * 	"battleName": "Cruiserweight Cup: Cruiserweight Cup"
 				 * 	"battleIcon": 1
-				 * 
+				 *
 				 * Clan CTF
 				 * 	"battleName": "Klanové války: Bir Moghrein - Jižní Tiris Zemmour, bitva o hranice"
 				 * 	"battleIcon": 1
@@ -80,34 +81,35 @@ class wot.BattleMessenger.models.StatsDataProxy
 				return BATTLE_SPECIAL;
 			case "ctf":
 			case "domination":
-			case "assault": 
+			case "assault":
+            case "nations":
 				/**
 				 * Random CTF
 				 * 	"battleName": "#arenas:type/ctf/name"
 				 * 	"battleIcon": "ctf"
-				 * 
+				 *
 				 * Random Encounter
 				 * 	"battleName": "#arenas:type/domination/name"
 				 * 	"battleIcon": "domination"
-				 * 
+				 *
 				 * Random Assault (both side)
 				 * 	"battleName": "#arenas:type/assault/name"
 				 * 	"battleIcon": "assault"
 				 */
 				return BATTLE_RANDOM;
-			case "3": 
+			case "3":
 				/**
 				 * Training CTF
 				 * Training Encounter
 				 * 	"battleName": "#menu:loading/battleTypes/2"
 				 * 	"battleIcon": 3,
-				 * 
+				 *
 				 * Training Assault
 				 * 	TODO: get info
 				 */
 				return BATTLE_TRAINING;
 			case "4":
-				/** 
+				/**
 				 * Company CTF
 				 * Company Assault (both side)
 				 * Company Encounter
@@ -115,6 +117,11 @@ class wot.BattleMessenger.models.StatsDataProxy
 				 * 	"battleIcon": 4
 				 */
 				return BATTLE_COMPANY;
+            case "6":
+                /**
+                 * Team battles 7x7
+                 */
+                return BATTLE_TEAM_7x7;
 			default:
 				return BATTLE_UNKNOWN;
 		}
@@ -139,7 +146,7 @@ class wot.BattleMessenger.models.StatsDataProxy
         for (var i:Number = 0; i < players.length; i++)
             if (players[i].userName == username)
                 return players[i];
-        
+
         return null;
     }
 	
@@ -148,7 +155,7 @@ class wot.BattleMessenger.models.StatsDataProxy
         var playerInfo:Player = getPlayerFromByUid(getAllyPlayers(), uid);
         if (playerInfo)
             return playerInfo;
-        
+
         return getPlayerFromByUid(getEnemyPlayers(), uid);
     }
 	
@@ -157,7 +164,7 @@ class wot.BattleMessenger.models.StatsDataProxy
         for (var i:Number = 0; i < players.length; i++)
             if (players[i].uid == uid)
                 return players[i];
-        
+
         return null;
     }
 }
