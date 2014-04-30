@@ -18,6 +18,7 @@ When someone spaming chat, for example, with minimap ping.. this mod only hide m
 > [[0.8.11] BattleMessenger - chat filter & antispam 2.6.rar](http://www.mediafire.com/download/5x587yy0f9njwub)
 >
 > MD5 checksum: `0a744579e4106cd8c42698316341ee9c`
+>
 > compatible with 0.9.0 World of Tanks version
 
 ---
@@ -65,7 +66,7 @@ Simple filter like `"badword"` will match message: `In this message is badword a
 
 ### Display chat messages little longer
 >Open file `res_mods/0.9.x/gui/messenger.xml`.
->You can get original for 0.9.0 version here: [ [0.9.0] messenger.xml - original.zip](http://cdn-frm-us.wargaming.net/wot/us/uploads/monthly_04_2014/post-4116953-0-38788200-1397881465.zip),
+>You can get original for 0.9.0 version here: [ [0.9.0] messenger.xml - original.zip](http://cdn-frm-us.wargaming.net/wot/us/uploads/monthly_04_2014/post-4116953-0-38788200-1397881465.zip), on forum [http://forum.worldoftanks.com/index.php?/topic/251717-090-increased-duration-of-the-display-chat-messages/#topmost]
 >or use existing one if you have some mod using it (YasenKrasen etc.)
 >
 >Change `battle/messageLifeCycle/lifeTime` *value* field to set display time for ingame messages **in seconds**.
@@ -96,7 +97,7 @@ Simple filter like `"badword"` will match message: `In this message is badword a
 **[0.9.0]**
 >2.6 (11.02.2014)
 >- no adaptation for client version 0.9.0
->- only new 0.9.0 messenger.xml from [http://forum.worldoftanks.com/index.php?/topic/251717-090-increased-duration-of-the-display-chat-messages/#topmost]
+>- only new 0.9.0 messenger.xml from
 
 **[0.8.11]**
 >2.6 (11.02.2014)
