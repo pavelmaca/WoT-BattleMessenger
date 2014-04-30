@@ -16,8 +16,8 @@ When someone spaming chat, for example, with minimap ping.. this mod only hide m
 
 ## Download
 > [[0.8.11] BattleMessenger - chat filter & antispam 2.6.rar](http://www.mediafire.com/download/5x587yy0f9njwub)
->
 > MD5 checksum: `0a744579e4106cd8c42698316341ee9c`
+> compatible with 0.9.0 World of Tanks version
 
 ---
 
