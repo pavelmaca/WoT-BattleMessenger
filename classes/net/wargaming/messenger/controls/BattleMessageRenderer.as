@@ -2,6 +2,9 @@ intrinsic dynamic class net.wargaming.messenger.controls.BattleMessageRenderer e
 {
 	public var textBottomPadding : Number;
 	public var textRightPadding : Number;
+	public var showAlpha : Number;
+	public var showTime : Number;
+	public var _alpha;
 	public var _shown;
 	public var _xscale;
 	public var _yscale;

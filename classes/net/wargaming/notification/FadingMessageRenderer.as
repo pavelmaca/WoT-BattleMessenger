@@ -1,40 +1,41 @@
-intrinsic class net.wargaming.notification.FadingMessageRenderer extends gfx.core.UIComponent
+intrinsic dynamic class net.wargaming.notification.FadingMessageRenderer extends gfx.core.UIComponent
 {
-    var _lifeTime: Number;
-    var _alphaSpeed: Number;
-    var _shown: Boolean;
-    var _alpha;
-    var _data;
-    var _height;
-    var _intervalID;
-    var _xscale;
-    var _yscale;
-    var dispatchEvent;
-    var initialized;
-    var removeMovieClip;
-    var tabChildren;
-    var tabEnabled;
-    var textField;
-    var tweenEnd;
-    var tweenTo;
+	public var _lifeTime : Number;
+	public var _alphaSpeed : Number;
+	public var _shown : Boolean;
+	public var _alpha;
+	public var _data;
+	public var _height;
+	public var _intervalID;
+	public var _xscale;
+	public var _yscale;
+	public var dispatchEvent;
+	public var initialized;
+	public var removeMovieClip;
+	public var tabChildren;
+	public var tabEnabled;
+	public var textField;
+	public var tweenEnd;
+	public var tweenTo;
 
-    function FadingMessageRenderer();
+	public function get data ();
+	public function set data (value) : Void;
 
-    function get data();
-    function set data(value);
-    function setData(data);
+	public function FadingMessageRenderer ();
 
-    function startShow();
+	public function setData (data);
 
-    function configUI();
+	public function startShow ();
 
-    function draw();
+	public function configUI ();
 
-    function close();
-    function populateData(initData);
+	public function draw ();
 
-    function startVisibleLife();
+	public function close ();
 
-    function stopVisibleLife();
+	public function populateData (initData);
 
+	public function startVisibleLife ();
+
+	public function stopVisibleLife ();
 }

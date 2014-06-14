@@ -1,16 +1,23 @@
-intrinsic  class net.wargaming.controls.TextInput extends gfx.controls.TextInput
+intrinsic dynamic class net.wargaming.controls.TextInput extends gfx.controls.TextInput
 {
-    var _extractEscapes: Boolean;
-    var addEventListener;
-    var textField;
+	public var _extractEscapes : Boolean;
+	public var addEventListener;
+	public var textField;
 
-    function TextInput();
-    function updateTextField();
-    function onKillFocus();
-    function onSetFocus();
-    function onUnload();
-    function configUI();
-    function onTextChange(args);
-    function get extractEscapes();
-    function set extractEscapes(value);
+	public function get extractEscapes ();
+	public function set extractEscapes (value) : Void;
+
+	public function TextInput ();
+
+	public function updateTextField ();
+
+	public function onKillFocus ();
+
+	public function onSetFocus ();
+
+	public function onUnload ();
+
+	public function configUI ();
+
+	public function onTextChange (args);
 }

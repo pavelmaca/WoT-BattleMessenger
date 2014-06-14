@@ -1,5 +1,17 @@
 intrinsic dynamic class net.wargaming.messenger.BattleMessenger extends gfx.core.UIComponent
 {
+	public var isHistoryEnabled : Boolean;
+	public var historyZeroPoint : Boolean;
+	public var countMessagesOfHistory : Number;
+	public var alphaLastMessage : Number;
+	public var messageLifeTime : Number;
+	public var messageAlphaSpeed : Number;
+	public var isListing : Boolean;
+	public var lastCaretIndex : Number;
+	public var recoveredLatestMessagesAlpha : Number;
+	public var latestMessageLength : Number;
+	public var lifeTimeRecoveredMessages : Number;
+	public var isChatEnable : Boolean;
 	public var m_editable : Boolean;
 	public var m_channelsInit : Boolean;
 	public var m_tabIsDown : Boolean;
@@ -21,6 +33,8 @@ intrinsic dynamic class net.wargaming.messenger.BattleMessenger extends gfx.core
 	public function getEditable ();
 
 	public function setEditable (bool, forced, generateEvent);
+
+	public function showAfterHistoryMessages (length);
 
 	public function changeReceiverByKeyMod ();
 
@@ -44,9 +58,25 @@ intrinsic dynamic class net.wargaming.messenger.BattleMessenger extends gfx.core
 
 	public function _onRefreshUI ();
 
-	public function _onPopulateUI ();
+	public function _enableHistoryControls (value);
 
 	public function _onRecieveChannelMessage (cid, message, himself, targetIsCurrentPlayer);
+
+	public function _showLatestMessages (message, himself);
+
+	public function _showHistoryMessages (message, himself, numberOfMessages, historyCount);
+
+	public function _isHistoryEnabled (value);
+
+	public function changeHistoryBehavior (isHistory);
+
+	public function upHistoryHandler (e);
+
+	public function downHistoryHandler (e);
+
+	public function lastMessagesHandler (e);
+
+	public function _onPopulateUI ();
 
 	public function _onClearMessages ();
 
@@ -56,5 +86,5 @@ intrinsic dynamic class net.wargaming.messenger.BattleMessenger extends gfx.core
 
 	public function _onUpdateReceivers ();
 
-	public function _onUserPreferencesUpdated (storeLastReceiver);
+	public function _onUserPreferencesUpdated (storeLastReceiver, removeReceivers, toolTipText);
 }
