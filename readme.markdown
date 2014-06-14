@@ -15,9 +15,8 @@ When someone spaming chat, for example, with minimap ping.. this mod only hide m
 ---
 
 ## Download
-> [[0.9.1] BattleMessenger - chat filter & antispam 2.7.rar]()
->
-> MD5 checksum: ``
+> For latest version check:  
+> [https://github.com/PavelMaca/WoT-BattleMessenger/releases/](https://github.com/PavelMaca/WoT-BattleMessenger/releases/)
 
 ---
 
@@ -72,7 +71,7 @@ Simple filter like `"badword"` will match message: `In this message is badword a
     <settings>
       <name>battle</name>
       <set>
-        <name>	messageLifeCycle	</name>
+        <name>    messageLifeCycle	</name>
         <items>
           <item>
             <name>	lifeTime	</name>
@@ -91,63 +90,4 @@ Simple filter like `"badword"` will match message: `In this message is badword a
 ---
 
 ## Changelog
-**[0.9.1]**
->2.7 (14.06.2014)
->- adaptation for client version 0.9.1
->- ready for XVM 5.3.1
-
-**[0.8.11]**
->2.6 (11.02.2014)
->- adaptation for client version 0.8.11
->- rating filter now use WN8
->- ready for XVM 5.0.2 and higher
-
-**[0.8.10]**
->2.5 (23.12.2013)
->- adaptation for client version 0.8.10
-
-**[0.8.9]**
->2.4 (31.10.2013)
->- adaptation for client version 0.8.9
->- update for XVM 5.0.1-test2 and higher
-
-**[0.8.8]**
->2.3 (11.9.2013)
->- update for XVM 5.0.0 and higher
-
-**[0.8.6]**
->2.2 (15.7.2013)
->- fix: game freeze on loading screen
->
->2.1 (19.6.2013)
->- option for background transparency
-
-**[0.8.5]**
->2.0 (7.5.2013)
->
->- ignore section reworked, add battle types
->- new implementation of filters
->    - testing each word separatly
->    - included set of WG filters from lobby chat (EU)
->    - special chars replacing and removing
->    - default custom filters in config
->- add XVM section
->    - depend on XVM > 4.0 & xvm-stats
->    - messages blocking based on minimum {{WN}} rating
->- debug mode
->    - using XVM 4.0 & xvm-stats for loging
->    - hide/ignore reason under messages
->
->no version (24.4.)
->
->- file structure for 0.8.5
-
-**[0.8.4]**
->1.1 (21.4.2013)
->
->- filters are now case insensitive
->- config use UTF-8
->
->1.0 (16.4.2013)
->
->- public release
+[List of changes](https://github.com/PavelMaca/WoT-BattleMessenger/releases/)
