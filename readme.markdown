@@ -15,9 +15,9 @@ When someone spaming chat, for example, with minimap ping.. this mod only hide m
 ---
 
 ## Download
-> [[0.8.11] BattleMessenger - chat filter & antispam 2.6.rar](http://www.mediafire.com/download/5x587yy0f9njwub)
+> [[0.9.1] BattleMessenger - chat filter & antispam 2.7.rar]()
 >
-> MD5 checksum: `0a744579e4106cd8c42698316341ee9c`
+> MD5 checksum: ``
 
 ---
 
@@ -91,6 +91,11 @@ Simple filter like `"badword"` will match message: `In this message is badword a
 ---
 
 ## Changelog
+**[0.9.1]**
+>2.7 (14.06.2014)
+>- adaptation for client version 0.9.1
+>- ready for XVM 5.3.1
+
 **[0.8.11]**
 >2.6 (11.02.2014)
 >- adaptation for client version 0.8.11
