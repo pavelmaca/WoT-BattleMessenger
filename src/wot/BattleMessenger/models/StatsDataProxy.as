@@ -1,3 +1,4 @@
+//import com.xvm.Logger;
 import wot.BattleMessenger.models.Player;
 
 /**
@@ -83,6 +84,7 @@ class wot.BattleMessenger.models.StatsDataProxy
 			case "domination":
 			case "assault":
             case "nations":
+			case "assault1":
 				/**
 				 * Random CTF
 				 * 	"battleName": "#arenas:type/ctf/name"
@@ -123,6 +125,7 @@ class wot.BattleMessenger.models.StatsDataProxy
                  */
                 return BATTLE_TEAM_7x7;
 			default:
+				//Logger.addObject(_root.statsData.arenaData.battleIcon.toString());
 				return BATTLE_UNKNOWN;
 		}
 	}
