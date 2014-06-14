@@ -85,6 +85,8 @@ class wot.BattleMessenger.models.StatsDataProxy
 			case "assault":
             case "nations":
 			case "assault1":
+			case "assault2":
+			case "historical":
 				/**
 				 * Random CTF
 				 * 	"battleName": "#arenas:type/ctf/name"
