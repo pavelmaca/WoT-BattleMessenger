@@ -113,6 +113,7 @@ class wot.BattleMessenger.models.StatsDataProxy
 				 */
 				return BATTLE_TRAINING;
 			case "4":
+			case "team":
 				/**
 				 * Company CTF
 				 * Company Assault (both side)
@@ -122,6 +123,7 @@ class wot.BattleMessenger.models.StatsDataProxy
 				 */
 				return BATTLE_COMPANY;
             case "6":
+			case "team7x7":
                 /**
                  * Team battles 7x7
                  */
