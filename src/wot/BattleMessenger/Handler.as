@@ -95,7 +95,9 @@ class wot.BattleMessenger.Handler
 		 * [0]: player name, clan, vehicle
 		 * [1]: content
 		 */
-		var msgParts:Array = message.split("&nbsp;:&nbsp;</font>", 2);
+		
+		
+		var msgParts:Array = message.split("&nbsp;: </font>", 2);
 		if (msgParts.length == 2) {
 			sender = this.getPlayerFromMessage(msgParts[0]);
 		}
