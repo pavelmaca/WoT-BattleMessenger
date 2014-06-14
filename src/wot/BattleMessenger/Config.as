@@ -15,6 +15,7 @@ class wot.BattleMessenger.Config
 	
 	private static var _defaultConfig:Object = {
 		enabled: true,
+		messageLifeTime: 10,
 		chatLength: 10,
 		backgroundAlpha: 100,
 		ignore: {
@@ -56,6 +57,10 @@ class wot.BattleMessenger.Config
 	}
 	
 	/** Chat setting */
+	public static function get messageLifeTime():Number   {
+        return battleMessenger.messageLifeTime;
+	}
+	
 	public static function get chatLength():Number   {
         return battleMessenger.chatLength;
 	}

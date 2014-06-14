@@ -11,5 +11,7 @@ class wot.BattleMessenger.BattleMessageRenderer extends net.wargaming.messenger.
 		super.populateData.apply(this, arguments);
 		
 		this.background._alpha = Config.backgroundAlpha;
+		
+		this._lifeTime = Config.messageLifeTime;
     }	
 }

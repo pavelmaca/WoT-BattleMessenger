@@ -62,21 +62,8 @@ Simple filter like `"badword"` will match message: `In this message is badword a
 ---
 
 ### Display chat messages little longer
->Open file `res_mods/0.8.x/gui/messenger.xml`.
->You can get original here: [[0.8.11] messenger.xml - original.rar](http://www.mediafire.com/download/v9pe1g89y1nl8mj),
->or use existing one if you have some mod using it (YasenKrasen etc.)
->
->Change `battle/messageLifeCycle/lifeTime` *value* field to set display time for ingame messages **in seconds**.
-
-    <settings>
-      <name>battle</name>
-      <set>
-        <name>    messageLifeCycle	</name>
-        <items>
-          <item>
-            <name>	lifeTime	</name>
-            <value>	10	</value>
->In combination with `chatLength` option in this mode, you are able to set as big value as you want, without having chat over whole screen.
+>Standard message life time is 10s.  
+>If you want to make it longer _(or shorter)_ simply edit config value for `messageLifeTime`
 
 ---
 
