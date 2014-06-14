@@ -234,7 +234,7 @@ class wot.BattleMessenger.Handler
 			/** stats must be loaded */
 			if (com.xvm.Stat.s_data[xvmKey].loadstate == com.xvm.Defines.LOADSTATE_DONE) {
 				if (com.xvm.Stat.s_data[xvmKey].stat.wn8 < Config.xvmMinRating) {
-					this.lastReason = "XVM rating: " + com.xvm.Stat.s_data[xvmKey].stat.wn;
+					this.lastReason = "XVM rating: " + com.xvm.Stat.s_data[xvmKey].stat.wn8;
 					return false;
 				}
 			}else {
