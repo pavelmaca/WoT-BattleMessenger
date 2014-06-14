@@ -1,6 +1,6 @@
---- orig\BattleMessenger.xml	2013-05-08 10:52:09.376800000 +0200
-+++ BattleMessenger.xml	2013-05-08 10:58:45.871800000 +0200
-@@ -34273,7 +34273,7 @@
+--- orig/BattleMessenger.xml	2014-06-14 10:39:33.487861900 +0200
++++ BattleMessenger.xml	2014-06-14 10:39:18.259990900 +0200
+@@ -59251,7 +59251,7 @@
          <actions>
            <PushData>
              <items>
@@ -9,7 +9,7 @@
              </items>
            </PushData>
            <GetVariable/>
-@@ -34299,7 +34299,7 @@
+@@ -59277,7 +59277,7 @@
          <actions>
            <PushData>
              <items>
