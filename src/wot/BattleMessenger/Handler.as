@@ -95,9 +95,20 @@ class wot.BattleMessenger.Handler
 		 * [0]: player name, clan, vehicle
 		 * [1]: content
 		 */
-		
-		
-		var msgParts:Array = message.split("&nbsp;: </font>", 2);
+        
+        var pattern1 = "&nbsp;: </font>";
+        var pattern2 = "&nbsp;:&nbsp;</font>";
+        
+        var msgParts:Array;
+        if (message.indexOf(pattern1) >= 0) {
+            msgParts = message.split(pattern1, 2);
+        }else if (message.indexOf(pattern2) >= 0) {
+            msgParts = message.split(pattern2, 2);
+        }else {
+            this.sendDebugMessage("Error: unsupported message format");
+            return true; //error
+        }
+
 		if (msgParts.length == 2) {
 			sender = this.getPlayerFromMessage(msgParts[0]);
 		}
@@ -106,6 +117,8 @@ class wot.BattleMessenger.Handler
 			this.sendDebugMessage("Error: can't parse sender identity");
 			return true; //error
 		}
+        
+        /** /split */
 		
 		/** Ignore */
 		if ( ignoreForClan(sender) && !himself ) {
