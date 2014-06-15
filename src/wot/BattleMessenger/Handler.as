@@ -139,6 +139,7 @@ class wot.BattleMessenger.Handler
 						return true;
 					} break;
 				case StatsDataProxy.BATTLE_COMPANY:
+                case StatsDataProxy.BATTLE_TEAM_7x7:
 					if (Config.ignoreCompanyBattle) {
 						this.lastReason = "Ignore: ally in Company battle";
 						return true;
