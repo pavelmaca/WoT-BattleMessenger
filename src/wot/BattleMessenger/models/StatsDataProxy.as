@@ -69,48 +69,24 @@ class wot.BattleMessenger.models.StatsDataProxy
 	public static function getBattleType():String {
 		switch(_root.statsData.arenaData.battleIcon.toString()) {
 			case "1":
-				/**
-				 * Tournament CTF
-				 * 	"battleName": "Open League Championship Series, Spring 2013: May 4th [Group 2]"
-				 * 	"battleName": "Cruiserweight Cup: Cruiserweight Cup"
-				 * 	"battleIcon": 1
-				 *
-				 * Clan CTF
-				 * 	"battleName": "Klanové války: Bir Moghrein - Jižní Tiris Zemmour, bitva o hranice"
-				 * 	"battleIcon": 1
-				 */
+                // Clan wars & special battles (WG turnaments)
 				return BATTLE_SPECIAL;
 			case "ctf":
 			case "domination":
 			case "assault":
-            case "nations":
 			case "assault1":
 			case "assault2":
+                // HOTFIX: cant recognize training battle anymore, only way is to check number of players in both teams
+                // WARNING: FULL training battle is taken as random, not training !!
+                if (_root.statsData.team1.length < 15 || _root.statsData.team2.length < 15) {
+                    return BATTLE_TRAINING;
+                }
+            case "nations":
 			case "historical":
-				/**
-				 * Random CTF
-				 * 	"battleName": "#arenas:type/ctf/name"
-				 * 	"battleIcon": "ctf"
-				 *
-				 * Random Encounter
-				 * 	"battleName": "#arenas:type/domination/name"
-				 * 	"battleIcon": "domination"
-				 *
-				 * Random Assault (both side)
-				 * 	"battleName": "#arenas:type/assault/name"
-				 * 	"battleIcon": "assault"
-				 */
+                // randoms
 				return BATTLE_RANDOM;
 			case "3":
-				/**
-				 * Training CTF
-				 * Training Encounter
-				 * 	"battleName": "#menu:loading/battleTypes/2"
-				 * 	"battleIcon": 3,
-				 *
-				 * Training Assault
-				 * 	TODO: get info
-				 */
+                // old training battles
 				return BATTLE_TRAINING;
 			case "4":
 			case "team":
@@ -118,8 +94,6 @@ class wot.BattleMessenger.models.StatsDataProxy
 				 * Company CTF
 				 * Company Assault (both side)
 				 * Company Encounter
-				 * 	"battleName": "#menu:loading/battleTypes/3"
-				 * 	"battleIcon": 4
 				 */
 				return BATTLE_COMPANY;
             case "6":
