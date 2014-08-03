@@ -90,6 +90,7 @@ class wot.BattleMessenger.models.StatsDataProxy
 				return BATTLE_TRAINING;
 			case "4":
 			case "team":
+            case "fortifications": //skirmishes
 				/**
 				 * Company CTF
 				 * Company Assault (both side)
