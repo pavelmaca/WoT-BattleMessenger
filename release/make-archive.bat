@@ -4,8 +4,8 @@ REM FIX: Post-Build Command are executed from /project dir
 CD release/
 
 REM set variables
-SET game_varsion=0.9.6
-SET mod_version=2.7.6
+SET game_varsion=0.9.7
+SET mod_version=2.7.7
 SET output_file="%game_varsion%.BattleMessenger.chat.filter.antispam.v%mod_version%.rar"
 SET input_files=BattleMessenger.swf BattleMessenger.conf
 
