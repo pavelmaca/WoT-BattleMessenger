@@ -1,20 +1,16 @@
---- orig/BattleMessenger.xml	2014-06-14 10:39:33.487861900 +0200
-+++ BattleMessenger.xml	2014-06-14 10:39:18.259990900 +0200
-@@ -59251,7 +59251,7 @@
-         <actions>
+--- orig/BattleMessenger.xml	2015-11-14 14:30:09.963627300 +0300
++++ BattleMessenger.xml	2015-11-14 14:30:10.071791400 +0300
+@@ -60481,5 +60481,5 @@
            <PushData>
              <items>
 -              <StackString value="net.wargaming.messenger.BattleMessenger"/>
 +              <StackString value="wot.BattleMessenger.BattleMessenger"/>
              </items>
            </PushData>
-           <GetVariable/>
-@@ -59277,7 +59277,7 @@
-         <actions>
+@@ -60507,5 +60507,5 @@
            <PushData>
              <items>
 -              <StackString value="net.wargaming.messenger.controls.BattleMessageRenderer"/>
 +              <StackString value="wot.BattleMessenger.BattleMessageRenderer"/>
              </items>
            </PushData>
-           <GetVariable/>
